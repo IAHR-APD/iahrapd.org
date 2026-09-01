@@ -1,0 +1,35 @@
+{
+  "interval_seconds": 7,
+  "slides": [
+    {
+      "image": "/assets/hero/slide-1.jpg",
+      "place": "Mekong River",
+      "region": "Southeast Asia"
+    },
+    {
+      "image": "/assets/hero/slide-2.jpg",
+      "place": "Cheonggyecheon",
+      "region": "Seoul, Republic of Korea"
+    },
+    {
+      "image": "/assets/hero/slide-3.jpg",
+      "place": "Kushiro Wetland",
+      "region": "Hokkaido, Japan"
+    },
+    {
+      "image": "/assets/hero/slide-4.jpg",
+      "place": "Syr Darya",
+      "region": "Central Asia"
+    },
+    {
+      "image": "/assets/hero/slide-5.jpg",
+      "place": "Wular Lake",
+      "region": "India"
+    },
+    {
+      "image": "/assets/hero/slide-6.jpg",
+      "place": "Great Barrier Reef",
+      "region": "Australia"
+    }
+  ]
+}

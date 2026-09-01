@@ -52,6 +52,22 @@ def load(name):
         return json.load(f)
 
 
+def load_documents():
+    """Every long-form document that gets its own page."""
+    d = os.path.join(CONTENT, "documents")
+    if not os.path.isdir(d):
+        return []
+    out = []
+    for fn in sorted(os.listdir(d)):
+        if fn.endswith(".json"):
+            with open(os.path.join(d, fn), encoding="utf-8") as f:
+                doc = json.load(f)
+            doc["slug"] = fn[:-5]
+            doc["url"] = "/documents/%s/" % doc["slug"]
+            out.append(doc)
+    return out
+
+
 def load_news():
     d = os.path.join(CONTENT, "news")
     items = []
@@ -128,12 +144,22 @@ def rebase_css(css):
     return re.sub(r"url\((['\"]?)/(?!/)", lambda m: "url(" + m.group(1) + BASE + "/", css)
 
 
+def externalise(markup):
+    """Links off the site open in a new tab."""
+    def fix(m):
+        attrs = m.group(1)
+        if "target=" in attrs:
+            return m.group(0)
+        return '<a %s target="_blank" rel="noopener">' % attrs
+    return re.sub(r'<a ([^>]*href="https?://[^"]+"[^>]*)>', fix, markup)
+
+
 def write(path, markup):
     full = os.path.join(DIST, path.strip("/"), "index.html") if path != "/" \
         else os.path.join(DIST, "index.html")
     os.makedirs(os.path.dirname(full), exist_ok=True)
     with open(full, "w", encoding="utf-8") as f:
-        f.write(rebase(markup))
+        f.write(externalise(rebase(markup)))
     print("  %-24s %6d bytes" % (path, len(markup.encode("utf-8"))))
 
 
@@ -280,7 +306,7 @@ def band_head(eyebrow, title, sub="", more=None):
 def person_card(m):
     flag = ' <span class="tag">%s</span>' % e(m["flag"]) if m.get("flag") else ""
     return """        <div class="card">
-          <img class="avatar" src="%s" width="420" height="420" loading="lazy" alt="%s">
+          <img class="avatar" src="%s" width="420" height="525" loading="lazy" alt="%s">
           <div class="role">%s</div>
           <div class="who">%s</div>
           <div class="aff">%s%s</div>
@@ -307,22 +333,95 @@ def doc_list(docs, extra=""):
     return '      <ul class="docs"%s>\n%s      </ul>\n' % (extra, rows)
 
 
+def doc_blocks(body):
+    out = []
+    for b in body:
+        if b["type"] == "heading":
+            out.append("<h3>%s</h3>" % e(b["text"]))
+        elif b["type"] == "list":
+            out.append("<ul>%s</ul>" % "".join("<li>%s</li>" % e(i) for i in b["items"]))
+        else:
+            out.append("<p>%s</p>" % e(b["text"]))
+    return "\n      ".join(out)
+
+
+def build_document(site, doc):
+    eyebrow = "Statute" if doc.get("kind") == "statute" else "Report to the IAHR Council"
+    body = pagehead(eyebrow, doc["title"], doc.get("summary", ""))
+
+    pills = ""
+    if doc.get("status"):
+        pills += '<span class="pill now">%s</span>' % e(doc["status"])
+    if doc.get("version"):
+        pills += '<span class="pill">%s</span>' % e(doc["version"])
+    if doc.get("pdf"):
+        pills += '<a class="pill" href="%s">Download PDF</a>' % e(doc["pdf"])
+
+    body += '  <section class="band tint"><div class="wrap">\n'
+    if pills:
+        body += '    <div class="docmeta">%s</div>\n' % pills
+    if doc.get("intro"):
+        body += '    <p class="sub" style="margin-top:16px">%s</p>\n' % inline(doc["intro"])
+    body += '    <div class="doc prose" style="margin-top:26px">\n      '
+    body += doc_blocks(doc["body"])
+    body += '\n    </div>\n  </div></section>\n'
+
+    if doc.get("superseded"):
+        rows = ""
+        for old in doc["superseded"]:
+            link = ' &mdash; <a href="%s">PDF</a>' % e(old["pdf"]) if old.get("pdf") else ""
+            rows += ('      <li><div class="t">%s%s</div><div class="n">%s</div></li>\n'
+                     % (e(old["title"]), link, e(old.get("note", ""))))
+        body += '  <section class="band"><div class="wrap">\n'
+        body += band_head("Earlier editions", "Superseded versions",
+                          "Kept for reference. Only the edition above is in force.")
+        body += '    <ul class="superseded">\n' + rows + '    </ul>\n  </div></section>\n'
+
+    return page(site, doc["url"], doc["title"],
+                doc.get("summary") or ("%s. IAHR-APD." % doc["title"]), body)
+
+
 # ---------------------------------------------------------------- pages
-def build_home(site, congresses, news, events, docs, journal, awards):
+def doc_links(docs, kind, version=True):
+    """One row per document: the page, its edition, and the PDF if there is one."""
+    rows = ""
+    for d in sorted((x for x in docs if x.get("kind") == kind),
+                    key=lambda x: (x.get("order", 99), x["title"])):
+        pdf = ('<a class="fmt" href="%s">PDF</a>' % e(d["pdf"])) if d.get("pdf") else ""
+        ver = ('\n          <div class="ver">%s</div>' % e(d["version"])) \
+            if version and d.get("version") else ""
+        rows += ('        <li>\n          <div class="line"><a class="t" href="%s">%s</a>%s</div>%s\n        </li>\n'
+                 % (e(d["url"]), e(d["title"]), pdf, ver))
+    return '      <ul class="doclist">\n%s      </ul>\n' % rows
+def build_home(site, congresses, news, events, documents, journal, awards, hero):
     nxt = congresses["next"]
     theme = e(nxt["theme"]) if nxt.get("theme") else "Theme to be announced by the Local Organising Committee."
+
+    slides, dots = "", ""
+    for i, sl in enumerate(hero["slides"]):
+        slides += ('      <img src="%s" alt="" width="1800" height="760"%s data-place="%s" data-region="%s">\n'
+                   % (e(sl["image"]), ' class="on"' if i == 0 else ' loading="lazy"',
+                      e(sl["place"]), e(sl["region"])))
+        dots += ('        <button type="button" data-slide="%d" aria-current="%s" '
+                 'aria-label="%s"></button>\n' % (i, "true" if i == 0 else "false", e(sl["place"])))
+    first = hero["slides"][0]
+
     news_items = ""
     for n in news[:3]:
-        news_items += """            <li><span class="date">%s</span>
-              <a class="title" href="/news/%s/">%s</a>
-              <span class="meta">%s</span></li>
-""" % (pretty_date(n["date"]), e(n["slug"]), e(n["title"]), inline(n.get("summary", "")))
+        img = ('              <img class="thumb" src="%s" alt="" loading="lazy" width="720" height="405">\n'
+               % e(n["image"])) if n.get("image") else ""
+        news_items += ('            <li>%s              <span class="date">%s</span>\n'
+                       '              <a class="title" href="/news/%s/">%s</a>\n'
+                       '              <span class="meta">%s</span></li>\n'
+                       % (img, pretty_date(n["date"]), e(n["slug"]), e(n["title"]),
+                          inline(n.get("summary", ""))))
 
     ev = ""
     for x in events["events"][:3]:
-        ev += """          <div class="event"><div class="when"><b class="num">%s</b><span class="num">%s</span></div>
-            <div><div class="what">%s</div><div class="where">%s</div></div></div>
-""" % (e(x["month"]), e(x["year"]), e(x["title"]), e(x["detail"]))
+        ev += ('          <div class="event"><div class="when"><b class="num">%s</b>'
+               '<span class="num">%s</span></div>\n'
+               '            <div><div class="what">%s</div><div class="where">%s</div></div></div>\n'
+               % (e(x["month"]), e(x["year"]), e(x["title"]), e(x["detail"])))
 
     rows = ""
     for c in congresses["archive"][:6]:
@@ -344,14 +443,14 @@ def build_home(site, congresses, news, events, docs, journal, awards):
         lis = "".join('            <li><b class="num">%s</b><span>%s</span></li>\n'
                       % (e(r["year"]), "<br>".join(e(p["name"]) for p in r["people"]))
                       for r in block["recipients"][:3])
-        award_cards += """        <div class="award"><div class="since">Awarded biennially</div><h3>%s</h3>
-          <ul>
-%s          </ul></div>
-""" % (label, lis)
+        award_cards += ('        <div class="award"><div class="since">Awarded biennially</div>'
+                        '<h3>%s</h3>\n          <ul>\n%s          </ul></div>\n' % (label, lis))
 
-    body = """  <section class="hero">
-    <canvas id="contours" aria-hidden="true"></canvas>
-    <div class="wrap">
+    body = '  <section class="hero">\n'
+    body += '    <div class="hero-slides" id="hero-slides" data-interval="%d">\n%s    </div>\n' % (
+        int(hero.get("interval_seconds", 7)), slides)
+    body += '    <canvas id="contours" aria-hidden="true"></canvas>\n'
+    body += '''    <div class="wrap">
       <div>
         <div class="eyebrow">Regional Division &middot; Founded %s</div>
         <h1>%s</h1>
@@ -380,9 +479,9 @@ def build_home(site, congresses, news, events, docs, journal, awards):
     </div>
     <div class="photocred">
       <div class="wrap">
-        <span>Syr Darya, Central Asia</span><span>Wular Lake, India</span><span>Mekong River</span>
-        <span>Cheonggyecheon, Republic of Korea</span><span>Kushiro Wetland, Japan</span>
-        <span>Great Barrier Reef, Australia</span>
+        <b id="slide-place">%s</b><span id="slide-region">%s</span>
+        <div class="dots" id="slide-dots">
+%s        </div>
       </div>
     </div>
   </section>
@@ -399,7 +498,7 @@ def build_home(site, congresses, news, events, docs, journal, awards):
           <h3>Upcoming</h3>
 %s        </div>
         <div class="col">
-          <h3>Documents</h3>
+          <h3>Governing documents</h3>
 %s        </div>
       </div>
     </div>
@@ -442,11 +541,11 @@ def build_home(site, congresses, news, events, docs, journal, awards):
 %s      </div>
     </div>
   </section>
-""" % (e(site["founded"]), e(site["tagline"]), e(congresses["next"]["number"]), e(nxt["number"]),
-       e(nxt["city"]), e(nxt["country"]), theme, e(nxt["dates"]), e(nxt["host"]), e(nxt["abstracts"]),
-       e(nxt["opening"]),
-       news_items, ev,
-       doc_list(docs["statutes"][:6]),
+''' % (e(site["founded"]), e(site["tagline"]), e(nxt["number"]), e(nxt["number"]),
+       e(nxt["city"]), e(nxt["country"]), theme, e(nxt["dates"]), e(nxt["host"]),
+       e(nxt["abstracts"]), e(nxt["opening"]),
+       e(first["place"]), e(first["region"]), dots,
+       news_items, ev, doc_links(documents, "statute", version=False),
        band_head("Record of Congresses",
                  "Twenty-five congresses since %s" % site["founded"], "",
                  ("/congresses/", "Full archive, 1st &ndash; 26th &rarr;")),
@@ -456,17 +555,18 @@ def build_home(site, congresses, news, events, docs, journal, awards):
        band_head("Recognition", "APD Awards", "",
                  ("/awards/", "Statements, rules and full recipient lists &rarr;")),
        award_cards)
+
     return page(site, "/", site["short_name"],
                 "IAHR-APD — the Asian and Pacific Division of the International Association for "
                 "Hydro-Environment Engineering and Research. Congresses, awards, the Journal of "
                 "Hydro-environment Research and news from the region.", body)
 
 
-def build_about(site, docs):
+def build_about(site, documents):
     body = pagehead("The Division", "About IAHR-APD",
                     "A regional division of the International Association for Hydro-Environment "
                     "Engineering and Research, serving the Asian and Pacific regions since 1973.")
-    body += """  <section class="band tint"><div class="wrap">
+    body += '''  <section class="band tint"><div class="wrap">
     <div class="split">
       <div class="prose">
         <p>The IAHR Asian and Pacific Division &mdash; in short <strong>IAHR-APD</strong> &mdash; is a
@@ -517,36 +617,32 @@ def build_about(site, docs):
   </div></section>
 
   <section class="band tint" id="statutes"><div class="wrap">
-"""
+'''
     body += band_head("Statutes", "Laws, regulations and statements",
-                      "The documents below govern the Division, its awards and its congresses. They are "
-                      "the authoritative reference for host institutions and award juries.")
-    half = (len(docs["statutes"]) + 1) // 2
-    body += '    <div class="split wide">\n'
-    body += doc_list(docs["statutes"][:half], ' style="border-top:2px solid var(--ink)"')
-    body += doc_list(docs["statutes"][half:], ' style="border-top:2px solid var(--ink)"')
-    body += """    </div>
-  </div></section>
+                      "Each document is published in full on this site. Only the edition currently in "
+                      "force is listed; superseded editions are kept at the foot of each document.")
+    body += doc_links(documents, "statute")
+    body += '''  </div></section>
 
   <section class="band"><div class="wrap">
     <div class="band-head"><div><div class="eyebrow">History</div><h2>Milestones</h2></div></div>
     <ul class="timeline">
       <li><b>1973</b><div><div class="what">The Division is founded</div><div class="note">IAHR establishes a regional division for the Asian and Pacific regions.</div></div></li>
-      <li><b>1988</b><div><div class="what">6th APD Congress, Kyoto</div><div class="note">The earliest congress for which a full theme record survives.</div></div></li>
-      <li><b>2004</b><div><div class="what">By-Laws amended</div><div class="note">The governing By-Laws of IAHR-APD are amended; a revised edition was prepared in 2025.</div></div></li>
+      <li><b>1990</b><div><div class="what">First By-Laws adopted</div><div class="note">Adopted by the Executive Committee in Beijing on 15 November 1990 and approved by the IAHR Council on 1 April 1991.</div></div></li>
+      <li><b>2004</b><div><div class="what">By-Laws amended in Hong Kong</div><div class="note">Superseded by the revised edition of 2025.</div></div></li>
       <li><b>2007</b><div><div class="what">JHER launched</div><div class="note">The <em>Journal of Hydro-environment Research</em> begins publication with Elsevier, sponsored by the Korean Water Resources Association.</div></div></li>
       <li><b>2009</b><div><div class="what">Distinguished Membership Award established</div><div class="note">The statement of the award is approved in August 2009.</div></div></li>
       <li><b>2024</b><div><div class="what">24th APD Congress, Wuhan</div><div class="note">&ldquo;Water for a Changing Future&rdquo;, with the Heritage Award presented to Hankou Hydrological Station.</div></div></li>
       <li><b>2026</b><div><div class="what">25th APD Congress, Incheon</div><div class="note">&ldquo;Hydro-environments in the Era of Climate Change and AI&rdquo;, hosted in the Republic of Korea.</div></div></li>
     </ul>
   </div></section>
-"""
+'''
     return page(site, "/about/", "About",
                 "What IAHR-APD is, its objectives and programme, the By-Laws and award statements that "
                 "govern it, and the Division's history since 1973.", body)
 
 
-def build_governance(site, committee, meetings, docs):
+def build_governance(site, committee, meetings, documents):
     body = pagehead("How the Division is run", "Governance",
                     "The officers and Executive Committee of the Division, and the public record of its "
                     "meetings and annual reporting.")
@@ -554,16 +650,13 @@ def build_governance(site, committee, meetings, docs):
     officers = ""
     for o in committee["officers"]:
         dept = "<br>%s" % e(o["department"]) if o.get("department") else ""
-        officers += """      <div class="feature">
-        <img class="portrait" src="%s" width="420" height="420" alt="%s">
-        <div>
-          <div class="role">%s</div>
-          <h3>%s</h3>
-          <p class="aff">%s%s</p>
-          <div class="cty">%s</div>
-        </div>
-      </div>
-""" % (e(o["photo"]), e(o["name"]), e(o["role"]), e(o["name"]), e(o["affiliation"]), dept, e(o["country"]))
+        officers += ('      <div class="feature">\n'
+                     '        <img class="portrait" src="%s" width="420" height="420" alt="%s">\n'
+                     '        <div>\n          <div class="role">%s</div>\n          <h3>%s</h3>\n'
+                     '          <p class="aff">%s%s</p>\n          <div class="cty">%s</div>\n'
+                     '        </div>\n      </div>\n'
+                     % (e(o["photo"]), e(o["name"]), e(o["role"]), e(o["name"]),
+                        e(o["affiliation"]), dept, e(o["country"])))
 
     body += '  <section class="band tint"><div class="wrap">\n'
     body += band_head("Officers · " + committee["term"], "Chair and Vice-Chair")
@@ -581,29 +674,15 @@ def build_governance(site, committee, meetings, docs):
         body += '    <p class="sub" style="margin-top:22px">Past committees: %s</p>\n' % links
     body += '  </div></section>\n\n'
 
-    reports = "".join('        <div class="row"><span>%s</span><b><a href="%s">PDF</a></b></div>\n'
-                      % (e(r["title"]), e(r.get("file") or "#")) for r in docs["annual_reports"])
-    body += """  <section class="band tint" id="reports"><div class="wrap">
-    <div class="split">
-      <div>
-        <div class="eyebrow">Reporting</div>
-        <h2 style="font-size:23px;margin-top:8px">Annual reports</h2>
-        <div class="prose" style="margin-top:14px">
-          <p>Each year the Division reports its activity to the IAHR Council using the standard
-          regional-division format: congresses held and planned, committee changes, awards presented,
-          journal activity and regional outreach.</p>
-          <p>The governing By-Laws and the award statements are published under
-          <a href="/about/#statutes">About the Division</a>.</p>
-        </div>
-      </div>
-      <div class="sidecard">
-        <div class="cap">Reports to the IAHR Council</div>
-%s      </div>
-    </div>
-  </div></section>
+    body += '  <section class="band tint" id="reports"><div class="wrap">\n'
+    body += band_head("Reporting", "Annual reports",
+                      "Each year the Division reports its activity to the IAHR Council: congresses held "
+                      "and planned, committee changes, awards presented, journal activity and regional "
+                      "outreach. Each report is published in full on this site.")
+    body += doc_links(documents, "report")
+    body += '  </div></section>\n\n'
 
-  <section class="band" id="meetings"><div class="wrap">
-""" % reports
+    body += '  <section class="band" id="meetings"><div class="wrap">\n'
     body += band_head("Record", "Executive Committee meetings",
                       "Meetings held in person alongside IAHR congresses, plus informal gatherings and "
                       "online sessions. Minutes are circulated to members on request.")
@@ -611,21 +690,16 @@ def build_governance(site, committee, meetings, docs):
                    '<td class="place">%s</td><td class="theme">%s</td></tr>\n'
                    % (e(m["date"]), e(m["type"]), e(m["location"]), e(m["with"]))
                    for m in meetings["meetings"])
-    body += """    <div class="tablewrap">
-      <table class="records">
-        <thead><tr><th scope="col">Date</th><th scope="col">Type</th><th scope="col">Location</th><th scope="col">Held with</th></tr></thead>
-        <tbody>
-%s        </tbody>
-      </table>
-    </div>
-  </div></section>
-""" % rows
+    body += ('    <div class="tablewrap">\n      <table class="records">\n'
+             '        <thead><tr><th scope="col">Date</th><th scope="col">Type</th>'
+             '<th scope="col">Location</th><th scope="col">Held with</th></tr></thead>\n'
+             '        <tbody>\n%s        </tbody>\n      </table>\n    </div>\n  </div></section>\n' % rows)
     return page(site, "/governance/", "Governance",
                 "The IAHR-APD Executive Committee for %s, the Division's annual reports to the IAHR "
                 "Council, and the record of committee meetings since 2010." % committee["term"], body)
 
 
-def build_congresses(site, congresses, docs):
+def build_congresses(site, congresses, downloads):
     nxt, latest = congresses["next"], congresses["latest"]
     theme = e(nxt["theme"]) if nxt.get("theme") else \
         "The Local Organising Committee will announce the congress theme and sub-themes, together with " \
@@ -634,7 +708,7 @@ def build_congresses(site, congresses, docs):
     body = pagehead("Biennial regional congress", "IAHR-APD Congresses",
                     "Since 1973 the Division has convened a regional congress every two years, hosted in "
                     "turn by member institutions across Asia and the Pacific.")
-    body += """  <section class="band tint"><div class="wrap">
+    body += '''  <section class="band tint"><div class="wrap">
     <div class="split">
       <div>
         <div class="eyebrow">Next &middot; %s Congress</div>
@@ -655,22 +729,29 @@ def build_congresses(site, congresses, docs):
   </div></section>
 
   <section class="band" id="archive"><div class="wrap">
-""" % (e(nxt["number"]), e(nxt["city"]), e(nxt["country"]), e(nxt["dates"]), theme,
+''' % (e(nxt["number"]), e(nxt["city"]), e(nxt["country"]), e(nxt["dates"]), theme,
        e(latest["number"]), e(latest["theme"]), e(latest["venue"]))
 
-    body += band_head("Complete record", "Congress archive, 1st &ndash; 26th",
+    body += band_head("Complete record", "Congress archive, 1st – 26th",
                       "Rows marked as incomplete are gaps in the Division's own records. Corrections and "
                       "proceedings links from former host institutions are welcome.")
     rows = ""
     for c in congresses["archive"]:
         cls = ' class="next"' if c.get("next") else ""
         tag = '<span class="tag">Next</span>' if c.get("next") else ""
-        th = e(c["theme"]) if c["theme"] else '<span class="gap">Year and theme not recorded</span>' \
-            if not c["year"] else '<span class="gap">Theme to be announced</span>'
+        if c["theme"]:
+            th = e(c["theme"])
+        elif c["year"]:
+            th = '<span class="gap">Theme to be announced</span>'
+        else:
+            th = '<span class="gap">Year and theme not recorded</span>'
         rows += ('          <tr%s><td class="no">%s</td><td class="yr">%s</td>'
                  '<td class="place">%s%s</td><td class="theme">%s</td></tr>\n'
                  % (cls, e(c["number"]), e(c["year"] or "—"), e(c["location"]), tag, th))
-    body += """    <div class="tablewrap">
+    pack = "".join('        <div class="row"><span>%s</span><b><a href="%s">%s</a></b></div>\n'
+                   % (e(d["title"]), e(d["file"]), e(d.get("format", "PDF")))
+                   for d in downloads["congress_pack"])
+    body += '''    <div class="tablewrap">
       <table class="records">
         <thead><tr><th scope="col">No.</th><th scope="col">Year</th><th scope="col">Location</th><th scope="col">Theme</th></tr></thead>
         <tbody>
@@ -706,16 +787,20 @@ def build_congresses(site, congresses, docs):
       </div>
     </div>
   </div></section>
-""" % (rows, "".join('        <div class="row"><span>%s</span><b><a href="%s">%s</a></b></div>\n'
-                     % (e(d["title"]), e(d.get("file") or "#"), e(d.get("format", "PDF")))
-                     for d in docs["statutes"] if "Congress" in d["title"]))
+''' % (rows, pack)
     return page(site, "/congresses/", "Congresses",
                 "Every IAHR-APD congress from the 1st to the 26th, the next congress in Wellington in "
                 "2028, and how member institutions can propose to host one.", body)
 
 
-def build_awards(site, awards):
+def build_awards(site, awards, documents):
     latest = awards["latest"]
+    statements = {d["slug"]: d for d in documents}
+    links = {
+        "distinguished": statements.get("distinguished-membership-award-statement"),
+        "best_paper": statements.get("best-paper-award-rules"),
+    }
+
     body = pagehead("Recognition", "IAHR-APD Awards",
                     "The Division presents three awards at each regional congress: for distinguished "
                     "individual contribution, for hydraulic heritage in the region, and for the best "
@@ -726,14 +811,14 @@ def build_awards(site, awards):
             return '<img class="avatar sm" src="%s" alt="%s">' % (e(entry["photo"]), e(entry["name"]))
         return '<div class="portrait-slot" aria-hidden="true">Photo</div>'
 
-    papers = "".join("""          <li><div class="ttl">%s</div>
-            <div class="aut">%s</div><div class="cty">%s</div></li>
-""" % (e(p["title"]), e(p["authors"]), e(p["country"])) for p in latest["papers"])
+    papers = "".join('          <li><div class="ttl">%s</div>\n'
+                     '            <div class="aut">%s</div><div class="cty">%s</div></li>\n'
+                     % (e(p["title"]), e(p["authors"]), e(p["country"])) for p in latest["papers"])
 
     body += '  <section class="band tint"><div class="wrap">\n'
     body += band_head(latest["congress"], "%s recipients" % latest["year"], "",
                       ("/congresses/", "About the congress &rarr;"))
-    body += """    <div class="split wide">
+    body += '''    <div class="split wide">
       <div>
         <div class="sidecard">
           <div class="cap">Distinguished Membership Award</div>
@@ -756,7 +841,7 @@ def build_awards(site, awards):
     </div>
   </div></section>
 
-""" % (slot(latest["distinguished"]), e(latest["distinguished"]["name"]),
+''' % (slot(latest["distinguished"]), e(latest["distinguished"]["name"]),
        e(latest["distinguished"]["affiliation"]),
        slot(latest["heritage"]), e(latest["heritage"]["name"]), e(latest["heritage"]["affiliation"]),
        papers)
@@ -764,13 +849,219 @@ def build_awards(site, awards):
     for i, key in enumerate(("distinguished", "heritage", "best_paper")):
         block = awards[key]
         tint = " tint" if i % 2 else ""
+        doc = links.get(key)
+        more = (doc["url"], "Read the statement and rules &rarr;") if doc else None
         body += '  <section class="band%s" id="%s"><div class="wrap">\n' % (tint, key.replace("_", "-"))
-        body += band_head(block["eyebrow"], block["title"], block["intro"])
+        body += band_head(block["eyebrow"], block["title"], block["intro"], more)
         body += laureate_list(block["recipients"])
         body += "  </div></section>\n\n"
     return page(site, "/awards/", "Awards",
                 "The Distinguished IAHR-APD Membership Award, the Heritage Award and the Best Paper "
                 "Award, with the full list of recipients since 2010.", body)
+
+
+def build_news_index(site, news, events):
+    items = ""
+    for n in news:
+        img = ('            <img class="thumb" src="%s" alt="" loading="lazy" width="720" height="405">\n'
+               % e(n["image"])) if n.get("image") else ""
+        items += ('          <li>%s            <span class="date">%s</span>\n'
+                  '            <a class="title" href="/news/%s/">%s</a>\n'
+                  '            <span class="meta">%s</span></li>\n'
+                  % (img, pretty_date(n["date"]), e(n["slug"]), e(n["title"]),
+                     inline(n.get("summary", ""))))
+    ev = "".join('          <div class="event"><div class="when"><b class="num">%s</b>'
+                 '<span class="num">%s</span></div>\n'
+                 '            <div><div class="what">%s</div><div class="where">%s</div></div></div>\n'
+                 % (e(x["month"]), e(x["year"]), e(x["title"]), e(x["detail"]))
+                 for x in events["events"])
+
+    body = pagehead("Bulletin", "News & Events",
+                    "Announcements from the Division and the calendar of congresses, committee meetings "
+                    "and regional events.")
+    body += '''  <section class="band tint"><div class="wrap">
+    <div class="split">
+      <div>
+        <div class="eyebrow">Announcements</div>
+        <h2 style="font-size:23px;margin-top:8px">Latest news</h2>
+        <ul class="items" style="margin-top:16px;border-top:2px solid var(--ink)">
+%s        </ul>
+      </div>
+      <div class="sidecard">
+        <div class="cap">Calendar</div>
+        <div class="pad" style="padding-bottom:4px">
+%s        </div>
+      </div>
+    </div>
+  </div></section>
+''' % (items, ev)
+    return page(site, "/news/", "News & Events",
+                "Announcements from IAHR-APD and the calendar of congresses, Executive Committee "
+                "meetings and regional events.", body)
+
+
+def build_news_item(site, item):
+    body = pagehead("News · " + pretty_date(item["date"]).replace(" · ", "."),
+                    item["title"], item.get("summary", ""))
+    img = ('    <img class="newsimg" src="%s" alt="" width="1600" height="900">\n'
+           % e(item["image"])) if item.get("image") else ""
+    body += '  <section class="band tint"><div class="wrap">\n%s' % img
+    body += ('    <div class="prose" style="font-size:16.5px;margin-top:22px">%s</div>\n'
+             '    <p class="sub" style="margin-top:32px"><a href="/news/">&larr; All news</a></p>\n'
+             '  </div></section>\n' % rich(item.get("body", "")))
+    return page(site, "/news/%s/" % item["slug"], item["title"],
+                item.get("summary", "")[:180], body)
+
+
+def build_gallery(site, gallery):
+    body = pagehead("Photographs", "Gallery",
+                    "Congresses, Executive Committee meetings and technical visits, year by year.")
+    nav = "".join('        <button type="button" data-year="y%s">%s</button>\n'
+                  % (e(y["year"]), e(y["year"])) for y in gallery["years"])
+    body = body.replace("  </div></section>\n\n",
+                        '    <div class="yearnav" id="yearnav">\n%s    </div>\n  </div></section>\n\n' % nav, 1)
+
+    for i, y in enumerate(gallery["years"]):
+        alt = "%s, %s" % (y["title"], y["year"])
+        shots = "".join("""        <button type="button" class="shot" data-full="%s" data-caption="%s"
+                aria-label="Enlarge photograph from %s">
+          <img src="%s" width="640" height="457" loading="lazy" alt="%s">
+        </button>
+""" % (e(p["image"]), e(p.get("caption") or alt), e(alt), e(p.get("thumb") or p["image"]),
+       e(p.get("caption") or alt)) for p in y["photos"])
+        body += """  <section class="band%s" id="y%s"><div class="wrap">
+    <div class="yearhead"><b>%s</b><h2>%s</h2><span class="where">%s</span></div>
+    <div class="gallery">
+%s    </div>
+  </div></section>
+
+""" % (" tint" if i % 2 == 0 else "", e(y["year"]), e(y["year"]), e(y["title"]), e(y["where"]), shots)
+
+    body += """  <section class="band"><div class="wrap">
+    <p class="sub">Photographs from earlier congresses are held by the Secretariat and by former host
+    institutions. Members who have images from past congresses are invited to send them to the
+    <a href="/contact/">Secretariat</a> for the archive.</p>
+  </div></section>
+"""
+    return page(site, "/gallery/", "Gallery",
+                "Photographs from IAHR-APD congresses, Executive Committee meetings and technical "
+                "visits, arranged by year.", body)
+
+
+def build_membership(site, committee):
+    ypn = next((m for m in committee["members"] if m["role"] == "YPN Member"), None)
+    ypn_line = ("The Division holds a dedicated YPN seat on its Executive Committee, currently held by "
+                "%s of %s." % (ypn["name"], ypn["affiliation"])) if ypn else ""
+    body = pagehead("Joining the Division", "Membership",
+                    "Membership of IAHR-APD follows automatically from membership of IAHR. There is no "
+                    "separate application and no separate fee.")
+    body += '''  <section class="band tint"><div class="wrap">
+    <div class="split">
+      <div>
+        <div class="prose">
+          <p><strong>All IAHR members residing in the Asian and Pacific regions are members of the
+          Division.</strong> To join, you become a member of IAHR through the association's global
+          secretariat; the regional division follows from your country of residence.</p>
+          <p>IAHR offers individual, student, young professional and corporate membership. Current
+          categories, rates and the application form are held by the IAHR global secretariat, and are
+          the same wherever in the world you live.</p>
+          <p>Division membership adds the biennial regional congress at member rates, eligibility for
+          the APD awards, the Division's calls and announcements, and a route into the regional Young
+          Professionals Network.</p>
+        </div>
+        <div class="hero-actions" style="margin-top:26px">
+          <a class="btn" href="%s">Categories, rates and application &#8599;</a>
+          <a class="btn ghost" href="/contact/">Ask the Secretariat</a>
+        </div>
+        <div class="band-head" style="margin-top:44px;margin-bottom:16px">
+          <div><div class="eyebrow">Young Professionals</div><h2 style="font-size:23px">YPN in the Asia-Pacific</h2></div>
+        </div>
+        <p class="sub" style="margin-top:0">The IAHR Young Professionals Network connects students and
+        early-career researchers across the region. %s</p>
+      </div>
+      <div>
+        <div class="sidecard">
+          <div class="cap">What Division membership adds</div>
+          <div class="pad">
+            <ul class="plainlist" style="font-size:14px">
+              <li>Member rates at the biennial APD Congress</li>
+              <li>Eligibility for the three APD awards</li>
+              <li>Announcements and calls from the Division</li>
+              <li>Regional Young Professionals Network</li>
+            </ul>
+          </div>
+        </div>
+        <div class="sidecard" style="margin-top:24px">
+          <div class="cap">What IAHR membership adds</div>
+          <div class="pad">
+            <ul class="plainlist" style="font-size:14px">
+              <li>The Journal of Hydraulic Research</li>
+              <li>Hydrolink, the association's magazine</li>
+              <li>Technical committee participation</li>
+              <li>Member rates at IAHR World Congresses</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></section>
+''' % (e(site["links"]["iahr_membership"]), e(ypn_line))
+    return page(site, "/membership/", "Membership",
+                "How to join IAHR and the Asian and Pacific Division, what membership includes, and the "
+                "regional Young Professionals Network.", body)
+
+
+def build_contact(site):
+    s = site["secretariat"]
+    addr = "<br>".join(e(l) for l in s["address_lines"])
+
+    people = ""
+    for p in s.get("people", []):
+        mail = ""
+        if p.get("email") and "@" in p["email"]:
+            user, domain = p["email"].split("@", 1)
+            mail = ('\n            <a class="mailto" href="#" data-u="%s" data-d="%s">Email %s</a>' % (e(user), e(domain), e(p["name"].split()[-1])))
+        note = ('\n            <div class="note">%s</div>' % e(p["note"])) if p.get("note") else ""
+        people += ('          <div class="who-row">\n            <div class="role">%s</div>\n            <div class="nm">%s</div>\n            <div class="aff">%s</div>%s%s\n          </div>\n'
+                   % (e(p["role"]), e(p["name"]), e(p.get("affiliation", "")), note, mail))
+
+    topics = "".join("          <li>%s</li>\n" % e(t) for t in site.get("enquiry_topics", []))
+
+    body = pagehead("Get in touch", "Contact",
+                    "The Division's Secretariat is hosted by the Korea Institute of Civil Engineering and "
+                    "Building Technology in Goyang, Republic of Korea.")
+    body += '''  <section class="band tint"><div class="wrap">
+    <div class="split">
+      <div>
+        <div class="eyebrow">Enquiries</div>
+        <h2 style="font-size:23px;margin-top:8px">Write to the Secretariat</h2>
+        <p class="sub">The Secretariat is the first point of contact for:</p>
+        <ul class="plainlist" style="margin-top:14px">
+%s        </ul>
+        <div class="prose" style="margin-top:22px">
+          <p>For membership, subscriptions and world congress matters, contact the IAHR global
+          secretariat directly at <a href="%s">iahr.org</a>.</p>
+        </div>
+        <div class="hero-actions" style="margin-top:22px">
+          <a class="btn ghost" href="/congresses/#hosting">Hosting a congress</a>
+          <a class="btn ghost" href="/awards/">Award nominations</a>
+        </div>
+      </div>
+      <div>
+        <div class="sidecard">
+          <div class="cap">IAHR-APD Secretariat</div>
+          <div class="pad"><strong style="color:var(--ink)">%s</strong><br>%s</div>
+          <div class="row"><span>Telephone</span><b>%s</b></div>
+        </div>
+        <div class="sidecard" style="margin-top:24px">
+          <div class="cap">Who to write to</div>
+%s        </div>
+      </div>
+    </div>
+  </div></section>
+''' % (topics, e(site["links"]["iahr_global"]), e(s["host"]), addr, e(s["telephone"]), people)
+    return page(site, "/contact/", "Contact",
+                "How to reach the IAHR-APD Secretariat at KICT in Goyang, Republic of Korea.", body)
 
 
 def build_publications(site, journal, congresses):
@@ -847,209 +1138,6 @@ def build_publications(site, journal, congresses):
                 "wider IAHR publishing programme.", body)
 
 
-def build_news_index(site, news, events):
-    items = ""
-    for n in news:
-        items += """          <li><span class="date">%s</span>
-            <a class="title" href="/news/%s/">%s</a>
-            <span class="meta">%s</span></li>
-""" % (pretty_date(n["date"]), e(n["slug"]), e(n["title"]), inline(n.get("summary", "")))
-    ev = "".join("""          <div class="event"><div class="when"><b class="num">%s</b><span class="num">%s</span></div>
-            <div><div class="what">%s</div><div class="where">%s</div></div></div>
-""" % (e(x["month"]), e(x["year"]), e(x["title"]), e(x["detail"])) for x in events["events"])
-
-    body = pagehead("Bulletin", "News &amp; Events",
-                    "Announcements from the Division and the calendar of congresses, committee meetings "
-                    "and regional events.")
-    body += """  <section class="band tint"><div class="wrap">
-    <div class="split">
-      <div>
-        <div class="eyebrow">Announcements</div>
-        <h2 style="font-size:23px;margin-top:8px">Latest news</h2>
-        <ul class="items" style="margin-top:16px;border-top:2px solid var(--ink)">
-%s        </ul>
-      </div>
-      <div class="sidecard">
-        <div class="cap">Calendar</div>
-        <div class="pad" style="padding-bottom:4px">
-%s        </div>
-      </div>
-    </div>
-  </div></section>
-""" % (items, ev)
-    return page(site, "/news/", "News &amp; Events",
-                "Announcements from IAHR-APD and the calendar of congresses, Executive Committee "
-                "meetings and regional events.", body)
-
-
-def build_news_item(site, item):
-    body = pagehead("News · " + pretty_date(item["date"]).replace(" · ", "."),
-                    item["title"], item.get("summary", ""))
-    body += """  <section class="band tint"><div class="wrap">
-    <div class="prose" style="font-size:16.5px">%s</div>
-    <p class="sub" style="margin-top:32px"><a href="/news/">&larr; All news</a></p>
-  </div></section>
-""" % rich(item.get("body", ""))
-    return page(site, "/news/%s/" % item["slug"], item["title"],
-                item.get("summary", "")[:180], body)
-
-
-def build_gallery(site, gallery):
-    body = pagehead("Photographs", "Gallery",
-                    "Congresses, Executive Committee meetings and technical visits, year by year.")
-    nav = "".join('        <button type="button" data-year="y%s">%s</button>\n'
-                  % (e(y["year"]), e(y["year"])) for y in gallery["years"])
-    body = body.replace("  </div></section>\n\n",
-                        '    <div class="yearnav" id="yearnav">\n%s    </div>\n  </div></section>\n\n' % nav, 1)
-
-    for i, y in enumerate(gallery["years"]):
-        alt = "%s, %s" % (y["title"], y["year"])
-        shots = "".join("""        <button type="button" class="shot" data-full="%s" data-caption="%s"
-                aria-label="Enlarge photograph from %s">
-          <img src="%s" width="640" height="457" loading="lazy" alt="%s">
-        </button>
-""" % (e(p["image"]), e(p.get("caption") or alt), e(alt), e(p.get("thumb") or p["image"]),
-       e(p.get("caption") or alt)) for p in y["photos"])
-        body += """  <section class="band%s" id="y%s"><div class="wrap">
-    <div class="yearhead"><b>%s</b><h2>%s</h2><span class="where">%s</span></div>
-    <div class="gallery">
-%s    </div>
-  </div></section>
-
-""" % (" tint" if i % 2 == 0 else "", e(y["year"]), e(y["year"]), e(y["title"]), e(y["where"]), shots)
-
-    body += """  <section class="band"><div class="wrap">
-    <p class="sub">Photographs from earlier congresses are held by the Secretariat and by former host
-    institutions. Members who have images from past congresses are invited to send them to the
-    <a href="/contact/">Secretariat</a> for the archive.</p>
-  </div></section>
-"""
-    return page(site, "/gallery/", "Gallery",
-                "Photographs from IAHR-APD congresses, Executive Committee meetings and technical "
-                "visits, arranged by year.", body)
-
-
-def build_membership(site, committee):
-    ypn = next((m for m in committee["members"] if m["role"] == "YPN Member"), None)
-    ypn_line = ("The Division holds a dedicated YPN seat on its Executive Committee, currently held by "
-                "%s of %s." % (ypn["name"], ypn["affiliation"])) if ypn else ""
-    body = pagehead("Joining the Division", "Membership",
-                    "Membership of IAHR-APD follows automatically from membership of IAHR. There is no "
-                    "separate application and no separate fee.")
-    body += """  <section class="band tint"><div class="wrap">
-    <div class="split">
-      <div>
-        <div class="prose">
-          <p><strong>All IAHR members residing in the Asian and Pacific regions are members of the
-          Division.</strong> To join, you become a member of IAHR through the association's global
-          secretariat; the regional division follows from your country of residence.</p>
-          <p>Division membership gives you the biennial regional congress at member rates, eligibility for
-          the APD awards, the Division's newsletter and calls, and a route into the regional Young
-          Professionals Network.</p>
-        </div>
-        <div class="hero-actions" style="margin-top:26px">
-          <a class="btn" href="%s">Join IAHR &#8599;</a>
-          <a class="btn ghost" href="/contact/">Ask the Secretariat</a>
-        </div>
-        <div class="band-head" style="margin-top:44px;margin-bottom:16px">
-          <div><div class="eyebrow">Young Professionals</div><h2 style="font-size:23px">YPN in the Asia-Pacific</h2></div>
-        </div>
-        <p class="sub" style="margin-top:0">The IAHR Young Professionals Network connects students and
-        early-career researchers across the region. %s</p>
-      </div>
-      <div>
-        <div class="sidecard">
-          <div class="cap">Membership categories</div>
-          <div class="row"><span>Individual</span><b>IAHR</b></div>
-          <div class="row"><span>Student</span><b>IAHR</b></div>
-          <div class="row"><span>Young Professional</span><b>IAHR</b></div>
-          <div class="row"><span>Corporate / Institutional</span><b>IAHR</b></div>
-          <div class="pad">Categories, current rates and the application form are held by the IAHR global
-          secretariat.</div>
-        </div>
-        <div class="sidecard" style="margin-top:24px">
-          <div class="cap">What members receive</div>
-          <div class="pad">
-            <ul class="plainlist" style="font-size:14px">
-              <li>Member rates at the biennial APD Congress</li>
-              <li>Eligibility for the three APD awards</li>
-              <li>Access to IAHR journals and Hydrolink</li>
-              <li>Technical committee and YPN participation</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div></section>
-""" % (e(site["links"]["iahr_membership"]), e(ypn_line))
-    return page(site, "/membership/", "Membership",
-                "How to join IAHR and the Asian and Pacific Division, what membership includes, and the "
-                "regional Young Professionals Network.", body)
-
-
-def build_contact(site, committee):
-    s = site["secretariat"]
-    chair = committee["officers"][0]
-    addr = "<br>".join(e(l) for l in s["address_lines"])
-
-    # The address is split so that it is not a plain string in the markup;
-    # the link is assembled in the browser. Leave `email` empty in site.json
-    # and the page falls back to telephone and post.
-    email = (s.get("email") or "").strip()
-    if email and "@" in email:
-        user, domain = email.split("@", 1)
-        mail_block = """          <div class="pad">
-            <a class="mailto" href="#" data-u="%s" data-d="%s">Email the Secretariat</a>
-          </div>""" % (e(user), e(domain))
-    else:
-        mail_block = """          <div class="pad">Enquiries by telephone or post. An address for written
-          enquiries will be published here.</div>"""
-
-    body = pagehead("Get in touch", "Contact",
-                    "The Division's Secretariat is hosted by the Korea Institute of Civil Engineering and "
-                    "Building Technology in Goyang, Republic of Korea.")
-    body += """  <section class="band tint"><div class="wrap">
-    <div class="split">
-      <div>
-        <div class="eyebrow">Enquiries</div>
-        <h2 style="font-size:23px;margin-top:8px">Write to the Secretariat</h2>
-        <div class="prose" style="margin-top:14px">
-          <p>The Secretariat handles congress hosting proposals, award nominations, membership questions
-          and corrections to the congress archive.</p>
-          <p>For membership, subscriptions and world congress matters, contact the IAHR global
-          secretariat directly at <a href="%s">iahr.org</a>.</p>
-        </div>
-        <div class="hero-actions" style="margin-top:26px">
-          <a class="btn ghost" href="/congresses/#hosting">Hosting a congress</a>
-          <a class="btn ghost" href="/awards/">Award nominations</a>
-        </div>
-      </div>
-      <div>
-        <div class="sidecard">
-          <div class="cap">IAHR-APD Secretariat</div>
-          <div class="pad"><strong style="color:var(--ink)">%s</strong><br>%s</div>
-          <div class="row"><span>Telephone</span><b>%s</b></div>
-          <div class="row"><span>Secretary General</span><b>%s</b></div>
-%s
-        </div>
-        <div class="sidecard" style="margin-top:24px">
-          <div class="cap">Chair of the Division</div>
-          <div class="editor">
-            <img class="avatar sm" src="%s" alt="%s">
-            <div><strong>%s</strong><br>%s, %s</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div></section>
-""" % (e(site["links"]["iahr_global"]), e(s["host"]), addr, e(s["telephone"]),
-       e(s["secretary_general"]), mail_block,
-       e(chair["photo"]), e(chair["name"]), e(chair["name"]),
-       e(chair["affiliation"]), e(chair["country"]))
-    return page(site, "/contact/", "Contact",
-                "How to reach the IAHR-APD Secretariat at KICT in Goyang, Republic of Korea.", body)
-
-
 # ---------------------------------------------------------------- extras
 def build_sitemap(paths):
     urls = "".join("  <url><loc>%s%s</loc></url>\n" % (SITE_URL, p) for p in paths)
@@ -1085,30 +1173,33 @@ def main():
     committee = load("committee.json")
     congresses = load("congresses.json")
     meetings = load("ec-meetings.json")
-    docs = load("documents.json")
+    downloads = load("downloads.json")
     awards = load("awards.json")
     journal = load("journal.json")
     events = load("events.json")
     gallery = load("gallery.json")
+    hero = load("hero.json")
+    documents = load_documents()
     news = load_news()
 
     print("pages")
-    write("/", build_home(site, congresses, news, events, docs, journal, awards))
-    write("/about/", build_about(site, docs))
-    write("/governance/", build_governance(site, committee, meetings, docs))
-    write("/congresses/", build_congresses(site, congresses, docs))
-    write("/awards/", build_awards(site, awards))
+    write("/", build_home(site, congresses, news, events, documents, journal, awards, hero))
+    write("/about/", build_about(site, documents))
+    write("/governance/", build_governance(site, committee, meetings, documents))
+    write("/congresses/", build_congresses(site, congresses, downloads))
+    write("/awards/", build_awards(site, awards, documents))
     write("/publications/", build_publications(site, journal, congresses))
     write("/news/", build_news_index(site, news, events))
     for item in news:
         write("/news/%s/" % item["slug"], build_news_item(site, item))
     write("/gallery/", build_gallery(site, gallery))
     write("/membership/", build_membership(site, committee))
-    write("/contact/", build_contact(site, committee))
+    write("/contact/", build_contact(site))
+    for doc in documents:
+        write(doc["url"], build_document(site, doc))
 
     paths = ["/", "/about/", "/governance/", "/congresses/", "/awards/", "/publications/",
-             "/news/", "/gallery/", "/membership/", "/contact/"] + \
-            ["/news/%s/" % n["slug"] for n in news]
+             "/news/", "/gallery/", "/membership/", "/contact/"] +             ["/news/%s/" % n["slug"] for n in news] + [d["url"] for d in documents]
     with open(os.path.join(DIST, "sitemap.xml"), "w", encoding="utf-8") as f:
         f.write(build_sitemap(paths))
     with open(os.path.join(DIST, "robots.txt"), "w", encoding="utf-8") as f:

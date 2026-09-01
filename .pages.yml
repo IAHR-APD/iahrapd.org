@@ -21,6 +21,10 @@ media:
     label: Gallery photographs
     input: assets/gallery
     output: /assets/gallery
+  - name: hero
+    label: Home page photographs
+    input: assets/hero
+    output: /assets/hero
 
 content:
 
@@ -43,6 +47,7 @@ content:
       - { name: date, label: Date, type: date, options: { format: yyyy-MM-dd } }
       - { name: title, label: Title, type: string }
       - { name: summary, label: Summary, type: text, description: "One or two sentences. Shown on the home page and the news list." }
+      - { name: image, label: Photograph, type: image, required: false, options: { media: gallery }, description: "Optional. Shown on the news list and at the top of the item." }
       - { name: body, label: Body, type: rich-text, required: false }
 
   # ---------------------------------------------------------------- gallery
@@ -251,26 +256,73 @@ content:
 
   # ---------------------------------------------------------------- documents
   - name: documents
-    label: Documents
+    label: By-Laws, statements and reports
+    type: collection
+    path: content/documents
+    format: json
+    extension: json
+    filename: '{primary}.json'
+    primary: title
+    view:
+      fields: [title, kind, version]
+    fields:
+      - { name: title, label: Title, type: string }
+      - { name: kind, label: Kind, type: select, options: { values: [statute, report] }, description: "statute = By-Laws and award statements, shown under About. report = annual reports, shown under Governance." }
+      - { name: status, label: Status, type: string, required: false, description: "e.g. In force. Leave empty for reports." }
+      - { name: version, label: Edition or year, type: string, required: false }
+      - { name: order, label: Order, type: number, required: false, description: "Lower numbers appear first in the lists." }
+      - { name: summary, label: Summary, type: text, required: false }
+      - { name: intro, label: Introduction, type: text, required: false }
+      - { name: pdf, label: PDF, type: file, required: false, options: { media: uploads } }
+      - name: body
+        label: Text
+        type: object
+        list: true
+        fields:
+          - { name: type, label: Block, type: select, options: { values: [heading, text, list] } }
+          - { name: text, label: Text, type: text, required: false, description: "For heading and text blocks." }
+          - { name: items, label: Items, type: string, list: true, required: false, description: "For list blocks." }
+      - name: superseded
+        label: Earlier editions
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: note, label: Note, type: text, required: false }
+          - { name: pdf, label: PDF, type: file, required: false, options: { media: uploads } }
+
+  # ---------------------------------------------------------------- hero
+  - name: hero
+    label: Home page photographs
     type: file
-    path: content/documents.json
+    path: content/hero.json
     format: json
     fields:
-      - name: statutes
-        label: Laws, regulations and statements
+      - { name: interval_seconds, label: Seconds between photographs, type: number }
+      - name: slides
+        label: Photographs
+        type: object
+        list: true
+        fields:
+          - { name: image, label: Photograph, type: image, options: { media: hero } }
+          - { name: place, label: Place, type: string }
+          - { name: region, label: Region, type: string }
+
+  # ---------------------------------------------------------------- downloads
+  - name: downloads
+    label: Congress hosting pack
+    type: file
+    path: content/downloads.json
+    format: json
+    fields:
+      - name: congress_pack
+        label: Files
         type: object
         list: true
         fields:
           - { name: title, label: Title, type: string }
           - { name: format, label: Format, type: select, options: { values: [PDF, DOCX, XLSX] } }
-          - { name: file, label: File, type: file, required: false, options: { media: uploads } }
-      - name: annual_reports
-        label: Annual reports
-        type: object
-        list: true
-        fields:
-          - { name: title, label: Title, type: string }
-          - { name: file, label: File, type: file, required: false, options: { media: uploads } }
+          - { name: file, label: File, type: file, options: { media: uploads } }
 
   # ---------------------------------------------------------------- calendar
   - name: events
@@ -355,6 +407,7 @@ content:
       - { name: full_name, label: Full name, type: string }
       - { name: tagline, label: Home page headline, type: string }
       - { name: founded, label: Founded, type: number }
+      - { name: enquiry_topics, label: What the Secretariat handles, type: string, list: true }
       - { name: custom_domain, label: Custom domain, type: string, required: false, description: "Leave empty until the domain is pointed at GitHub Pages. Then enter www.iahrapd.org and the site switches over." }
       - name: secretariat
         label: Secretariat
@@ -364,7 +417,17 @@ content:
           - { name: address_lines, label: Address, type: string, list: true }
           - { name: telephone, label: Telephone, type: string }
           - { name: secretary_general, label: Secretary General, type: string }
-          - { name: email, label: Enquiry address, type: string, required: false, description: "Use a shared Secretariat address, not a personal one — it is published on the Contact page. Leave empty to show telephone and post only." }
+          - { name: email, label: General enquiry address, type: string, required: false }
+          - name: people
+            label: Who to write to
+            type: object
+            list: true
+            fields:
+              - { name: role, label: Role, type: string }
+              - { name: name, label: Name, type: string }
+              - { name: affiliation, label: Affiliation, type: string }
+              - { name: email, label: Email, type: string, description: "Published on the Contact page. Prefer a shared address over a personal one — it outlives the post-holder." }
+              - { name: note, label: Note, type: string, required: false }
       - name: links
         label: External links
         type: object

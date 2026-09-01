@@ -45,6 +45,48 @@
     raf = requestAnimationFrame(drawContours);
   });
 
+  // ---------------------------------------------------------------- hero slideshow
+  // Cross-fades the rivers of the region behind the headline. Without JavaScript
+  // the first photograph simply stays put.
+  var stage = document.getElementById('hero-slides');
+  if (stage) {
+    var slides = Array.prototype.slice.call(stage.querySelectorAll('img'));
+    var dots = Array.prototype.slice.call(document.querySelectorAll('#slide-dots button'));
+    var place = document.getElementById('slide-place');
+    var region = document.getElementById('slide-region');
+    var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var at = 0, timer = null;
+
+    function show(i) {
+      at = (i + slides.length) % slides.length;
+      slides.forEach(function (img, n) { img.classList.toggle('on', n === at); });
+      dots.forEach(function (b, n) { b.setAttribute('aria-current', n === at ? 'true' : 'false'); });
+      place.textContent = slides[at].dataset.place;
+      region.textContent = slides[at].dataset.region;
+    }
+
+    function start() {
+      if (still || slides.length < 2) return;
+      clearInterval(timer);
+      timer = setInterval(function () { show(at + 1); },
+                          (parseInt(stage.dataset.interval, 10) || 7) * 1000);
+    }
+
+    dots.forEach(function (b) {
+      b.addEventListener('click', function () {
+        show(parseInt(b.dataset.slide, 10));
+        start();
+      });
+    });
+
+    // Do not burn cycles while the tab is in the background.
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) clearInterval(timer); else start();
+    });
+
+    start();
+  }
+
   // ---------------------------------------------------------------- gallery year jumps
   var yearnav = document.getElementById('yearnav');
   if (yearnav) {

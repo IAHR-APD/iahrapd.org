@@ -7,11 +7,26 @@
     "host": "Korea Institute of Civil Engineering and Building Technology",
     "address_lines": [
       "283 Goyang-daero, Ilsanseo-gu, Goyang-si",
-      "Gyeonggi-do, Republic of Korea"
+      "Gyeonggi-do 10223, Republic of Korea"
     ],
     "telephone": "+82 31-9100-0265",
     "secretary_general": "Won Kim",
-    "email": ""
+    "email": "wonkim@kict.re.kr",
+    "people": [
+      {
+        "role": "Secretary General",
+        "name": "Dr Won Kim",
+        "affiliation": "Korea Institute of Civil Engineering and Building Technology",
+        "email": "wonkim@kict.re.kr"
+      },
+      {
+        "role": "Secretariat Officer",
+        "name": "Eunkyung Jang",
+        "affiliation": "Korea Institute of Civil Engineering and Building Technology",
+        "email": "jang@kict.re.kr",
+        "note": "Day-to-day point of contact for the Division"
+      }
+    ]
   },
   "links": {
     "iahr_global": "https://www.iahr.org/",
@@ -19,5 +34,12 @@
     "jher": "https://www.sciencedirect.com/journal/journal-of-hydro-environment-research",
     "kict": "https://www.kict.re.kr/eng/"
   },
-  "custom_domain": ""
+  "custom_domain": "",
+  "enquiry_topics": [
+    "Proposals to host a congress",
+    "Award nominations",
+    "Membership questions",
+    "Corrections to the congress archive",
+    "Any other enquiry"
+  ]
 }
