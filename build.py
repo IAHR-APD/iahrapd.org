@@ -111,6 +111,13 @@ def rebase(markup):
     return re.sub(r'(href|src)="/(?!/)', r'\1="' + BASE + '/', markup)
 
 
+def rebase_css(css):
+    """Same for url(/...) inside a stylesheet, which rebase() never sees."""
+    if not BASE:
+        return css
+    return re.sub(r"url\((['\"]?)/(?!/)", lambda m: "url(" + m.group(1) + BASE + "/", css)
+
+
 def write(path, markup):
     full = os.path.join(DIST, path.strip("/"), "index.html") if path != "/" \
         else os.path.join(DIST, "index.html")
@@ -1050,7 +1057,13 @@ def copy_tree(src, dst):
             rel = os.path.relpath(os.path.join(root, fn), src)
             out = os.path.join(dst, rel)
             os.makedirs(os.path.dirname(out), exist_ok=True)
-            shutil.copy2(os.path.join(root, fn), out)
+            if fn.endswith(".css") and BASE:
+                with open(os.path.join(root, fn), encoding="utf-8") as f:
+                    text = f.read()
+                with open(out, "w", encoding="utf-8") as f:
+                    f.write(rebase_css(text))
+            else:
+                shutil.copy2(os.path.join(root, fn), out)
 
 
 def main():
