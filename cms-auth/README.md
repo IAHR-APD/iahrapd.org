@@ -39,7 +39,7 @@ In `static/admin/config.yml`, set:
 ```yaml
 backend:
   name: github
-  repo: iahr-apd/iahrapd.org
+  repo: IAHR-APD/iahrapd.org
   branch: main
   base_url: https://iahrapd-admin.example.workers.dev
 ```
