@@ -104,11 +104,21 @@ def pretty_date(iso):
     return "%s · %s · %s" % (iso[:4], iso[5:7], iso[8:10])
 
 
+# Attributes whose value may be a site-absolute path.
+PATH_ATTRS = ("href", "src", "data-full")
+
+
 def rebase(markup):
-    """Prefix every site-absolute href/src with the base path. No-op at the root."""
+    """Prefix every site-absolute path attribute with the base path. No-op at the root."""
     if not BASE:
         return markup
-    return re.sub(r'(href|src)="/(?!/)', r'\1="' + BASE + '/', markup)
+    out = re.sub(r'(%s)="/(?!/)' % "|".join(PATH_ATTRS), r'\1="' + BASE + '/', markup)
+    # Anything still pointing at the server root would 404 under a sub-path.
+    stray = re.findall(r'([a-z-]+)="(/(?!/)[^"]*)"', out)
+    stray = [a for a in stray if not a[1].startswith(BASE + "/")]
+    if stray:
+        raise SystemExit("un-rebased absolute paths: %s" % stray[:5])
+    return out
 
 
 def rebase_css(css):
