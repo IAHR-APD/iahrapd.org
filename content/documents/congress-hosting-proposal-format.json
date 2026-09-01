@@ -1,0 +1,95 @@
+{
+  "title": "Proposal format for hosting an IAHR-APD Congress",
+  "kind": "hosting",
+  "status": "",
+  "version": "",
+  "order": 2,
+  "summary": "",
+  "intro": "",
+  "pdf": "/assets/documents/congress-hosting-proposal-format.pdf",
+  "body": [
+    {
+      "type": "heading",
+      "text": "Introduction"
+    },
+    {
+      "type": "text",
+      "text": "This section is supposed to demonstrate the strength, experience and ability of the applicant in organizing and marketing such events. Background of the applicant. Links to its websites may be provided, if necessary."
+    },
+    {
+      "type": "heading",
+      "text": "1.0 Date, venue and overall program"
+    },
+    {
+      "type": "text",
+      "text": "This section should also explain series of questions, such as why the dates, venue and program will be good for APD members, have the organizers considered what other events are likely to take place in the region, how this has been taken into account, and are there any plans to link the Congress with other national events?"
+    },
+    {
+      "type": "heading",
+      "text": "2.0 Central theme and subthemes"
+    },
+    {
+      "type": "text",
+      "text": "This section should specify the central theme and a few sub them and explain how the congress would benefit the delegates of the congress. For example:"
+    },
+    {
+      "type": "text",
+      "text": "Central theme: Vision and Imagination – Water in an Era of Change"
+    },
+    {
+      "type": "heading",
+      "text": "Subthemes:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Climate Change",
+        "Coastal and Estuarine",
+        "Surface water and groundwater",
+        "Hydro informatics and advances in research",
+        "Indigenous Knowledge"
+      ]
+    },
+    {
+      "type": "text",
+      "text": "Please explain how the congress would benefit the delegates of the congress"
+    },
+    {
+      "type": "heading",
+      "text": "3.0 Budget and finance"
+    },
+    {
+      "type": "text",
+      "text": "This section should specify a list of funding sources through sponsorships and exhibitors, the approximate number of expected delegates, the proposed registration fee. Please keep in mind that, the LOC of a regional congress must make a contribution equivalent to 3% of the registration fees to IAHR headquarter."
+    },
+    {
+      "type": "heading",
+      "text": "5.0 Tentative time table"
+    },
+    {
+      "type": "text",
+      "text": "Tentative time table should indicate approximate number of technical sessions and key-note lectures, etc."
+    },
+    {
+      "type": "heading",
+      "text": "6.0 Proceedings"
+    },
+    {
+      "type": "text",
+      "text": "The proceedings should be in both printed volumes (hard copies) containing abstracts and in electronic volume with full papers."
+    },
+    {
+      "type": "heading",
+      "text": "7.0 Details of venue"
+    },
+    {
+      "type": "text",
+      "text": "This section is to give a description of the venue where the congress will be held, including the details of city, city map, weather and connections to the rest of the world, etc., a few links to the relevant web sites, range of accommodation – including the special rate for students."
+    },
+    {
+      "type": "text",
+      "text": "Applications may be filed directly to the IAHR-APD Secretary wonkim@kict.re.kr."
+    }
+  ],
+  "superseded": []
+}

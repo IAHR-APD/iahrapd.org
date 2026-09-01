@@ -3,6 +3,7 @@
   "kind": "statute",
   "status": "In force",
   "version": "Revised edition, 2025",
+  "order": 1,
   "summary": "as adopted in the meeting of the Executive Committee of IAHR-APD on November 15, 1990 in Beijing, China; approved by IAHR Council on April 1, 1991. amended by IAHR-APD Executive Committee on December, 2004, Hong Kong",
   "intro": "The By-Laws govern the conduct of the Division. This is the edition currently in force. Superseded editions are listed at the foot of the page.",
   "pdf": "",
@@ -223,6 +224,5 @@
       "note": "Adopted by the Executive Committee in Beijing on 15 November 1990 and approved by the IAHR Council on 1 April 1991. Not held by the Secretariat in digital form.",
       "pdf": ""
     }
-  ],
-  "order": 1
+  ]
 }

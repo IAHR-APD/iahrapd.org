@@ -3,16 +3,17 @@
   "kind": "report",
   "status": "",
   "version": "2023",
+  "order": 3,
   "summary": "The Division's report to the IAHR Council for 2023.",
   "intro": "",
   "pdf": "",
   "body": [
     {
-      "type": "text",
+      "type": "heading",
       "text": "Asia and Pacific Division"
     },
     {
-      "type": "text",
+      "type": "heading",
       "text": "Regional Division"
     },
     {
@@ -20,7 +21,7 @@
       "text": "Asia and Pacific Division"
     },
     {
-      "type": "text",
+      "type": "heading",
       "text": "Webpage"
     },
     {
@@ -28,15 +29,11 @@
       "text": "https://www.iahr.org/index/committe/83"
     },
     {
-      "type": "text",
+      "type": "heading",
       "text": "Founding year"
     },
     {
-      "type": "text",
-      "text": "1973"
-    },
-    {
-      "type": "text",
+      "type": "heading",
       "text": "Chair"
     },
     {
@@ -44,7 +41,7 @@
       "text": "Norio Tanaka, Saitama University, Japan"
     },
     {
-      "type": "text",
+      "type": "heading",
       "text": "Past Chair"
     },
     {
@@ -52,7 +49,7 @@
       "text": "Gregory De Costa, Open Polytechnic of New Zealand, Sri Lanka"
     },
     {
-      "type": "text",
+      "type": "heading",
       "text": "Vice-Chair"
     },
     {
@@ -60,7 +57,7 @@
       "text": "Sannasi Annamalaisamy Sannasiraj, Indian Institute of Technology Madras, India"
     },
     {
-      "type": "text",
+      "type": "heading",
       "text": "Previous regional congress"
     },
     {
@@ -68,7 +65,7 @@
       "text": "23rd IAHR Asia and Pacific Division Congress, 14-17 December 2022, Chennai, India"
     },
     {
-      "type": "text",
+      "type": "heading",
       "text": "Next regional congress"
     },
     {
@@ -104,11 +101,11 @@
       "text": "Dates and Venue"
     },
     {
-      "type": "text",
+      "type": "heading",
       "text": "March 31, 2023, 12:30-13:30 PM (Asia/Seoul) (GMT +9)"
     },
     {
-      "type": "text",
+      "type": "heading",
       "text": "Zoom Meeting"
     },
     {
@@ -136,11 +133,11 @@
       "text": "Dates and Venue"
     },
     {
-      "type": "text",
+      "type": "heading",
       "text": "March 31, 2023"
     },
     {
-      "type": "text",
+      "type": "heading",
       "text": "Online"
     },
     {
@@ -172,7 +169,7 @@
       "text": "Dates and Venue"
     },
     {
-      "type": "text",
+      "type": "heading",
       "text": "August 22, 2023, TBD"
     },
     {
@@ -188,6 +185,5 @@
       "text": "Pictures"
     }
   ],
-  "superseded": [],
-  "order": 3
+  "superseded": []
 }

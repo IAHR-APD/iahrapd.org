@@ -3,16 +3,21 @@
   "kind": "report",
   "status": "",
   "version": "2025",
+  "order": 1,
   "summary": "The Division's report to the IAHR Council for 2025.",
   "intro": "",
   "pdf": "",
   "body": [
     {
       "type": "heading",
-      "text": "Activities of the Year 2025Including but not limited to conferences, webinars, publications, working meetings, elections, participation in international processes, etc. Some examples below:"
+      "text": "Activities of the Year 2025"
     },
     {
       "type": "text",
+      "text": "Including but not limited to conferences, webinars, publications, working meetings, elections, participation in international processes, etc. Some examples below:"
+    },
+    {
+      "type": "heading",
       "text": "2025 IAHR-APD Executive Committee (EC) Meeting in Singapore"
     },
     {
@@ -28,35 +33,18 @@
       "text": "CHAIR: Norio Tanaka (IAHR-APD Chair), Won Kim (IAHR-APD Secretary)"
     },
     {
-      "type": "text",
-      "text": "• Key Outcomes:"
+      "type": "list",
+      "items": [
+        "Key Outcomes:",
+        "Marked the first fully face-to-face EC meeting since the pandemic, with strong attendance (10 out of 15 members, 67%).",
+        "Reviewed 2024–25 APD activities and financial reports.",
+        "Endorsed the host cities for the 25th and 26th Congresses.",
+        "Approved by-law amendments regarding the Executive Committee size, YPN seat, and Secretariat rules.",
+        "All proceedings were documented in the official minutes for transparency and archival purposes."
+      ]
     },
     {
-      "type": "text",
-      "text": "- Marked the first fully face-to-face EC meeting since the pandemic, with strong attendance (10 out of 15 members, 67%)."
-    },
-    {
-      "type": "text",
-      "text": "- Reviewed 2024–25 APD activities and financial reports."
-    },
-    {
-      "type": "text",
-      "text": "- Endorsed the host cities for the 25th and 26th Congresses."
-    },
-    {
-      "type": "text",
-      "text": "- Approved by-law amendments regarding the Executive Committee size, YPN seat, and Secretariat rules."
-    },
-    {
-      "type": "text",
-      "text": "- All proceedings were documented in the official minutes for transparency and archival purposes."
-    },
-    {
-      "type": "text",
-      "text": "lefttop00"
-    },
-    {
-      "type": "text",
+      "type": "heading",
       "text": "Journal of Hydro-Environment Research (JHER)"
     },
     {
@@ -64,35 +52,29 @@
       "text": "Continues joint publication (Elsevier) with KWRA & IAHR-APD."
     },
     {
-      "type": "text",
-      "text": "• Performance: Achieved a 2024 Impact Factor of 2.3, demonstrating a steady upward trend."
-    },
-    {
-      "type": "text",
-      "text": "• Editorial Standards: Maintained rigorous academic standards, with a 78% rejection rate during preliminary screening."
-    },
-    {
-      "type": "text",
-      "text": "• Process Improvements: Introduced a fast-track review system for leading scholars to accelerate review turnaround and enhance publication rates."
-    },
-    {
-      "type": "text",
-      "text": "• Strategic Goals: Set future objectives to promote research focusing on climate change, artificial intelligence (AI), and hydro-environmental sensing technologies."
-    },
-    {
-      "type": "text",
-      "text": "• Special Issues: Continued emphasis on publishing special issues to attract high-quality submissions."
+      "type": "list",
+      "items": [
+        "Performance: Achieved a 2024 Impact Factor of 2.3, demonstrating a steady upward trend.",
+        "Editorial Standards: Maintained rigorous academic standards, with a 78% rejection rate during preliminary screening.",
+        "Process Improvements: Introduced a fast-track review system for leading scholars to accelerate review turnaround and enhance publication rates.",
+        "Strategic Goals: Set future objectives to promote research focusing on climate change, artificial intelligence (AI), and hydro-environmental sensing technologies.",
+        "Special Issues: Continued emphasis on publishing special issues to attract high-quality submissions."
+      ]
     },
     {
       "type": "text",
       "text": "https://www.journals.elsevier.com/journal-of-hydro-environment-research"
     },
     {
-      "type": "text",
-      "text": "Activities of Future YearsIncluding but not limited to conferences, webinars, publications, working meetings, elections, participation in international processes, etc."
+      "type": "heading",
+      "text": "Activities of Future Years"
     },
     {
       "type": "text",
+      "text": "Including but not limited to conferences, webinars, publications, working meetings, elections, participation in international processes, etc."
+    },
+    {
+      "type": "heading",
       "text": "25th IAHR-APD Congress – “Hydro-environments in the Era of Climate Change and AI”"
     },
     {
@@ -100,31 +82,21 @@
       "text": "19 – 22 Jul 2026, Incheon, Korea"
     },
     {
-      "type": "text",
-      "text": "• Objective: To provide a collaborative platform for knowledge-sharing, exchange, and technological presentations in water science and engineering across the Asia-Pacific region."
-    },
-    {
-      "type": "text",
-      "text": "• Subthemes: Climate change, AI & water, fluvial processes, eco-hydraulics, urban hydrology, estuarine hydraulics, and more."
-    },
-    {
-      "type": "text",
-      "text": "• Organizing Body: Led by the Local Organizing Committee (LOC) comprising over 100 local experts, an International Advisory Committee, and an International Scientific Committee (ISC) with over 26 members."
-    },
-    {
-      "type": "text",
-      "text": "• Program Structure: Includes keynote speeches, technical sessions, welcome & closing ceremonies, and technical tours. Twelve special sessions have been proposed, with further proposals from EC members strongly encouraged."
-    },
-    {
-      "type": "text",
-      "text": "• Call to Action: Strong support and active participation from EC members are requested to ensure a successful event.."
+      "type": "list",
+      "items": [
+        "Objective: To provide a collaborative platform for knowledge-sharing, exchange, and technological presentations in water science and engineering across the Asia-Pacific region.",
+        "Subthemes: Climate change, AI & water, fluvial processes, eco-hydraulics, urban hydrology, estuarine hydraulics, and more.",
+        "Organizing Body: Led by the Local Organizing Committee (LOC) comprising over 100 local experts, an International Advisory Committee, and an International Scientific Committee (ISC) with over 26 members.",
+        "Program Structure: Includes keynote speeches, technical sessions, welcome & closing ceremonies, and technical tours. Twelve special sessions have been proposed, with further proposals from EC members strongly encouraged.",
+        "Call to Action: Strong support and active participation from EC members are requested to ensure a successful event.."
+      ]
     },
     {
       "type": "text",
       "text": ".http://iahr-apd2026.com/"
     },
     {
-      "type": "text",
+      "type": "heading",
       "text": "26th IAHR-APD Congress – “He Tāonga te Wai – Water is a Treasure”"
     },
     {
@@ -132,26 +104,15 @@
       "text": "8-12 Feb 2028, Wellington, New Zealand"
     },
     {
-      "type": "text",
-      "text": "• Tentative Date: February 8–12, 2028 (Strategically scheduled around the Lunar New Year and local holidays)"
-    },
-    {
-      "type": "text",
-      "text": "• Venue: Rutherford House, Victoria University of Wellington (CBD, near the railway station), New Zealand"
-    },
-    {
-      "type": "text",
-      "text": "• Progress & Strategy:"
-    },
-    {
-      "type": "text",
-      "text": "- The Scientific Committee is currently being assembled, with a strong focus on encouraging regional collaboration."
-    },
-    {
-      "type": "text",
-      "text": "- Promotional activities will remain low-key until the conclusion of the 2026 Incheon Congress."
+      "type": "list",
+      "items": [
+        "Tentative Date: February 8–12, 2028 (Strategically scheduled around the Lunar New Year and local holidays)",
+        "Venue: Rutherford House, Victoria University of Wellington (CBD, near the railway station), New Zealand",
+        "Progress & Strategy:",
+        "The Scientific Committee is currently being assembled, with a strong focus on encouraging regional collaboration.",
+        "Promotional activities will remain low-key until the conclusion of the 2026 Incheon Congress."
+      ]
     }
   ],
-  "superseded": [],
-  "order": 1
+  "superseded": []
 }

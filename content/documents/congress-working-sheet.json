@@ -1,0 +1,187 @@
+{
+  "title": "Working sheet for the IAHR-APD Congress",
+  "kind": "hosting",
+  "status": "",
+  "version": "",
+  "order": 3,
+  "summary": "",
+  "intro": "",
+  "pdf": "/assets/documents/congress-working-sheet.pdf",
+  "body": [
+    {
+      "type": "heading",
+      "text": "Contents"
+    },
+    {
+      "type": "list",
+      "items": [
+        "IAHR-APD Congress preparation",
+        "IAHR-APD Congress outline",
+        "IAHR-APD Congress report and summary",
+        "IAHR-APD Congress preparation",
+        "[Bid for the Congress] A proposal for hosting a congress in a prescribed format (Annex 1) should be submitted to the APD secretariat 4 years prior to the congress, to be discussed and approved by an APD EC meeting. The final decision on the venue is to be made 3-4 years prior to the congress event.",
+        "[Reports on preparation of the Congress] After winning the bidding, congress preparation shall be mobilized as soon as possible, including formulation of LOC and Scientific Committee, etc. Two reports on the preparation shall be presented to the APD EC meeting. The first report shall be presented to the APD EC meeting during the APD congress 2 years ahead of the event, where the first announcement shall be distributed. The second one shall be presented to the APD EC meeting during the IAHR world congress one year ahead of the event in which the second announcement shall be distributed. At the same time, the website of the congress shall be set up providing information for potential participants and people who are interested. Access to the web-site should be easy enough for all interested people around the World.",
+        "[Second Announcement] The second announcement should be ready 9 months prior the congress event, in which more information are provided, including: tentative outline program; registration dates and deadlines for paper submission; rates for registration and exhibition; accommodation arrangement; short courses; tours; visa / travel information, etc.",
+        "[Third Announcement] The third announcement manual should be worked out 1-2 months before the congress event, in which the detailed program is described.",
+        "[Consistency with bidding documents] The main items of the congress should be arranged according to the original bidding documents. Any big changes compared with the bidding proposal should be consulted to and proved by APD EC.",
+        "IAHR-APD Congress outline",
+        "[Elements of the Congress] The congress usually takes place in summer with a duration of 3-4 days, consisting of the following elements: one main theme and 4 to 6 sub-themes; key-note lectures; parallel technical sessions: oral presentation and poster; APD Best Paper Awards (one for authors from host country and one for authors from outside the host country); other technical programs (short courses; technical visits, tours and exhibition); APD Distinguished Membership Award; social program, etc.",
+        "[Keynote lectures, invited speakers and poster presentations] At least 4 key-note lecturers should be invited, including: 1-2 from APD region, 1-2 from outside the APD and 1 from the host country, covering wide range of topics. Invited speakers can be arranged for parallel sessions so as to have more high level presentations. Poster may be arranged to 15% to 30% in order to attract as more as possible paper submissions.",
+        "[Abstracts and full papers] The paper submission includes abstract and full paper. The congress proceedings shall be in hard copies (abstracts) and in electronic version (full papers), which should be ready prior to the congress and distributed to participants at the congress.",
+        "[Heading of papers] The congress papers are suggested to follow such heading structure as below,",
+        "[Best Paper Award] An APD Best Paper Award Committee will be established to select the best papers, consisting of 5-7 members proposed by Congress LOC and approved by IAHR-APD EC. After pre-screening the submitted papers, LOC and/or the scientific committee should, 2-4 months prior to the congress, provide 24-30 candidate papers for the Award Committee for reviewing and evaluation.",
+        "[Distinguished Membership Award] The APD Distinguished Membership Award will be elected by APD EC and awarded at the closing ceremony along with the best paper award.",
+        "[Financial issues] Every LOC of the IAHR-APD congress is requested to make the registration fee as low as possible in order to have more participants from APD regions. LOC should make full use of the resources of the host organization and seek more internal and external support. Financial support or discount for students and young fellows is encouraged.",
+        "[Role of EC members] The role of each EC member in organizing the APD congresses shall be brought into full play. The congress LOC may invite them to be key-note lecturers, invited speakers, session chairs, and other responsible persons, etc.",
+        "[Contribution of registration fees to IAHR] According to the IAHR Secretariat, the LOC of a regional congress has to make a contribution equivalent to 3% of the registration fees to IAHR headquarter.",
+        "IAHR-APD Congress report and summary",
+        "[Congress report] LOC of the congress is requested to formulate the congress report within 3 months after the congress event. The report is to be submitted to IAHR council and APD Executive Committee and will be published in HYDROLINK.",
+        "[Feedback from EC members] After the congress, EC members will be asked to comment on the newly finished congress so as to improve the organization of congress.",
+        "[Summary table] A summary table is to be completed."
+      ]
+    },
+    {
+      "type": "text",
+      "text": "(Discussed and amended on the 21st IAHR-APD EC meeting, September 2013 Chengdu. )"
+    },
+    {
+      "type": "text",
+      "text": "(Texts in square brackets in red are added only for an easier reading by the Secretariat in March, 2014.)"
+    },
+    {
+      "type": "text",
+      "text": "Annex1, Proposal Format for hosting IAHR-APD congress"
+    },
+    {
+      "type": "heading",
+      "text": "FORMAT"
+    },
+    {
+      "type": "heading",
+      "text": "For preparing the proposal for hosting IAHR-APD Congress"
+    },
+    {
+      "type": "text",
+      "text": "Introduction"
+    },
+    {
+      "type": "text",
+      "text": "This section is supposed to demonstrate the strength, experience and ability of the applicant in organizing and marketing such events."
+    },
+    {
+      "type": "text",
+      "text": "Back ground of the applicant. Links to its websites may be provided, if necessary."
+    },
+    {
+      "type": "list",
+      "items": [
+        "date, VENUE and overall programme"
+      ]
+    },
+    {
+      "type": "text",
+      "text": "This section should also explain series of questions, such as why the dates, venue and program will be good for APD members, have the organizers considered what other events are likely to take place in the region, how this has been taken into account, and are there any plans to link the Congress with other national events?"
+    },
+    {
+      "type": "list",
+      "items": [
+        "theme and subthemes"
+      ]
+    },
+    {
+      "type": "text",
+      "text": "This section should specify the central theme and a few sub them and explain how the congress would benefit the delegates of the congress. For example:"
+    },
+    {
+      "type": "heading",
+      "text": "CENTRAL THEME:"
+    },
+    {
+      "type": "heading",
+      "text": "Vision and Imagination – Water in an Era of Change"
+    },
+    {
+      "type": "heading",
+      "text": "SUB THEMES:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Climate Change",
+        "Coastal and Estuarine",
+        "Surface water and groundwater",
+        "Hydro informatics and advances in research",
+        "Indigenous Knowledge",
+        "Budget and Financial 275,00"
+      ]
+    },
+    {
+      "type": "text",
+      "text": "This section should specify a list of funding sources through sponsorships and exhibitors, the approximate number of expected delegates, the proposed registration fee."
+    },
+    {
+      "type": "text",
+      "text": "Please keep in mind that, the LOC of a regional congress must make a contribution equivalent to 3% of the registration fees to IAHR headquarter."
+    },
+    {
+      "type": "heading",
+      "text": "TENTATIVE TIME TABLE"
+    },
+    {
+      "type": "text",
+      "text": "Tentative time table should indicate approximate number of technical sessions and key-note lectures, etc."
+    },
+    {
+      "type": "heading",
+      "text": "PROCEEDINGS"
+    },
+    {
+      "type": "text",
+      "text": "The proceedings should be in both printed volumes (hard copies) containing abstracts and in electronic volume with full papers."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Details of venue"
+      ]
+    },
+    {
+      "type": "text",
+      "text": "This section is to give a description of the venue where the congress will be held, including the details of city, city map, weather and connections to the rest of the world, etc., a few links to the relevant web sites, range of accommodation – including the special rate for students."
+    },
+    {
+      "type": "text",
+      "text": "Annex 2, IAHR-APD Best Paper Awards adopted from IAHR By-Laws"
+    },
+    {
+      "type": "heading",
+      "text": "FOUNDING STATEMENT AND RULES OF ADMINISTRATION"
+    },
+    {
+      "type": "heading",
+      "text": "(IAHR By-Laws Annex 4)"
+    },
+    {
+      "type": "heading",
+      "text": "IAHR-APD Award"
+    },
+    {
+      "type": "text",
+      "text": "Founding statement"
+    },
+    {
+      "type": "text",
+      "text": "The IAHR-Asia Pacific Division award (hereinafter called the IAHR-APD award) was established by the IAHR council in its meeting in Moscow of 3rd September 1983, to encourage presentation of results on hydraulic and water resources research at IAHR-APD biennial congresses. To this end biennially two awards can be credited by IAHR-APD to the authors of the two papers judged the most outstanding papers presented at the APD congress. One award should be for the author of the best paper from the host country and the other one to the author of the best paper from outside the host country. An award may not be made if the papers in one of the categories are judged inadequate. Rules of administration"
+    },
+    {
+      "type": "list",
+      "items": [
+        "The IAHR-APD award will be made at each biennial IAHR-APD regional congress to the authors of the two papers judged the most outstanding and published or to be published in the congress proceedings.",
+        "The awardees will be confirmed by the IAHR-APD Executive Committee from the proposal for each award, submitted to the APD Executive Committee by an Award Committee set up by the APD Executive Committee and confirmed by the secretary general. The Award Committee will review the papers submitted for presentation, assess the manner of presentation by the author and will also seek suggestions for nominations of awardees from the participants in the congress. The nominations of awardees from the participants in the congress shall be completed with a clear argumentation (maximum one page) regarding its outstanding quality and why the paper is of such a specific quality that it outweighs the other papers of the considered field. The Award Committee shall submit the nominations to the IAHR-APD secretary before the closing session of the congress.",
+        "Awards need not be made during any congress in which the IAHR-APD Executive Committee considers none of the nominees to be of sufficiently high quality.",
+        "The awards will be presented at the closing ceremony and will consist of a plaque, a certificate and a free one year membership of IAHR, when relevant."
+      ]
+    }
+  ],
+  "superseded": []
+}

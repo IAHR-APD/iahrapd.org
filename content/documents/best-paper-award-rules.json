@@ -3,12 +3,13 @@
   "kind": "statute",
   "status": "In force",
   "version": "Founding statement",
+  "order": 2,
   "summary": "",
   "intro": "",
   "pdf": "/assets/documents/best-paper-award-rules.pdf",
   "body": [
     {
-      "type": "text",
+      "type": "heading",
       "text": "IAHR-APD Best Paper Award"
     },
     {
@@ -33,6 +34,5 @@
       ]
     }
   ],
-  "superseded": [],
-  "order": 2
+  "superseded": []
 }

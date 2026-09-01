@@ -4,10 +4,10 @@
     "year": 2028,
     "city": "Wellington",
     "country": "New Zealand",
-    "dates": "8 – 12 February 2028",
+    "dates": "8 – 11 February 2028",
     "opening": "2028-02-08",
-    "theme": "",
-    "host": "New Zealand hydraulics community",
+    "theme": "He Tāonga te Wai – Water is a Treasure",
+    "host": "Open Polytechnic of New Zealand and Victoria University of Wellington",
     "abstracts": "Call opens 2027"
   },
   "latest": {
@@ -16,15 +16,55 @@
     "city": "Incheon",
     "country": "Republic of Korea",
     "dates": "19 – 22 July 2026",
-    "venue": "Songdo ConvensiA, Incheon, Republic of Korea",
-    "theme": "Hydro-environments in the Era of Climate Change and AI"
+    "venue": "Songdo Convensia, Incheon, Republic of Korea",
+    "theme": "Hydro-environments in the Era of Climate Change and AI",
+    "facts": [
+      {
+        "label": "Participants",
+        "value": "706 from 22 countries"
+      },
+      {
+        "label": "Presentations",
+        "value": "587 — 242 oral, 345 poster"
+      },
+      {
+        "label": "Sessions",
+        "value": "42, including 13 special sessions"
+      },
+      {
+        "label": "Keynote and invited lectures",
+        "value": "5, and one High-Level Panel"
+      },
+      {
+        "label": "Exhibition",
+        "value": "27 booths, 28 sponsors"
+      },
+      {
+        "label": "Host",
+        "value": "Korea Water Resources Association"
+      },
+      {
+        "label": "Proceedings",
+        "value": "Springer, with a JHER special issue"
+      },
+      {
+        "label": "Technical tour",
+        "value": "Sihwa Lake Tidal Power Station"
+      }
+    ]
   },
   "archive": [
+    {
+      "number": "27th",
+      "year": "2030",
+      "location": "Nanjing, China",
+      "theme": "Water Intelligence and Resilience for a Shared Asia-Pacific Future"
+    },
     {
       "number": "26th",
       "year": "2028",
       "location": "Wellington, New Zealand",
-      "theme": "",
+      "theme": "He Tāonga te Wai – Water is a Treasure",
       "next": true
     },
     {
@@ -182,7 +222,7 @@
     {
       "number": "25th",
       "year": "2026",
-      "host": "Incheon, Republic of Korea",
+      "host": "Incheon, Republic of Korea — Springer",
       "url": ""
     },
     {

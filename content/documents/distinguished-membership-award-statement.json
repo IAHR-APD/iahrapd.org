@@ -3,16 +3,17 @@
   "kind": "statute",
   "status": "In force",
   "version": "Approved August 2009",
+  "order": 3,
   "summary": "",
   "intro": "",
   "pdf": "/assets/documents/distinguished-membership-award-statement.pdf",
   "body": [
     {
-      "type": "text",
+      "type": "heading",
       "text": "Distinguished IAHR-APD Membership Award"
     },
     {
-      "type": "text",
+      "type": "heading",
       "text": "Endorsed by the EC at its Meeting in Madrid April 2009 and by Council in Vancouver"
     },
     {
@@ -42,6 +43,5 @@
       "text": "This procedure was discussed in detail in and approved by the IAHR-APD EC Meeting on 20th Oct. 2008 during the 16th IAHR-APD Congress in Nanjing, and was put into function after the approval of Annex 7a IAHR 2009 Council Meeting, Vancouver of the IAHR Council meeting held in 33rd IAHR Congress, in Vancouver, Canada in Aug. 2009."
     }
   ],
-  "superseded": [],
-  "order": 3
+  "superseded": []
 }

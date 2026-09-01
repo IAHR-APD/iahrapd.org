@@ -5,29 +5,34 @@
   "body": [
     "Launched in 2007 by Elsevier, JHER is the house journal of the Asian and Pacific Division of IAHR, sponsored by the Korean Water Resources Association. The journal provides an international platform for research and engineering applications related to water and hydraulic problems in the Asia-Pacific region.",
     "The region's population density, economic growth, landscape, tradition and history require particular treatment of water problems, and every research article contains a section describing actual or potential applications to the Asia-Pacific. Alongside research articles the journal publishes review papers, invited papers, book reviews and technical communications.",
-    "**Special issues** carrying selected papers from the biennial IAHR-APD Congresses — in particular the APD award papers — are a regular feature."
+    "Between 2021 and 2025 the journal received 1,467 submissions. 294 (20 per cent) advanced to review and 1,173 (80 per cent) were declined at initial screening, most commonly as out of scope; of the 271 manuscripts reviewed, 130 (48 per cent) were accepted. A fast-track route, under which a decision is reached within three months, accounted for 10 papers in 2024 and 8 in 2025.",
+    "**Special issues** carrying selected papers from the biennial IAHR-APD Congresses — in particular the APD award papers — are a regular feature. The journal particularly welcomes submissions on climate-change impacts, artificial intelligence and water, and high-tech sensing."
   ],
-  "metrics_year": "2024",
+  "metrics_year": "2025",
   "metrics": [
     {
-      "label": "CiteScore",
-      "value": "5.6"
-    },
-    {
       "label": "Impact Factor",
-      "value": "2.3"
+      "value": "2.8"
     },
     {
-      "label": "Review time",
-      "value": "116 days"
+      "label": "Five-year Impact Factor",
+      "value": "3.0"
     },
     {
-      "label": "Submission to acceptance",
-      "value": "251 days"
+      "label": "Category ranking",
+      "value": "Q2, Water Resources"
     },
     {
-      "label": "Acceptance to publication",
-      "value": "3 days"
+      "label": "Indexed in SCI-Expanded",
+      "value": "since 2011"
+    },
+    {
+      "label": "Articles published",
+      "value": "623"
+    },
+    {
+      "label": "Issues / volumes",
+      "value": "87 / 66"
     },
     {
       "label": "ISSN",
@@ -47,7 +52,7 @@
     },
     {
       "name": "Adrian Wing-Keung Law",
-      "affiliation": "Nanyang Technological University, Singapore",
+      "affiliation": "National University of Singapore, Singapore",
       "interests": "",
       "photo": "/assets/people/adrian.jpg"
     }

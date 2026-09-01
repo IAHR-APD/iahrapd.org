@@ -3,16 +3,21 @@
   "kind": "report",
   "status": "",
   "version": "2024",
+  "order": 2,
   "summary": "The Division's report to the IAHR Council for 2024.",
   "intro": "",
   "pdf": "",
   "body": [
     {
       "type": "heading",
-      "text": "Activities of the Year 2024Including but not limited to conferences, webinars, publications, working meetings, elections, participation in international processes, etc. Some examples below:"
+      "text": "Activities of the Year 2024"
     },
     {
       "type": "text",
+      "text": "Including but not limited to conferences, webinars, publications, working meetings, elections, participation in international processes, etc. Some examples below:"
+    },
+    {
+      "type": "heading",
       "text": "24th IAHR-APD Congress – “Water for a Changing Future”"
     },
     {
@@ -20,32 +25,16 @@
       "text": "14 – 17 Oct 2024, Wuhan, China"
     },
     {
-      "type": "text",
-      "text": "• Jointly organized by the Changjiang River Scientific Research Institute (CRSRI) & Sichuan Univ."
-    },
-    {
-      "type": "text",
-      "text": "• > 500 participants from 30 + countries (gov’t, IOs, academia, industry, students)."
-    },
-    {
-      "type": "text",
-      "text": "• Eight sub-themes ranging from hazard-risk reduction to smart-water tech & estuarine/coastal engineering."
-    },
-    {
-      "type": "text",
-      "text": "• 500 + abstracts → 230 full papers accepted (recommended for Scopus)."
-    },
-    {
-      "type": "text",
-      "text": "• 12 special sessions & 4 side events; technical & post-conference tours (Three Gorges Dam, Dujiangyan, Giant Panda Base, etc.)."
-    },
-    {
-      "type": "text",
-      "text": "• Heritage nomination: Hankou Hydrological Station (1865)."
-    },
-    {
-      "type": "text",
-      "text": "• Advanced regional cooperation toward the UN SDGs."
+      "type": "list",
+      "items": [
+        "Jointly organized by the Changjiang River Scientific Research Institute (CRSRI) & Sichuan Univ.",
+        "> 500 participants from 30 + countries (gov’t, IOs, academia, industry, students).",
+        "Eight sub-themes ranging from hazard-risk reduction to smart-water tech & estuarine/coastal engineering.",
+        "500 + abstracts → 230 full papers accepted (recommended for Scopus).",
+        "12 special sessions & 4 side events; technical & post-conference tours (Three Gorges Dam, Dujiangyan, Giant Panda Base, etc.).",
+        "Heritage nomination: Hankou Hydrological Station (1865).",
+        "Advanced regional cooperation toward the UN SDGs."
+      ]
     },
     {
       "type": "text",
@@ -60,19 +49,15 @@
       "text": "14 Oct 2024, Wuhan, China"
     },
     {
-      "type": "text",
-      "text": "• First fully face-to-face EC since the pandemic; 11 / 15 members (> 73 %) present, co-chaired by Prof. Norio Tanaka (Chair) & Dr. Won Kim (Secretary)."
+      "type": "list",
+      "items": [
+        "First fully face-to-face EC since the pandemic; 11 / 15 members (> 73 %) present, co-chaired by Prof. Norio Tanaka (Chair) & Dr. Won Kim (Secretary).",
+        "Reviewed 2023–24 APD activities & finances; endorsed 25th & 26th Congress hosts; approved by-law amendments (Executive Committee size, YPN seat, Secretariat rules).",
+        "Recorded in official minutes for transparency & archival."
+      ]
     },
     {
-      "type": "text",
-      "text": "• Reviewed 2023–24 APD activities & finances; endorsed 25th & 26th Congress hosts; approved by-law amendments (Executive Committee size, YPN seat, Secretariat rules)."
-    },
-    {
-      "type": "text",
-      "text": "• Recorded in official minutes for transparency & archival."
-    },
-    {
-      "type": "text",
+      "type": "heading",
       "text": "Journal of Hydro-Environment Research (JHER)"
     },
     {
@@ -80,19 +65,15 @@
       "text": "Continues joint publication (Elsevier) with KWRA & IAHR-APD."
     },
     {
-      "type": "text",
-      "text": "• 2018-23: 2 462 submissions → 556 sent to review; 39 % acceptance."
+      "type": "list",
+      "items": [
+        "2018-23: 2 462 submissions → 556 sent to review; 39 % acceptance.",
+        "2023 Impact Factor = 2.470 (steady rise).",
+        "Emphasis on rapid, high-quality eco-hydraulics & water-resources research; global authorship."
+      ]
     },
     {
-      "type": "text",
-      "text": "• 2023 Impact Factor = 2.470 (steady rise)."
-    },
-    {
-      "type": "text",
-      "text": "• Emphasis on rapid, high-quality eco-hydraulics & water-resources research; global authorship."
-    },
-    {
-      "type": "text",
+      "type": "heading",
       "text": "https://www.journals.elsevier.com/journal-of-hydro-environment-research"
     },
     {
@@ -104,19 +85,25 @@
       "text": "Oct 2024, Wuhan, China"
     },
     {
-      "type": "text",
-      "text": "• Awarded to Dr. Gregory Shahane De Costa (Open Polytechnic NZ) for decades-long contributions (APD VP 2014-18, President 2018-22; Congress chair 2010 & 2016)."
+      "type": "heading",
+      "text": "Awarded to Dr. Gregory Shahane De Costa (Open Polytechnic NZ) for decades-long contributions (APD VP 2014-18, President 2018-22; Congress chair 2010 & 2016)."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Cited for advancing hydro-environmental collaboration across APD."
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Activities of Future Years"
     },
     {
       "type": "text",
-      "text": "• Cited for advancing hydro-environmental collaboration across APD."
+      "text": "Including but not limited to conferences, webinars, publications, working meetings, elections, participation in international processes, etc."
     },
     {
-      "type": "text",
-      "text": "Activities of Future YearsIncluding but not limited to conferences, webinars, publications, working meetings, elections, participation in international processes, etc."
-    },
-    {
-      "type": "text",
+      "type": "heading",
       "text": "25th IAHR-APD Congress – “Hydro-environments in the Era of Climate Change and AI”"
     },
     {
@@ -124,39 +111,23 @@
       "text": "19 – 22 Jul 2026, Incheon, Korea"
     },
     {
-      "type": "text",
-      "text": "• LOC chaired by Prof. Sung-Uk Choi (Yonsei Univ.)"
-    },
-    {
-      "type": "text",
-      "text": "• Grand ballroom (3 000 pax) + 35 rooms, 900-booth hall."
-    },
-    {
-      "type": "text",
-      "text": "• Five keynote speeches; ≈ 10 special sessions; SCI-indexed special issues."
-    },
-    {
-      "type": "text",
-      "text": "• Call for abstracts opens 1 Jul 2025; full papers due 1 Apr 2026."
-    },
-    {
-      "type": "text",
-      "text": "• Master classes (2), Best Paper Awards, video-poster sessions, tech exhibition."
-    },
-    {
-      "type": "text",
-      "text": "• Technical tours: Gunnam Dam, ARA Waterway, Cheonggye-cheon, Han River."
-    },
-    {
-      "type": "text",
-      "text": "• Target 320 – 400 participants."
+      "type": "list",
+      "items": [
+        "LOC chaired by Prof. Sung-Uk Choi (Yonsei Univ.)",
+        "Grand ballroom (3 000 pax) + 35 rooms, 900-booth hall.",
+        "Five keynote speeches; ≈ 10 special sessions; SCI-indexed special issues.",
+        "Call for abstracts opens 1 Jul 2025; full papers due 1 Apr 2026.",
+        "Master classes (2), Best Paper Awards, video-poster sessions, tech exhibition.",
+        "Technical tours: Gunnam Dam, ARA Waterway, Cheonggye-cheon, Han River.",
+        "Target 320 – 400 participants."
+      ]
     },
     {
       "type": "text",
       "text": "http://iahr-apd2026.com/"
     },
     {
-      "type": "text",
+      "type": "heading",
       "text": "26th IAHR-APD Congress – “He Tāonga te Wai – Water is a Treasure”"
     },
     {
@@ -164,26 +135,15 @@
       "text": "21 – 25 Feb 2028, Wellington, New Zealand"
     },
     {
-      "type": "text",
-      "text": "• Joint hosts: Open Polytechnic NZ & Victoria Univ. of Wellington."
-    },
-    {
-      "type": "text",
-      "text": "• Five-day programme: pre-workshops, technical sessions, dinner, visits."
-    },
-    {
-      "type": "text",
-      "text": "• Compact walkable CBD venues (James Cook Hotel & VUW)."
-    },
-    {
-      "type": "text",
-      "text": "• Late-summer climate; easy intl. access."
-    },
-    {
-      "type": "text",
-      "text": "• Engagement with NZ Hydrological Society, NZ Society on Large Dams, Coastal Soc., Meteorological Soc."
+      "type": "list",
+      "items": [
+        "Joint hosts: Open Polytechnic NZ & Victoria Univ. of Wellington.",
+        "Five-day programme: pre-workshops, technical sessions, dinner, visits.",
+        "Compact walkable CBD venues (James Cook Hotel & VUW).",
+        "Late-summer climate; easy intl. access.",
+        "Engagement with NZ Hydrological Society, NZ Society on Large Dams, Coastal Soc., Meteorological Soc."
+      ]
     }
   ],
-  "superseded": [],
-  "order": 2
+  "superseded": []
 }

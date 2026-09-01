@@ -114,5 +114,89 @@
   "past_terms": [
     "2023 – 2024",
     "2020 – 2022"
-  ]
+  ],
+  "incoming": {
+    "term": "2027 – 2028",
+    "note": "Elected by the Executive Committee in Incheon on 22 July 2026. Under By-law Article 6.3 the retiring Chair continues on the committee in an advisory role for one term, and the nomination of the Chair is subject to ratification by the IAHR Council.",
+    "members": [
+      {
+        "role": "Chair",
+        "name": "Prof. S. A. Sannasiraj",
+        "affiliation": "IIT Madras",
+        "country": "India"
+      },
+      {
+        "role": "Vice-Chair",
+        "name": "Prof. Sung-Uk Choi",
+        "affiliation": "Yonsei University",
+        "country": "Republic of Korea"
+      },
+      {
+        "role": "Immediate Past Chair",
+        "name": "Prof. Norio Tanaka",
+        "affiliation": "Saitama University",
+        "country": "Japan"
+      },
+      {
+        "role": "Member",
+        "name": "Prof. Intan Supraba",
+        "affiliation": "Universitas Gadjah Mada",
+        "country": "Indonesia"
+      },
+      {
+        "role": "Member",
+        "name": "Prof. Mingfu Guan",
+        "affiliation": "The University of Hong Kong",
+        "country": "Hong Kong, China"
+      },
+      {
+        "role": "Member",
+        "name": "Dr Chang Chun Kiat",
+        "affiliation": "Universiti Sains Malaysia",
+        "country": "Malaysia"
+      },
+      {
+        "role": "Member",
+        "name": "Prof. Joongcheol Paik",
+        "affiliation": "Gangneung-Wonju National University",
+        "country": "Republic of Korea"
+      },
+      {
+        "role": "Member",
+        "name": "Dr Jenn Wei Er",
+        "affiliation": "DHI Water & Environment",
+        "country": "Singapore"
+      },
+      {
+        "role": "Member",
+        "name": "Prof. Yongfeng Liu",
+        "affiliation": "Hohai University",
+        "country": "China"
+      },
+      {
+        "role": "Member",
+        "name": "Dr Induka Werellagama",
+        "affiliation": "Wellington Institute of Technology",
+        "country": "New Zealand"
+      },
+      {
+        "role": "Member",
+        "name": "Prof. Kenichiro Kobayashi",
+        "affiliation": "Saitama University",
+        "country": "Japan"
+      },
+      {
+        "role": "YPN Member",
+        "name": "Dr Yu Qian",
+        "affiliation": "China Institute of Water Resources and Hydropower Research",
+        "country": "China"
+      },
+      {
+        "role": "Secretary General",
+        "name": "Dr Won Kim",
+        "affiliation": "Korea Institute of Civil Engineering and Building Technology",
+        "country": "Republic of Korea"
+      }
+    ]
+  }
 }
