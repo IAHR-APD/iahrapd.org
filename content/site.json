@@ -23,14 +23,13 @@
         "role": "Secretariat Officer",
         "name": "Eunkyung Jang",
         "affiliation": "Korea Institute of Civil Engineering and Building Technology",
-        "email": "jang@kict.re.kr",
-        "note": "Day-to-day point of contact for the Division"
+        "email": "jang@kict.re.kr"
       }
     ]
   },
   "links": {
     "iahr_global": "https://www.iahr.org/",
-    "iahr_membership": "https://www.iahr.org/individual-member/register-one",
+    "iahr_membership": "https://www.iahr.org/index/sub/1710",
     "jher": "https://www.sciencedirect.com/journal/journal-of-hydro-environment-research",
     "kict": "https://www.kict.re.kr/eng/"
   },

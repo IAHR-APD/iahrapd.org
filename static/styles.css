@@ -405,3 +405,15 @@ footer.site .addr strong{color:#fff;font-weight:600}
 .who-row .aff{font-size:13px;color:var(--ink-2);margin-top:4px;line-height:1.45}
 .who-row .note{font-size:13px;color:var(--ink-3);margin-top:4px}
 .who-row .mail{margin-top:8px;font-size:14px;font-family:"IBM Plex Mono",monospace;color:var(--link);word-break:break-all}
+
+/* ============ congress cards ============ */
+/* The metric row is for short values; congress facts are sentences. */
+.factlist{margin:0;padding:0 20px 6px}
+.factlist > div{padding:12px 0;border-top:1px solid var(--rule)}
+.factlist dt{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--ink-3)}
+.factlist dd{margin:5px 0 0;font-size:14.5px;color:var(--ink);line-height:1.5}
+.factlist.plain{padding-left:0;padding-right:0;margin-top:18px;border-top:2px solid var(--ink)}
+.factlist.plain > div:first-child{border-top:0}
+.theme-line{margin-top:12px;font-family:"IBM Plex Serif",serif;font-size:18px;font-style:italic;
+  color:var(--ink-2);line-height:1.4}

@@ -8,7 +8,26 @@
     "opening": "2028-02-08",
     "theme": "He Tāonga te Wai – Water is a Treasure",
     "host": "Open Polytechnic of New Zealand and Victoria University of Wellington",
-    "abstracts": "Call opens 2027"
+    "abstracts": "Call opens 2027",
+    "description": "The 26th Congress returns the Division to New Zealand, organised jointly by the Open Polytechnic of New Zealand and Victoria University of Wellington. The congress flag was handed over to the New Zealand Local Organising Committee at the closing ceremony of the 25th Congress in Incheon.\n\nThe theme, *He Tāonga te Wai – Water is a Treasure*, takes its name from the Māori understanding of water as something held in trust — a framing the Local Organising Committee has chosen for a programme on water as a shared inheritance across the Asia-Pacific.\n\nThe call for abstracts and the sub-themes will be announced during 2027. Institutions interested in sponsoring or exhibiting should write to the Secretariat.",
+    "facts": [
+      {
+        "label": "Dates",
+        "value": "8 – 11 February 2028"
+      },
+      {
+        "label": "Venue",
+        "value": "Wellington, New Zealand"
+      },
+      {
+        "label": "Hosts",
+        "value": "Open Polytechnic of New Zealand and Victoria University of Wellington"
+      },
+      {
+        "label": "Abstracts",
+        "value": "Call opens 2027"
+      }
+    ]
   },
   "latest": {
     "number": "25th",

@@ -205,12 +205,12 @@ def head(site, title, description, path):
 """ % (e(full_title), e(description), SITE_URL, path, e(full_title), e(description), SITE_URL, path)
 
 
-def header(path):
+def header(path, join_url="https://www.iahr.org/"):
     items = "".join(
         '        <li><a href="%s"%s>%s</a></li>\n'
         % (href, ' aria-current="page"' if href == path else "", label)
         for href, label in NAV)
-    return """<a class="skip" href="#main">Skip to content</a>
+    markup = """<a class="skip" href="#main">Skip to content</a>
 <header class="site">
   <div class="wrap masthead">
     <a class="lockup" href="/" aria-label="IAHR-APD home">
@@ -219,7 +219,7 @@ def header(path):
     </a>
     <div class="util">
       <a href="https://www.iahr.org/">IAHR Global &#8599;</a>
-      <a class="btn ghost" href="/membership/">Join IAHR</a>
+      <a class="btn ghost" href="__JOIN__">Join IAHR</a>
     </div>
   </div>
   <nav class="primary" aria-label="Primary">
@@ -231,6 +231,7 @@ def header(path):
 </header>
 <main id="main">
 """ % items
+    return markup.replace("__JOIN__", join_url)
 
 
 def footer(site):
@@ -297,7 +298,9 @@ def footer(site):
 
 
 def page(site, path, title, description, body):
-    return head(site, title, description, path) + header(path) + body + footer(site)
+    return (head(site, title, description, path)
+            + header(path, site["links"]["iahr_membership"])
+            + body + footer(site))
 
 
 def pagehead(eyebrow, title, lede):
@@ -453,17 +456,6 @@ def build_home(site, congresses, news, events, documents, journal, awards, hero)
     metrics = "".join('          <div class="row"><span>%s</span><b>%s</b></div>\n'
                       % (e(m["label"]), e(m["value"])) for m in journal["metrics"][:6])
 
-    award_cards = ""
-    for key, label in (("distinguished", "Distinguished Membership"),
-                       ("heritage", "Heritage Award"),
-                       ("best_paper", "Best Paper Award")):
-        block = awards[key]
-        lis = "".join('            <li><b class="num">%s</b><span>%s</span></li>\n'
-                      % (e(r["year"]), "<br>".join(e(p["name"]) for p in r["people"]))
-                      for r in block["recipients"][:3])
-        award_cards += ('        <div class="award"><div class="since">Awarded biennially</div>'
-                        '<h3>%s</h3>\n          <ul>\n%s          </ul></div>\n' % (label, lis))
-
     body = '  <section class="hero">\n'
     body += '    <div class="hero-slides" id="hero-slides" data-interval="%d">\n%s    </div>\n' % (
         int(hero.get("interval_seconds", 7)), slides)
@@ -553,12 +545,6 @@ def build_home(site, congresses, news, events, documents, journal, awards, hero)
     </div>
   </section>
 
-  <section class="band">
-    <div class="wrap">
-%s      <div class="awards">
-%s      </div>
-    </div>
-  </section>
 ''' % (e(site["founded"]), e(site["tagline"]), e(nxt["number"]), e(nxt["number"]),
        e(nxt["city"]), e(nxt["country"]), theme, e(nxt["dates"]), e(nxt["host"]),
        e(nxt["abstracts"]), e(nxt["opening"]),
@@ -570,9 +556,7 @@ def build_home(site, congresses, news, events, documents, journal, awards, hero)
        rows,
        e(journal["title"]), inline(journal["body"][0]), e(site["links"]["jher"]),
        e(journal["metrics_year"]), metrics,
-       band_head("Recognition", "APD Awards", "",
-                 ("/awards/", "Statements, rules and full recipient lists &rarr;")),
-       award_cards)
+       )
 
     return page(site, "/", site["short_name"],
                 "IAHR-APD — the Asian and Pacific Division of the International Association for "
@@ -747,8 +731,11 @@ def build_congresses(site, congresses, documents):
       <div>
         <div class="eyebrow">Next &middot; %s Congress</div>
         <h2 style="font-size:28px;margin-top:8px">%s, %s</h2>
-        <p class="sub">%s. %s</p>
-        <div class="hero-actions" style="margin-top:22px">
+        <p class="theme-line">%s</p>
+        <dl class="factlist plain">
+%s        </dl>
+        <div class="prose" style="margin-top:20px">%s</div>
+        <div class="hero-actions" style="margin-top:24px">
           <a class="btn" href="/contact/">Register interest</a>
           <a class="btn ghost" href="#hosting">Hosting a congress</a>
         </div>
@@ -756,15 +743,22 @@ def build_congresses(site, congresses, documents):
       <div class="sidecard">
         <div class="cap">Most recent &middot; %s Congress</div>
         <div class="pad"><strong style="color:var(--ink)">%s</strong><br>%s</div>
-%s        <div class="row"><span>Award citations</span><b><a href="/awards/">Awards</a></b></div>
+        <dl class="factlist">
+%s        </dl>
+        <div class="pad" style="border-top:1px solid var(--rule)">
+          <a href="/awards/">Award citations</a> &middot; <a href="/gallery/#y2026">Photographs</a>
+        </div>
       </div>
     </div>
   </div></section>
 
   <section class="band" id="archive"><div class="wrap">
-''' % (e(nxt["number"]), e(nxt["city"]), e(nxt["country"]), e(nxt["dates"]), theme,
+''' % (e(nxt["number"]), e(nxt["city"]), e(nxt["country"]), theme,
+       "".join('          <div><dt>%s</dt><dd>%s</dd></div>\n'
+               % (e(f["label"]), e(f["value"])) for f in nxt.get("facts", [])),
+       rich(nxt.get("description", "")),
        e(latest["number"]), e(latest["theme"]), e(latest["venue"]),
-       "".join('        <div class="row"><span>%s</span><b>%s</b></div>\n'
+       "".join('          <div><dt>%s</dt><dd>%s</dd></div>\n'
                % (e(f["label"]), e(f["value"])) for f in latest.get("facts", [])))
 
     body += band_head("Complete record", "Congress archive, 1st – 26th",
