@@ -1,12 +1,12 @@
 # Decap CMS — the admin screen at /admin/
 #
-# Before this works, fill in `repo` below with the GitHub repository, and
-# `base_url` with the address of the small OAuth worker (see cms-auth/README.md).
+# Before this works, fill in `base_url` below with the address of the small
+# OAuth sign-in worker (see cms-auth/README.md).
 # Nothing else in this file needs changing to add news or edit pages.
 
 backend:
   name: github
-  repo: ORG/iahr-apd-website          # <-- change to your GitHub org/repo
+  repo: iahr-apd/iahrapd.org
   branch: main
   base_url: https://REPLACE-ME.workers.dev   # <-- change to your OAuth worker
 
