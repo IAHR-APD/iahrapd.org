@@ -678,14 +678,14 @@ def build_governance(site, committee, meetings, documents):
 
     inc = committee.get("incoming")
     if inc:
-        rows = "".join('            <tr><td class="place">%s</td><td class="place">%s</td>'
-                       '<td class="theme">%s</td><td class="yr">%s</td></tr>\n'
+        rows = "".join('            <tr><td class="ec-role">%s</td><td class="ec-name">%s</td>'
+                       '<td class="ec-aff">%s</td><td class="ec-cty">%s</td></tr>\n'
                        % (e(m["role"]), e(m["name"]), e(m["affiliation"]), e(m["country"]))
                        for m in inc["members"])
         body += '  <section class="band tint" id="incoming"><div class="wrap">\n'
         body += band_head("Elected · takes office " + inc["term"].split("–")[0].strip(),
                           "Executive Committee %s" % inc["term"], inc.get("note", ""))
-        body += ('    <div class="tablewrap">\n      <table class="records">\n'
+        body += ('    <div class="tablewrap">\n      <table class="records committee">\n'
                  '        <thead><tr><th scope="col">Role</th><th scope="col">Name</th>'
                  '<th scope="col">Affiliation</th><th scope="col">Country</th></tr></thead>\n'
                  '        <tbody>\n%s        </tbody>\n      </table>\n    </div>\n'

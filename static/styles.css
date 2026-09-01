@@ -417,3 +417,14 @@ footer.site .addr strong{color:#fff;font-weight:600}
 .factlist.plain > div:first-child{border-top:0}
 .theme-line{margin-top:12px;font-family:"IBM Plex Serif",serif;font-size:18px;font-style:italic;
   color:var(--ink-2);line-height:1.4}
+
+/* ============ committee table ============ */
+/* Its own column widths: the congress table's are far too narrow for
+   "Immediate Past Chair" or "Republic of Korea". */
+table.records.committee{min-width:720px}
+table.records.committee .ec-role{width:190px;font-weight:600;white-space:nowrap}
+table.records.committee .ec-name{width:210px;font-weight:600;white-space:nowrap}
+table.records.committee .ec-aff{color:var(--ink-2)}
+table.records.committee .ec-cty{width:1%;white-space:nowrap;text-align:right;
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--ink-3);padding-right:0}
