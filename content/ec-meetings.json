@@ -1,0 +1,100 @@
+{
+  "meetings": [
+    {
+      "date": "2026·07",
+      "type": "EC meeting",
+      "location": "Incheon, Republic of Korea",
+      "with": "25th APD Congress"
+    },
+    {
+      "date": "2025·06",
+      "type": "EC meeting",
+      "location": "Singapore",
+      "with": "41st IAHR World Congress"
+    },
+    {
+      "date": "2024·10",
+      "type": "EC meeting",
+      "location": "Wuhan, China",
+      "with": "24th APD Congress"
+    },
+    {
+      "date": "2023·08",
+      "type": "EC gathering",
+      "location": "Vienna, Austria",
+      "with": "40th IAHR World Congress"
+    },
+    {
+      "date": "2023·03",
+      "type": "EC meeting",
+      "location": "Online",
+      "with": "—"
+    },
+    {
+      "date": "2022·12",
+      "type": "EC meeting",
+      "location": "Chennai, India",
+      "with": "23rd APD Congress"
+    },
+    {
+      "date": "2022·06",
+      "type": "EC gathering",
+      "location": "Granada, Spain",
+      "with": "39th IAHR World Congress"
+    },
+    {
+      "date": "2020·09",
+      "type": "EC meeting",
+      "location": "Sapporo, Japan — online",
+      "with": "22nd APD Congress"
+    },
+    {
+      "date": "2019·09",
+      "type": "EC meeting",
+      "location": "Panama City, Panama",
+      "with": "38th IAHR World Congress"
+    },
+    {
+      "date": "2018·09",
+      "type": "EC meeting",
+      "location": "Yogyakarta, Indonesia",
+      "with": "21st APD Congress"
+    },
+    {
+      "date": "2017·08",
+      "type": "EC gathering",
+      "location": "Kuala Lumpur, Malaysia",
+      "with": "37th IAHR World Congress"
+    },
+    {
+      "date": "2016·08",
+      "type": "EC meeting",
+      "location": "Colombo, Sri Lanka",
+      "with": "20th APD Congress"
+    },
+    {
+      "date": "2015·06",
+      "type": "EC gathering",
+      "location": "The Hague, Netherlands",
+      "with": "36th IAHR World Congress"
+    },
+    {
+      "date": "2014·09",
+      "type": "EC meeting",
+      "location": "Hanoi, Viet Nam",
+      "with": "19th APD Congress"
+    },
+    {
+      "date": "2013·09",
+      "type": "EC gathering",
+      "location": "Chengdu, China",
+      "with": "35th IAHR World Congress"
+    },
+    {
+      "date": "2010·05",
+      "type": "EC meeting",
+      "location": "Auckland, New Zealand",
+      "with": "17th APD Congress"
+    }
+  ]
+}

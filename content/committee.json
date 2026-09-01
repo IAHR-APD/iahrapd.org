@@ -1,0 +1,119 @@
+{
+  "term": "2025 – 2026",
+  "officers": [
+    {
+      "role": "Chair of the Division",
+      "name": "Prof. Norio Tanaka",
+      "affiliation": "Saitama University",
+      "department": "Graduate School of Science and Engineering",
+      "country": "Japan",
+      "photo": "/assets/people/tanaka.jpg"
+    },
+    {
+      "role": "Vice-Chair",
+      "name": "Prof. S. A. Sannasiraj",
+      "affiliation": "Indian Institute of Technology Madras",
+      "department": "Department of Ocean Engineering",
+      "country": "India",
+      "photo": "/assets/people/sannasiraj.jpg"
+    }
+  ],
+  "members": [
+    {
+      "role": "EC Member",
+      "name": "Joongcheol Paik",
+      "affiliation": "Gangneung-Wonju National University",
+      "country": "Republic of Korea",
+      "photo": "/assets/people/paik.jpg"
+    },
+    {
+      "role": "EC Member",
+      "name": "Asaad Y. Shamseldin",
+      "affiliation": "The University of Auckland",
+      "country": "New Zealand",
+      "photo": "/assets/people/shamseldin.jpg"
+    },
+    {
+      "role": "EC Member",
+      "name": "Intan Supraba",
+      "affiliation": "Universitas Gadjah Mada",
+      "country": "Indonesia",
+      "photo": "/assets/people/intan.jpg"
+    },
+    {
+      "role": "EC Member",
+      "name": "Hao-Che (Howard) Ho",
+      "affiliation": "Affiliation to be confirmed",
+      "country": "Taiwan, China",
+      "photo": "/assets/people/haoche.jpg",
+      "flag": "Check"
+    },
+    {
+      "role": "EC Member",
+      "name": "Mingfu Guan",
+      "affiliation": "The University of Hong Kong",
+      "country": "Hong Kong, China",
+      "photo": "/assets/people/mingfu.jpg"
+    },
+    {
+      "role": "EC Member",
+      "name": "Chun Kiat Chang",
+      "affiliation": "Universiti Sains Malaysia",
+      "country": "Malaysia",
+      "photo": "/assets/people/chunkiat.jpg"
+    },
+    {
+      "role": "EC Member",
+      "name": "Huu Loc Ho",
+      "affiliation": "Asian Institute of Technology",
+      "country": "Thailand",
+      "photo": "/assets/people/huuloc.jpg"
+    },
+    {
+      "role": "EC Member",
+      "name": "Yongfeng Liu",
+      "affiliation": "Hohai University",
+      "country": "China",
+      "photo": "/assets/people/liu.jpg"
+    },
+    {
+      "role": "EC Member",
+      "name": "Er Jenn Wei",
+      "affiliation": "DHI Water & Environment (S) Pte. Ltd.",
+      "country": "Singapore",
+      "photo": "/assets/people/er.jpg"
+    },
+    {
+      "role": "YPN Member",
+      "name": "Qian Yu",
+      "affiliation": "China Institute of Water Resources and Hydropower Research",
+      "country": "China",
+      "photo": "/assets/people/qian.jpg"
+    },
+    {
+      "role": "Co-opted Member",
+      "name": "Zhu Yonghui",
+      "affiliation": "Changjiang River Scientific Research Institute",
+      "country": "China",
+      "photo": "/assets/people/zhu.jpg"
+    },
+    {
+      "role": "Co-opted Member",
+      "name": "Sung-Uk Choi",
+      "affiliation": "Yonsei University",
+      "country": "Republic of Korea",
+      "photo": "/assets/people/choi.jpg"
+    },
+    {
+      "role": "Secretary General",
+      "name": "Won Kim",
+      "affiliation": "Korea Institute of Civil Engineering and Building Technology",
+      "country": "Republic of Korea",
+      "photo": "/assets/people/wonkim.jpg"
+    }
+  ],
+  "past_terms": [
+    "2023 – 2024",
+    "2020 – 2022"
+  ]
+}

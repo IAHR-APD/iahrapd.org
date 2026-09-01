@@ -1,0 +1,21 @@
+{
+  "short_name": "IAHR-APD",
+  "full_name": "International Association for Hydro-Environment Engineering and Research — Asian and Pacific Division",
+  "tagline": "Hydraulics and hydro-environment research across the Asia-Pacific.",
+  "founded": 1973,
+  "secretariat": {
+    "host": "Korea Institute of Civil Engineering and Building Technology",
+    "address_lines": [
+      "283 Goyang-daero, Ilsanseo-gu, Goyang-si",
+      "Gyeonggi-do, Republic of Korea"
+    ],
+    "telephone": "+82 31-9100-0265",
+    "secretary_general": "Won Kim"
+  },
+  "links": {
+    "iahr_global": "https://www.iahr.org/",
+    "iahr_membership": "https://www.iahr.org/index/join",
+    "jher": "https://www.sciencedirect.com/journal/journal-of-hydro-environment-research",
+    "kict": "https://www.kict.re.kr/eng/"
+  }
+}

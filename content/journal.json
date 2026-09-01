@@ -1,0 +1,81 @@
+{
+  "title": "Journal of Hydro-environment Research",
+  "abbreviation": "JHER",
+  "eyebrow": "House journal · since 2007",
+  "body": [
+    "Launched in 2007 by Elsevier, JHER is the house journal of the Asian and Pacific Division of IAHR, sponsored by the Korean Water Resources Association. The journal provides an international platform for research and engineering applications related to water and hydraulic problems in the Asia-Pacific region.",
+    "The region's population density, economic growth, landscape, tradition and history require particular treatment of water problems, and every research article contains a section describing actual or potential applications to the Asia-Pacific. Alongside research articles the journal publishes review papers, invited papers, book reviews and technical communications.",
+    "**Special issues** carrying selected papers from the biennial IAHR-APD Congresses — in particular the APD award papers — are a regular feature."
+  ],
+  "metrics_year": "2024",
+  "metrics": [
+    {
+      "label": "CiteScore",
+      "value": "5.6"
+    },
+    {
+      "label": "Impact Factor",
+      "value": "2.3"
+    },
+    {
+      "label": "Review time",
+      "value": "116 days"
+    },
+    {
+      "label": "Submission to acceptance",
+      "value": "251 days"
+    },
+    {
+      "label": "Acceptance to publication",
+      "value": "3 days"
+    },
+    {
+      "label": "ISSN",
+      "value": "1570-6443"
+    },
+    {
+      "label": "Publisher",
+      "value": "Elsevier"
+    }
+  ],
+  "editors": [
+    {
+      "name": "Sung-Uk Choi",
+      "affiliation": "Yonsei University, Seoul, Republic of Korea",
+      "interests": "River hydraulics · sediment transport · turbulent flows · ecohydraulics",
+      "photo": "/assets/people/choi.jpg"
+    },
+    {
+      "name": "Adrian Wing-Keung Law",
+      "affiliation": "Nanyang Technological University, Singapore",
+      "interests": "",
+      "photo": "/assets/people/adrian.jpg"
+    }
+  ],
+  "other_publications": [
+    {
+      "kind": "Journal",
+      "title": "Journal of Hydraulic Research",
+      "note": "The association's flagship journal, published since 1963.",
+      "meta": "IAHR · Taylor & Francis"
+    },
+    {
+      "kind": "Journal",
+      "title": "Journal of Applied Water Engineering and Research",
+      "note": "Applied and practice-oriented water engineering.",
+      "meta": "IAHR · Taylor & Francis"
+    },
+    {
+      "kind": "Magazine",
+      "title": "Hydrolink",
+      "note": "The association's quarterly magazine for members.",
+      "meta": "IAHR"
+    },
+    {
+      "kind": "Monographs",
+      "title": "IAHR Monograph Series",
+      "note": "Reference works in hydraulic engineering and research.",
+      "meta": "IAHR · CRC Press"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "events": [
+    {
+      "month": "Jun",
+      "year": "2027",
+      "title": "42nd IAHR World Congress",
+      "detail": "28 June – 2 July 2027 · Bari, Italy"
+    },
+    {
+      "month": "Feb",
+      "year": "2028",
+      "title": "26th IAHR-APD Congress",
+      "detail": "8 – 12 February 2028 · Wellington, New Zealand"
+    },
+    {
+      "month": "Feb",
+      "year": "2028",
+      "title": "APD Executive Committee meeting",
+      "detail": "Held alongside the 26th Congress"
+    },
+    {
+      "month": "2030",
+      "year": "TBC",
+      "title": "27th IAHR-APD Congress",
+      "detail": "Host to be selected · proposals open"
+    }
+  ]
+}

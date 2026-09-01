@@ -1,0 +1,264 @@
+{
+  "latest": {
+    "congress": "Presented at the 24th Congress · Wuhan, China",
+    "year": "2024",
+    "distinguished": {
+      "name": "Gregory Shahane De Costa",
+      "affiliation": "Open Polytechnic of New Zealand, New Zealand",
+      "photo": ""
+    },
+    "heritage": {
+      "name": "Hankou Hydrological Station",
+      "affiliation": "Wuhan, China",
+      "photo": ""
+    },
+    "papers": [
+      {
+        "title": "Diagnosing non-stationarity of hydrological model structure using Bayesian model averaging: whether saturation-excess or infiltration-excess dominates runoff generation",
+        "authors": "Liting Zhou, Xiaojing Zhang, Hairong Zhang, Huaming Yao, Pan Liu",
+        "country": "China"
+      },
+      {
+        "title": "Achieving SDG6 for sustainable water supply and wastewater management in Southeastern Europe",
+        "authors": "Elpida Kolokytha, Yannis Mylopoulos, Dionysis Latinopoulos, Jovan Despotović, Aleksandar Djukić, Branislav Babić",
+        "country": "Greece"
+      },
+      {
+        "title": "Experimental investigation on the filling process of a long-distance pressurized water conveyance tunnel",
+        "authors": "Songlin Han, Xiaoxia Hou, Zhixin Wang, Zhibing Jiang, Duan Chen",
+        "country": "China"
+      },
+      {
+        "title": "Exploring the effects of modifying stratification reality and biogeochemical model parameters on hypoxia using DN-4DVar",
+        "authors": "Takanori Nagano, Masayasu Irie",
+        "country": "Japan"
+      }
+    ]
+  },
+  "distinguished": {
+    "eyebrow": "Award · established 2009",
+    "title": "Distinguished IAHR-APD Membership Award",
+    "intro": "Presented to an individual whose sustained contribution to hydro-environment engineering and to the Division itself has been of exceptional value to the region.",
+    "recipients": [
+      {
+        "year": "2024",
+        "people": [
+          {
+            "name": "Gregory Shahane De Costa",
+            "note": "Open Polytechnic of New Zealand, New Zealand"
+          }
+        ]
+      },
+      {
+        "year": "2022",
+        "people": [
+          {
+            "name": "Hyoseop Woo",
+            "note": "Republic of Korea"
+          }
+        ]
+      },
+      {
+        "year": "2020",
+        "people": [
+          {
+            "name": "Bruce Melville",
+            "note": "New Zealand"
+          },
+          {
+            "name": "Kyung Soo Jun",
+            "note": "Republic of Korea"
+          }
+        ]
+      },
+      {
+        "year": "2018",
+        "people": [
+          {
+            "name": "Jing Peng",
+            "note": "China"
+          }
+        ]
+      },
+      {
+        "year": "2016",
+        "people": [
+          {
+            "name": "Hitoshi Tanaka",
+            "note": "Japan"
+          }
+        ]
+      },
+      {
+        "year": "2014",
+        "people": [
+          {
+            "name": "Il Won Seo",
+            "note": "Republic of Korea"
+          }
+        ]
+      },
+      {
+        "year": "2012",
+        "people": [
+          {
+            "name": "Lianxiang Wang",
+            "note": "India"
+          }
+        ]
+      },
+      {
+        "year": "2010",
+        "people": [
+          {
+            "name": "Joseph Lee",
+            "note": "China"
+          },
+          {
+            "name": "Ashim Das Gupta",
+            "note": "Thailand"
+          }
+        ]
+      }
+    ]
+  },
+  "heritage": {
+    "eyebrow": "Award",
+    "title": "IAHR-APD Heritage Award",
+    "intro": "Presented to a hydraulic structure, system or site in the region of outstanding historical, technical or cultural significance.",
+    "recipients": [
+      {
+        "year": "2024",
+        "people": [
+          {
+            "name": "Hankou Hydrological Station",
+            "note": "Wuhan, China"
+          }
+        ]
+      },
+      {
+        "year": "2022",
+        "people": [
+          {
+            "name": "Grand Anicut / Kallanai",
+            "note": "India"
+          }
+        ]
+      },
+      {
+        "year": "2020",
+        "people": [
+          {
+            "name": "Flood control and water utilisation facilities, Ishikari River basin",
+            "note": "Japan"
+          },
+          {
+            "name": "Tatsumi Aqueduct",
+            "note": "Japan"
+          },
+          {
+            "name": "Sayamaike Reservoir",
+            "note": "Japan"
+          }
+        ]
+      },
+      {
+        "year": "2016",
+        "people": [
+          {
+            "name": "Parakrama Samudraya",
+            "note": "Sri Lanka"
+          }
+        ]
+      }
+    ]
+  },
+  "best_paper": {
+    "eyebrow": "Award",
+    "title": "IAHR-APD Best Paper Award",
+    "intro": "Selected from the papers presented at each regional congress. Award papers are regularly invited for the JHER congress special issue.",
+    "recipients": [
+      {
+        "year": "2022",
+        "people": [
+          {
+            "name": "Numerical modelling of ship waves and induced sediment resuspension in the Hooghly River, India",
+            "note": "Mainak Chakraborty"
+          },
+          {
+            "name": "Eliminating fixation of alternate bars by using impermeable groynes",
+            "note": "Ryotaro Endo"
+          },
+          {
+            "name": "Combined storm surge and river flow simulation for the Hooghly Estuary, east coast of India",
+            "note": "B. Sridharan"
+          },
+          {
+            "name": "Numerical investigations into wave attenuation characteristics of vegetation belt in terms of vortex shedding",
+            "note": "N. Hari Ram"
+          },
+          {
+            "name": "Application of IITM-RANS3D to wave-breaking and wave–structure interaction problems",
+            "note": "Shaswat Saincher"
+          }
+        ]
+      },
+      {
+        "year": "2020",
+        "people": [
+          {
+            "name": "Variability in stage–discharge relationships in river reach with bed evolutions",
+            "note": "Robin K. Biswas, Shinji Egashira, Daisuke Harada"
+          },
+          {
+            "name": "Effects of submerged weir with an opening on bed deformation and flow structure under live-bed conditions",
+            "note": "Hirotaka Une, Terunori Ohmoto"
+          },
+          {
+            "name": "Uncertainties of machine learning in predicting the hydrological responses of LID practices",
+            "note": "Yang Yang, Ting Fong May Chui"
+          },
+          {
+            "name": "Reynolds number effects of internal solitary waves propagating on a uniform slope",
+            "note": "Hai Zhu, Songping Mao, Decai Sun, Lingling Wang, Zhenzhen Yu, Cheng Lin"
+          }
+        ]
+      },
+      {
+        "year": "2018",
+        "people": [
+          {
+            "name": "Effect of climate change variables on the coastal wind prediction",
+            "note": "Syamsidik"
+          },
+          {
+            "name": "Effect of the combination of forest and the front-side moat along a river where a tsunami runs up",
+            "note": "Yoshiya Igarashi, Norio Tanaka"
+          },
+          {
+            "name": "Dominating factors influencing rapid channel migration during floods — a case study on Otofuke River",
+            "note": "Tomoko Kyuka, Yasuyuki Shimizu"
+          }
+        ]
+      },
+      {
+        "year": "2012",
+        "people": [
+          {
+            "name": "Analysis of dispersion characteristic using tracer test in natural stream",
+            "note": "Il Won Seo"
+          }
+        ]
+      },
+      {
+        "year": "2010",
+        "people": [
+          {
+            "name": "The structure of flows in suspended aquaculture canopies",
+            "note": "David Plew"
+          }
+        ]
+      }
+    ]
+  }
+}

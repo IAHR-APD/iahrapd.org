@@ -1,0 +1,225 @@
+{
+  "next": {
+    "number": "26th",
+    "year": 2028,
+    "city": "Wellington",
+    "country": "New Zealand",
+    "dates": "8 – 12 February 2028",
+    "opening": "2028-02-08",
+    "theme": "",
+    "host": "New Zealand hydraulics community",
+    "abstracts": "Call opens 2027"
+  },
+  "latest": {
+    "number": "25th",
+    "year": 2026,
+    "city": "Incheon",
+    "country": "Republic of Korea",
+    "dates": "19 – 22 July 2026",
+    "venue": "Songdo ConvensiA, Incheon, Republic of Korea",
+    "theme": "Hydro-environments in the Era of Climate Change and AI"
+  },
+  "archive": [
+    {
+      "number": "26th",
+      "year": "2028",
+      "location": "Wellington, New Zealand",
+      "theme": "",
+      "next": true
+    },
+    {
+      "number": "25th",
+      "year": "2026",
+      "location": "Incheon, Republic of Korea",
+      "theme": "Hydro-environments in the Era of Climate Change and AI"
+    },
+    {
+      "number": "24th",
+      "year": "2024",
+      "location": "Wuhan, China",
+      "theme": "Water for a Changing Future"
+    },
+    {
+      "number": "23rd",
+      "year": "2022",
+      "location": "Chennai, India",
+      "theme": "Water – From Land to Sea – Conservation and Management"
+    },
+    {
+      "number": "22nd",
+      "year": "2020",
+      "location": "Sapporo, Japan",
+      "theme": "Creating resilience to water-related challenges"
+    },
+    {
+      "number": "21st",
+      "year": "2018",
+      "location": "Yogyakarta, Indonesia",
+      "theme": "Multi-perspective Water for Sustainable Development"
+    },
+    {
+      "number": "20th",
+      "year": "2016",
+      "location": "Colombo, Sri Lanka",
+      "theme": "Water in the Past, Water in the Present and Water for the Future"
+    },
+    {
+      "number": "19th",
+      "year": "2014",
+      "location": "Hanoi, Viet Nam",
+      "theme": "Working globally, acting locally on water and climate change issues"
+    },
+    {
+      "number": "18th",
+      "year": "2012",
+      "location": "Jeju, Republic of Korea",
+      "theme": "Hydro-environmental engineering toward harmony between human and nature"
+    },
+    {
+      "number": "17th",
+      "year": "2010",
+      "location": "Auckland, New Zealand",
+      "theme": "Go with the flow — changing perception in balancing environment and economic needs"
+    },
+    {
+      "number": "16th",
+      "year": "2008",
+      "location": "Nanjing, China",
+      "theme": "Water and humanity — friendship, harmony and sustainable development"
+    },
+    {
+      "number": "15th",
+      "year": "2006",
+      "location": "Chennai, India",
+      "theme": "Water for life — development and management"
+    },
+    {
+      "number": "14th",
+      "year": "2004",
+      "location": "Hong Kong, China",
+      "theme": "Sustainable water management in the Asia-Pacific region"
+    },
+    {
+      "number": "13th",
+      "year": "2002",
+      "location": "Singapore",
+      "theme": "Advances in hydraulic and water engineering"
+    },
+    {
+      "number": "12th",
+      "year": "2000",
+      "location": "Bangkok, Thailand",
+      "theme": "Sustainable water resources management: issues and future challenges"
+    },
+    {
+      "number": "11th",
+      "year": "1998",
+      "location": "Yogyakarta, Indonesia",
+      "theme": "Hydraulic research for sustainable development"
+    },
+    {
+      "number": "10th",
+      "year": "1996",
+      "location": "Langkawi, Malaysia",
+      "theme": "Hydraulic research and engineering towards and beyond 2000"
+    },
+    {
+      "number": "9th",
+      "year": "1994",
+      "location": "Singapore",
+      "theme": "Developments in hydraulic engineering and their impact on the environment"
+    },
+    {
+      "number": "8th",
+      "year": "1992",
+      "location": "Pune, India",
+      "theme": "Hydraulic research in the service of mankind"
+    },
+    {
+      "number": "7th",
+      "year": "1990",
+      "location": "Beijing, China",
+      "theme": "Hydraulics to serve the development of a nation and the welfare of mankind"
+    },
+    {
+      "number": "6th",
+      "year": "1988",
+      "location": "Kyoto, Japan",
+      "theme": "For further prosperity in hydraulic research toward the 21st century"
+    },
+    {
+      "number": "5th",
+      "year": "",
+      "location": "Seoul, Republic of Korea",
+      "theme": ""
+    },
+    {
+      "number": "4th",
+      "year": "",
+      "location": "Chiang Mai, Thailand",
+      "theme": ""
+    },
+    {
+      "number": "3rd",
+      "year": "",
+      "location": "Bandung, Indonesia",
+      "theme": ""
+    },
+    {
+      "number": "2nd",
+      "year": "",
+      "location": "Taipei, Taiwan, China",
+      "theme": ""
+    },
+    {
+      "number": "1st",
+      "year": "",
+      "location": "Bangkok, Thailand",
+      "theme": ""
+    }
+  ],
+  "proceedings": [
+    {
+      "number": "25th",
+      "year": "2026",
+      "host": "Incheon, Republic of Korea",
+      "url": ""
+    },
+    {
+      "number": "24th",
+      "year": "2024",
+      "host": "Wuhan, China",
+      "url": ""
+    },
+    {
+      "number": "23rd",
+      "year": "2022",
+      "host": "Chennai, India",
+      "url": ""
+    },
+    {
+      "number": "22nd",
+      "year": "2020",
+      "host": "Sapporo, Japan",
+      "url": ""
+    },
+    {
+      "number": "21st",
+      "year": "2018",
+      "host": "Yogyakarta, Indonesia",
+      "url": ""
+    },
+    {
+      "number": "20th",
+      "year": "2016",
+      "host": "Colombo, Sri Lanka",
+      "url": ""
+    },
+    {
+      "number": "19th",
+      "year": "2014",
+      "host": "Hanoi, Viet Nam",
+      "url": ""
+    }
+  ]
+}
