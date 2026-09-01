@@ -18,7 +18,19 @@ STATIC = os.path.join(HERE, "static")
 ASSETS = os.path.join(HERE, "assets")
 DIST = os.path.join(HERE, "dist")
 
-SITE_URL = "https://www.iahrapd.org"
+# Where the site lives. Both are derived from `custom_domain` in content/site.json:
+#   empty  -> the GitHub Pages project URL, served under /<repo>/
+#   filled -> the real domain, served at the root, and a CNAME file is written
+def _site_config():
+    with open(os.path.join(CONTENT, "site.json"), encoding="utf-8") as f:
+        domain = json.load(f).get("custom_domain", "").strip()
+    if domain:
+        return "https://" + domain, "", domain
+    base = os.environ.get("BASE_PATH", "").rstrip("/")
+    return os.environ.get("SITE_URL", "http://localhost:8788") + base, base, ""
+
+
+SITE_URL, BASE, CUSTOM_DOMAIN = _site_config()
 
 NAV = [
     ("/", "Home"),
@@ -92,12 +104,19 @@ def pretty_date(iso):
     return "%s · %s · %s" % (iso[:4], iso[5:7], iso[8:10])
 
 
+def rebase(markup):
+    """Prefix every site-absolute href/src with the base path. No-op at the root."""
+    if not BASE:
+        return markup
+    return re.sub(r'(href|src)="/(?!/)', r'\1="' + BASE + '/', markup)
+
+
 def write(path, markup):
     full = os.path.join(DIST, path.strip("/"), "index.html") if path != "/" \
         else os.path.join(DIST, "index.html")
     os.makedirs(os.path.dirname(full), exist_ok=True)
     with open(full, "w", encoding="utf-8") as f:
-        f.write(markup)
+        f.write(rebase(markup))
     print("  %-24s %6d bytes" % (path, len(markup.encode("utf-8"))))
 
 
@@ -955,6 +974,20 @@ def build_contact(site, committee):
     s = site["secretariat"]
     chair = committee["officers"][0]
     addr = "<br>".join(e(l) for l in s["address_lines"])
+
+    # The address is split so that it is not a plain string in the markup;
+    # the link is assembled in the browser. Leave `email` empty in site.json
+    # and the page falls back to telephone and post.
+    email = (s.get("email") or "").strip()
+    if email and "@" in email:
+        user, domain = email.split("@", 1)
+        mail_block = """          <div class="pad">
+            <a class="mailto" href="#" data-u="%s" data-d="%s">Email the Secretariat</a>
+          </div>""" % (e(user), e(domain))
+    else:
+        mail_block = """          <div class="pad">Enquiries by telephone or post. An address for written
+          enquiries will be published here.</div>"""
+
     body = pagehead("Get in touch", "Contact",
                     "The Division's Secretariat is hosted by the Korea Institute of Civil Engineering and "
                     "Building Technology in Goyang, Republic of Korea.")
@@ -963,25 +996,16 @@ def build_contact(site, committee):
       <div>
         <div class="eyebrow">Enquiries</div>
         <h2 style="font-size:23px;margin-top:8px">Write to the Secretariat</h2>
-        <p class="sub">For congress hosting, award nominations, membership questions and corrections to
-        the congress archive.</p>
-        <form class="form" id="enquiry" action="/api/contact" method="post" style="margin-top:24px">
-          <div class="field"><label for="f-name">Name</label>
-            <input id="f-name" name="name" type="text" autocomplete="name" required></div>
-          <div class="field"><label for="f-mail">Email</label>
-            <input id="f-mail" name="email" type="email" autocomplete="email" required></div>
-          <div class="field"><label for="f-topic">Subject</label>
-            <select id="f-topic" name="topic">
-              <option>Hosting a congress</option><option>Award nomination</option>
-              <option>Membership</option><option>Correction to the congress archive</option>
-              <option>Other</option>
-            </select></div>
-          <div class="field"><label for="f-msg">Message</label>
-            <textarea id="f-msg" name="message" required></textarea></div>
-          <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <div><button class="btn" type="submit">Send enquiry</button></div>
-          <p class="formnote" id="formnote" role="status"></p>
-        </form>
+        <div class="prose" style="margin-top:14px">
+          <p>The Secretariat handles congress hosting proposals, award nominations, membership questions
+          and corrections to the congress archive.</p>
+          <p>For membership, subscriptions and world congress matters, contact the IAHR global
+          secretariat directly at <a href="%s">iahr.org</a>.</p>
+        </div>
+        <div class="hero-actions" style="margin-top:26px">
+          <a class="btn ghost" href="/congresses/#hosting">Hosting a congress</a>
+          <a class="btn ghost" href="/awards/">Award nominations</a>
+        </div>
       </div>
       <div>
         <div class="sidecard">
@@ -989,6 +1013,7 @@ def build_contact(site, committee):
           <div class="pad"><strong style="color:var(--ink)">%s</strong><br>%s</div>
           <div class="row"><span>Telephone</span><b>%s</b></div>
           <div class="row"><span>Secretary General</span><b>%s</b></div>
+%s
         </div>
         <div class="sidecard" style="margin-top:24px">
           <div class="cap">Chair of the Division</div>
@@ -997,17 +1022,13 @@ def build_contact(site, committee):
             <div><strong>%s</strong><br>%s, %s</div>
           </div>
         </div>
-        <div class="sidecard" style="margin-top:24px">
-          <div class="cap">IAHR global secretariat</div>
-          <div class="pad">For membership, subscriptions and world congress matters, contact IAHR directly
-          at <a href="%s">iahr.org</a>.</div>
-        </div>
       </div>
     </div>
   </div></section>
-""" % (e(s["host"]), addr, e(s["telephone"]), e(s["secretary_general"]),
-       e(chair["photo"]), e(chair["name"]), e(chair["name"]), e(chair["affiliation"]), e(chair["country"]),
-       e(site["links"]["iahr_global"]))
+""" % (e(site["links"]["iahr_global"]), e(s["host"]), addr, e(s["telephone"]),
+       e(s["secretary_general"]), mail_block,
+       e(chair["photo"]), e(chair["name"]), e(chair["name"]),
+       e(chair["affiliation"]), e(chair["country"]))
     return page(site, "/contact/", "Contact",
                 "How to reach the IAHR-APD Secretariat at KICT in Goyang, Republic of Korea.", body)
 
@@ -1069,6 +1090,12 @@ def main():
         f.write(build_sitemap(paths))
     with open(os.path.join(DIST, "robots.txt"), "w", encoding="utf-8") as f:
         f.write("User-agent: *\nAllow: /\nSitemap: %s/sitemap.xml\n" % SITE_URL)
+    if CUSTOM_DOMAIN:
+        with open(os.path.join(DIST, "CNAME"), "w", encoding="utf-8") as f:
+            f.write(CUSTOM_DOMAIN + "\n")
+        print("  CNAME -> %s" % CUSTOM_DOMAIN)
+    # Stop GitHub Pages running the output through Jekyll.
+    open(os.path.join(DIST, ".nojekyll"), "w").close()
 
     print("static and assets")
     copy_tree(STATIC, DIST)

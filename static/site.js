@@ -120,31 +120,11 @@
     });
   }
 
-  // ---------------------------------------------------------------- enquiry form
-  // Posts to the server function, which holds the Secretariat address. The
-  // address never appears in the page.
-  var form = document.getElementById('enquiry');
-  if (form) {
-    var note = document.getElementById('formnote');
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var button = form.querySelector('button[type=submit]');
-      button.disabled = true;
-      note.className = 'formnote on';
-      note.textContent = 'Sending…';
-      fetch(form.action, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(Object.fromEntries(new FormData(form)))
-      }).then(function (r) {
-        if (!r.ok) throw new Error(r.status);
-        form.reset();
-        note.textContent = 'Thank you — your message has been sent to the Secretariat.';
-      }).catch(function () {
-        note.textContent = 'The message could not be sent. Please try again, or telephone the Secretariat.';
-      }).finally(function () {
-        button.disabled = false;
-      });
-    });
+  // ---------------------------------------------------------------- email links
+  // Addresses are split in the markup so they are not sitting in the page
+  // source as plain text for address scrapers to collect.
+  var links = document.querySelectorAll("a.mailto[data-u][data-d]");
+  for (var i = 0; i < links.length; i++) {
+    links[i].href = "mailto:" + links[i].dataset.u + "@" + links[i].dataset.d;
   }
 })();

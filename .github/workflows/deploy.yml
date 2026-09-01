@@ -1,0 +1,65 @@
+name: Build and publish
+
+# Every change to the content — whether made in the admin screen or committed
+# directly — rebuilds the site and publishes it to GitHub Pages. Nothing else
+# needs to run and there is no other service involved.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Work out where the site will live
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Build
+        env:
+          # Empty once a custom domain is set in content/site.json; until then
+          # the site is served under /<repository-name>/.
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          SITE_URL: ${{ steps.pages.outputs.origin }}
+        run: python build.py
+
+      - name: Check the expected pages exist
+        run: |
+          for page in index.html about/index.html governance/index.html \
+                      congresses/index.html awards/index.html publications/index.html \
+                      news/index.html gallery/index.html membership/index.html \
+                      contact/index.html sitemap.xml; do
+            test -s "dist/$page" || { echo "missing or empty: dist/$page"; exit 1; }
+          done
+          echo "all pages built"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

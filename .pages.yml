@@ -1,0 +1,375 @@
+# Pages CMS — the admin screen for this site.
+#
+# Editors go to https://app.pagescms.org, sign in with their GitHub account and
+# pick this repository. There is nothing to install and no separate account:
+# anyone with write access to the repository can edit, and removing their
+# access removes their editing rights.
+#
+# This file describes what the editing screens look like. Adding a field here
+# also needs the field adding to build.py.
+
+media:
+  - name: uploads
+    label: Uploaded images and files
+    input: assets/uploads
+    output: /assets/uploads
+  - name: people
+    label: Portraits
+    input: assets/people
+    output: /assets/people
+  - name: gallery
+    label: Gallery photographs
+    input: assets/gallery
+    output: /assets/gallery
+
+content:
+
+  # ---------------------------------------------------------------- news
+  - name: news
+    label: News
+    type: collection
+    path: content/news
+    format: json
+    extension: json
+    filename: '{fields.date}-{primary}.json'
+    primary: title
+    view:
+      fields: [date, title]
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - { name: date, label: Date, type: date, options: { format: yyyy-MM-dd } }
+      - { name: title, label: Title, type: string }
+      - { name: summary, label: Summary, type: text, description: "One or two sentences. Shown on the home page and the news list." }
+      - { name: body, label: Body, type: rich-text, required: false }
+
+  # ---------------------------------------------------------------- gallery
+  - name: gallery
+    label: Gallery
+    type: file
+    path: content/gallery.json
+    format: json
+    fields:
+      - name: years
+        label: Years
+        type: object
+        list: true
+        fields:
+          - { name: year, label: Year, type: string }
+          - { name: title, label: Event, type: string }
+          - { name: where, label: Dates and place, type: string }
+          - name: photos
+            label: Photographs
+            type: object
+            list: true
+            fields:
+              - { name: image, label: Photograph, type: image, options: { media: gallery } }
+              - { name: thumb, label: Small version, type: image, required: false, options: { media: gallery }, description: "Leave empty to use the full photograph." }
+              - { name: caption, label: Caption, type: string, required: false }
+
+  # ---------------------------------------------------------------- committee
+  - name: committee
+    label: Executive Committee
+    type: file
+    path: content/committee.json
+    format: json
+    fields:
+      - { name: term, label: Term, type: string, description: "e.g. 2027 – 2028" }
+      - name: officers
+        label: Chair and Vice-Chair
+        type: object
+        list: true
+        fields:
+          - { name: role, label: Role, type: string }
+          - { name: name, label: Name, type: string }
+          - { name: affiliation, label: Affiliation, type: string }
+          - { name: department, label: Department, type: string, required: false }
+          - { name: country, label: Country or economy, type: string }
+          - { name: photo, label: Photograph, type: image, options: { media: people } }
+      - name: members
+        label: Members
+        type: object
+        list: true
+        description: "The order here is the order on the page. Keep the Secretary General last."
+        fields:
+          - { name: role, label: Role, type: select, options: { values: ["EC Member", "YPN Member", "Co-opted Member", "Secretary General"] } }
+          - { name: name, label: Name, type: string }
+          - { name: affiliation, label: Affiliation, type: string }
+          - { name: country, label: Country or economy, type: string }
+          - { name: photo, label: Photograph, type: image, options: { media: people } }
+          - { name: flag, label: Needs checking, type: string, required: false, description: "Leave empty. Any text here shows as an orange warning tag next to the affiliation." }
+      - { name: past_terms, label: Past terms, type: string, list: true }
+
+  # ---------------------------------------------------------------- congresses
+  - name: congresses
+    label: Congresses
+    type: file
+    path: content/congresses.json
+    format: json
+    fields:
+      - name: next
+        label: Next congress
+        type: object
+        fields:
+          - { name: number, label: Number, type: string }
+          - { name: year, label: Year, type: number }
+          - { name: city, label: City, type: string }
+          - { name: country, label: Country, type: string }
+          - { name: dates, label: Dates, type: string }
+          - { name: opening, label: Opening day, type: date, options: { format: yyyy-MM-dd }, description: "Drives the countdown on the home page." }
+          - { name: theme, label: Theme, type: string, required: false }
+          - { name: host, label: Host, type: string }
+          - { name: abstracts, label: Abstracts, type: string }
+      - name: latest
+        label: Most recent congress
+        type: object
+        fields:
+          - { name: number, label: Number, type: string }
+          - { name: year, label: Year, type: number }
+          - { name: city, label: City, type: string }
+          - { name: country, label: Country, type: string }
+          - { name: dates, label: Dates, type: string }
+          - { name: venue, label: Venue, type: string }
+          - { name: theme, label: Theme, type: string }
+      - name: archive
+        label: Archive
+        type: object
+        list: true
+        fields:
+          - { name: number, label: Number, type: string }
+          - { name: year, label: Year, type: string, required: false }
+          - { name: location, label: Location, type: string }
+          - { name: theme, label: Theme, type: string, required: false }
+          - { name: next, label: Mark as the next congress, type: boolean, required: false }
+      - name: proceedings
+        label: Proceedings
+        type: object
+        list: true
+        fields:
+          - { name: number, label: Number, type: string }
+          - { name: year, label: Year, type: string }
+          - { name: host, label: Host, type: string }
+          - { name: url, label: Link, type: string, required: false }
+
+  # ---------------------------------------------------------------- awards
+  - name: awards
+    label: Awards
+    type: file
+    path: content/awards.json
+    format: json
+    fields:
+      - name: latest
+        label: Most recent congress
+        type: object
+        fields:
+          - { name: congress, label: Congress, type: string }
+          - { name: year, label: Year, type: string }
+          - name: distinguished
+            label: Distinguished Membership
+            type: object
+            fields:
+              - { name: name, label: Name, type: string }
+              - { name: affiliation, label: Affiliation, type: string }
+              - { name: photo, label: Photograph, type: image, required: false, options: { media: people } }
+          - name: heritage
+            label: Heritage Award
+            type: object
+            fields:
+              - { name: name, label: Name, type: string }
+              - { name: affiliation, label: Place, type: string }
+              - { name: photo, label: Photograph, type: image, required: false, options: { media: uploads } }
+          - name: papers
+            label: Best Paper Award
+            type: object
+            list: true
+            fields:
+              - { name: title, label: Title, type: text }
+              - { name: authors, label: Authors, type: string }
+              - { name: country, label: Country, type: string }
+      - name: distinguished
+        label: Distinguished Membership — all recipients
+        type: object
+        fields:
+          - { name: eyebrow, label: Label, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: intro, label: Introduction, type: text }
+          - name: recipients
+            label: Recipients
+            type: object
+            list: true
+            fields:
+              - { name: year, label: Year, type: string }
+              - name: people
+                label: People
+                type: object
+                list: true
+                fields:
+                  - { name: name, label: Name, type: string }
+                  - { name: note, label: Affiliation or country, type: string }
+      - name: heritage
+        label: Heritage Award — all recipients
+        type: object
+        fields:
+          - { name: eyebrow, label: Label, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: intro, label: Introduction, type: text }
+          - name: recipients
+            label: Recipients
+            type: object
+            list: true
+            fields:
+              - { name: year, label: Year, type: string }
+              - name: people
+                label: Sites
+                type: object
+                list: true
+                fields:
+                  - { name: name, label: Name, type: string }
+                  - { name: note, label: Country, type: string }
+      - name: best_paper
+        label: Best Paper Award — all recipients
+        type: object
+        fields:
+          - { name: eyebrow, label: Label, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: intro, label: Introduction, type: text }
+          - name: recipients
+            label: Recipients
+            type: object
+            list: true
+            fields:
+              - { name: year, label: Year, type: string }
+              - name: people
+                label: Papers
+                type: object
+                list: true
+                fields:
+                  - { name: name, label: Paper title, type: text }
+                  - { name: note, label: Authors, type: string }
+
+  # ---------------------------------------------------------------- documents
+  - name: documents
+    label: Documents
+    type: file
+    path: content/documents.json
+    format: json
+    fields:
+      - name: statutes
+        label: Laws, regulations and statements
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: format, label: Format, type: select, options: { values: [PDF, DOCX, XLSX] } }
+          - { name: file, label: File, type: file, required: false, options: { media: uploads } }
+      - name: annual_reports
+        label: Annual reports
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: file, label: File, type: file, required: false, options: { media: uploads } }
+
+  # ---------------------------------------------------------------- calendar
+  - name: events
+    label: Calendar
+    type: file
+    path: content/events.json
+    format: json
+    fields:
+      - name: events
+        label: Events
+        type: object
+        list: true
+        fields:
+          - { name: month, label: Month, type: string }
+          - { name: year, label: Year, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: detail, label: Dates and place, type: string }
+
+  # ---------------------------------------------------------------- EC meetings
+  - name: ec_meetings
+    label: Executive Committee meetings
+    type: file
+    path: content/ec-meetings.json
+    format: json
+    fields:
+      - name: meetings
+        label: Meetings
+        type: object
+        list: true
+        fields:
+          - { name: date, label: Date, type: string, description: "e.g. 2026·07" }
+          - { name: type, label: Type, type: select, options: { values: ["EC meeting", "EC gathering"] } }
+          - { name: location, label: Location, type: string }
+          - { name: with, label: Held with, type: string }
+
+  # ---------------------------------------------------------------- journal
+  - name: journal
+    label: Journal (JHER)
+    type: file
+    path: content/journal.json
+    format: json
+    fields:
+      - { name: title, label: Title, type: string }
+      - { name: abbreviation, label: Abbreviation, type: string }
+      - { name: eyebrow, label: Label, type: string }
+      - { name: body, label: Description, type: text, list: true }
+      - { name: metrics_year, label: Metrics year, type: string }
+      - name: metrics
+        label: Metrics
+        type: object
+        list: true
+        fields:
+          - { name: label, label: Label, type: string }
+          - { name: value, label: Value, type: string }
+      - name: editors
+        label: Editors-in-Chief
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Name, type: string }
+          - { name: affiliation, label: Affiliation, type: string }
+          - { name: interests, label: Interests, type: string, required: false }
+          - { name: photo, label: Photograph, type: image, options: { media: people } }
+      - name: other_publications
+        label: Other IAHR publications
+        type: object
+        list: true
+        fields:
+          - { name: kind, label: Kind, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: note, label: Note, type: string }
+          - { name: meta, label: Publisher, type: string }
+
+  # ---------------------------------------------------------------- site
+  - name: site
+    label: Site and Secretariat
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - { name: short_name, label: Short name, type: string }
+      - { name: full_name, label: Full name, type: string }
+      - { name: tagline, label: Home page headline, type: string }
+      - { name: founded, label: Founded, type: number }
+      - { name: custom_domain, label: Custom domain, type: string, required: false, description: "Leave empty until the domain is pointed at GitHub Pages. Then enter www.iahrapd.org and the site switches over." }
+      - name: secretariat
+        label: Secretariat
+        type: object
+        fields:
+          - { name: host, label: Host institution, type: string }
+          - { name: address_lines, label: Address, type: string, list: true }
+          - { name: telephone, label: Telephone, type: string }
+          - { name: secretary_general, label: Secretary General, type: string }
+          - { name: email, label: Enquiry address, type: string, required: false, description: "Use a shared Secretariat address, not a personal one — it is published on the Contact page. Leave empty to show telephone and post only." }
+      - name: links
+        label: External links
+        type: object
+        fields:
+          - { name: iahr_global, label: IAHR global, type: string }
+          - { name: iahr_membership, label: IAHR membership, type: string }
+          - { name: jher, label: JHER, type: string }
+          - { name: kict, label: KICT, type: string }

@@ -314,17 +314,8 @@ table.roster .cty{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:v
 .papers .aut{color:var(--ink-2);font-size:13.5px;margin-top:4px}
 .papers .cty{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;color:var(--ink-3);margin-top:4px}
 
-/* ============ contact form ============ */
-.form{display:grid;gap:16px;max-width:520px}
-.field{display:grid;gap:6px}
-.field label{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
-.field input,.field textarea,.field select{font-family:inherit;font-size:15px;color:var(--ink);background:var(--surface);
-  border:1px solid var(--rule-2);border-radius:2px;padding:10px 12px;width:100%}
-.field textarea{min-height:132px;resize:vertical}
-.formnote{font-size:13px;color:var(--accent);display:none}
-.formnote.on{display:block}
-.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-.formnote.on{display:block}
+/* ============ contact ============ */
+.mailto{font-weight:600}
 
 /* ============ footer ============ */
 footer.site{background:var(--deep-2);color:var(--on-deep-2);padding:52px 0 30px;font-size:13.5px}

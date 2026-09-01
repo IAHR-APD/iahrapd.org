@@ -10,12 +10,14 @@
       "Gyeonggi-do, Republic of Korea"
     ],
     "telephone": "+82 31-9100-0265",
-    "secretary_general": "Won Kim"
+    "secretary_general": "Won Kim",
+    "email": ""
   },
   "links": {
     "iahr_global": "https://www.iahr.org/",
     "iahr_membership": "https://www.iahr.org/index/join",
     "jher": "https://www.sciencedirect.com/journal/journal-of-hydro-environment-research",
     "kict": "https://www.kict.re.kr/eng/"
-  }
+  },
+  "custom_domain": ""
 }
