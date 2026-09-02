@@ -437,3 +437,10 @@ table.records.committee .ec-cty{width:1%;white-space:nowrap;text-align:right;
   border-bottom:1px solid var(--rule)}
 .citation p{margin-top:12px}
 .citation p:first-child{margin-top:0}
+
+/* ============ awards, most recent congress ============ */
+.split.wide > .sidecard{align-self:start}
+.bpa{margin-top:34px;border-top:2px solid var(--ink);padding-top:20px}
+.bpa .papers{margin-top:14px;columns:2;column-gap:44px}
+.bpa .papers li{break-inside:avoid;padding:0 0 18px}
+@media (max-width:860px){ .bpa .papers{columns:1} }

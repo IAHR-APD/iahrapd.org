@@ -832,23 +832,25 @@ def build_awards(site, awards, documents):
         "best_paper": statements.get("best-paper-award-rules"),
     }
 
-    def slot(entry):
-        if entry.get("photo"):
-            return '<img class="avatar sm" src="%s" alt="%s">' % (e(entry["photo"]), e(entry["name"]))
-        return '<div class="portrait-slot" aria-hidden="true">Photo</div>'
-
     def recipient(entry):
-        block = ('          <div class="editor">%s\n'
-                 '            <div><strong style="font-size:16px">%s</strong><br>%s</div>\n'
-                 '          </div>\n'
-                 % (slot(entry), e(entry["name"]), e(entry["affiliation"])))
+        """A portrait beside the name when there is one; otherwise just the name.
+        A site with its own wide photograph above needs no portrait at all."""
+        if entry.get("photo"):
+            block = ('          <div class="editor">\n'
+                     '            <img class="avatar sm" src="%s" alt="%s">\n'
+                     '            <div><strong style="font-size:16px">%s</strong><br>%s</div>\n'
+                     '          </div>\n'
+                     % (e(entry["photo"]), e(entry["name"]), e(entry["name"]),
+                        e(entry["affiliation"])))
+        else:
+            block = ('          <div class="pad">'
+                     '<strong style="color:var(--ink);font-size:16px">%s</strong><br>%s</div>\n'
+                     % (e(entry["name"]), e(entry["affiliation"])))
         if entry.get("citation"):
-            block += ('          <div class="citation">%s</div>\n'
-                      % rich(entry["citation"]))
+            block += '          <div class="citation">%s</div>\n' % rich(entry["citation"])
         return block
 
     def wide_image(entry):
-        """A site or structure is better shown wide than in a portrait slot."""
         if not entry.get("image"):
             return ""
         return ('          <img class="award-photo" src="%s" alt="%s" '
@@ -870,20 +872,21 @@ def build_awards(site, awards, documents):
     body += '  <section class="band tint"><div class="wrap">\n'
     body += band_head(latest["congress"], "%s recipients" % latest["year"], "",
                       ("/congresses/", "About the congress &rarr;"))
-    body += ('    <div class="split wide">\n      <div>\n'
-             '        <div class="sidecard">\n'
-             '          <div class="cap">Distinguished Membership Award</div>\n'
-             '%s        </div>\n'
-             '        <div class="sidecard" style="margin-top:24px">\n'
-             '          <div class="cap">Water Conservancy and Environmental Heritage Award</div>\n'
-             '%s%s        </div>\n'
-             '      </div>\n      <div>\n'
-             '        <div class="eyebrow">Best Paper Award</div>\n'
-             '        <ul class="papers" style="margin-top:12px;border-top:2px solid var(--ink)">\n'
-             '%s        </ul>\n'
-             '      </div>\n    </div>\n  </div></section>\n\n'
-             % (dma, wide_image(latest["heritage"]), recipient(latest["heritage"]),
-                papers))
+    body += ('    <div class="split wide">\n'
+             '      <div class="sidecard">\n'
+             '        <div class="cap">Distinguished Membership Award</div>\n'
+             '%s      </div>\n'
+             '      <div class="sidecard">\n'
+             '        <div class="cap">Water Conservancy and Environmental Heritage Award</div>\n'
+             '%s%s      </div>\n'
+             '    </div>\n'
+             '    <div class="bpa">\n'
+             '      <div class="eyebrow">Best Paper Award</div>\n'
+             '      <ul class="papers">\n'
+             '%s      </ul>\n'
+             '    </div>\n'
+             '  </div></section>\n\n'
+             % (dma, wide_image(latest["heritage"]), recipient(latest["heritage"]), papers))
 
     for i, key in enumerate(("distinguished", "heritage", "best_paper")):
         block = awards[key]
