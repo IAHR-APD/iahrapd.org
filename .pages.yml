@@ -53,26 +53,32 @@ content:
   # ---------------------------------------------------------------- gallery
   - name: gallery
     label: Gallery
-    type: file
-    path: content/gallery.json
+    label_singular: Year
+    type: collection
+    path: content/gallery
     format: json
+    extension: json
+    filename: '{fields.year}-{primary}.json'
+    primary: title
+    view:
+      fields: [year, title, where]
+      sort: [year]
+      default:
+        sort: year
+        order: desc
     fields:
-      - name: years
-        label: Years
+      - { name: year, label: Year, type: string }
+      - { name: title, label: Event, type: string, description: "e.g. 26th IAHR-APD Congress" }
+      - { name: where, label: Dates and place, type: string, description: "e.g. 8 – 11 February 2028 · Wellington, New Zealand" }
+      - { name: date, label: Month, type: string, required: false, description: "Only needed if two events share a year. Format YYYY-MM." }
+      - name: photos
+        label: Photographs
         type: object
         list: true
         fields:
-          - { name: year, label: Year, type: string }
-          - { name: title, label: Event, type: string }
-          - { name: where, label: Dates and place, type: string }
-          - name: photos
-            label: Photographs
-            type: object
-            list: true
-            fields:
-              - { name: image, label: Photograph, type: image, options: { media: gallery } }
-              - { name: thumb, label: Small version, type: image, required: false, options: { media: gallery }, description: "Leave this empty. The site makes its own small version automatically; this is only for overriding the crop." }
-              - { name: caption, label: Caption, type: string, required: false }
+          - { name: image, label: Photograph, type: image, options: { media: gallery }, description: "Any size. The site makes its own small version." }
+          - { name: caption, label: Caption, type: string, required: false }
+          - { name: thumb, label: Small version, type: image, required: false, options: { media: gallery }, description: "Leave empty. Only for overriding the automatic crop." }
 
   # ---------------------------------------------------------------- committee
   - name: committee

@@ -74,6 +74,21 @@ def ensure_pdf(doc):
     return rel
 
 
+def load_gallery():
+    """One file per year. Newest first; `date` only matters when a single
+    year holds more than one event."""
+    d = os.path.join(CONTENT, "gallery")
+    if not os.path.isdir(d):
+        return {"years": []}
+    years = []
+    for fn in sorted(os.listdir(d)):
+        if fn.endswith(".json"):
+            with open(os.path.join(d, fn), encoding="utf-8") as f:
+                years.append(json.load(f))
+    years.sort(key=lambda y: (str(y.get("year", "")), y.get("date", "")), reverse=True)
+    return {"years": years}
+
+
 def load_documents():
     """Every long-form document that gets its own page."""
     d = os.path.join(CONTENT, "documents")
@@ -1265,7 +1280,7 @@ def main():
     awards = load("awards.json")
     journal = load("journal.json")
     events = load("events.json")
-    gallery = load("gallery.json")
+    gallery = load_gallery()
     hero = load("hero.json")
     documents = load_documents()
     for doc in documents:
