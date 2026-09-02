@@ -80,6 +80,30 @@ content:
           - { name: caption, label: Caption, type: string, required: false }
           - { name: thumb, label: Small version, type: image, required: false, options: { media: gallery }, description: "Leave empty. Only for overriding the automatic crop." }
 
+  # ---------------------------------------------------------------- past committees
+  - name: committee_history
+    label: Past Executive Committees
+    type: file
+    path: content/committee-history.json
+    fields:
+      - { name: title, label: Page title, type: string }
+      - { name: lede, label: Introduction, type: text }
+      - name: terms
+        label: Terms
+        type: object
+        list: true
+        fields:
+          - { name: term, label: Term, type: string, description: "e.g. 2027 - 2028" }
+          - name: members
+            label: Members
+            type: object
+            list: true
+            fields:
+              - { name: role, label: Role, type: select, options: { values: [Chair, Vice-Chair, "Immediate Past Chair", Member, "Co-opted Member", "YPN Member", "Secretary General"] } }
+              - { name: name, label: Name, type: string, description: "With title, e.g. Prof. Norio Tanaka" }
+              - { name: country, label: Country, type: string }
+      - { name: note, label: Closing note, type: text }
+
   # ---------------------------------------------------------------- committee
   - name: committee
     label: Executive Committee
@@ -111,7 +135,6 @@ content:
           - { name: country, label: Country or economy, type: string }
           - { name: photo, label: Photograph, type: image, options: { media: people } }
           - { name: flag, label: Needs checking, type: string, required: false, description: "Leave empty. Any text here shows as an orange warning tag next to the affiliation." }
-      - { name: past_terms, label: Past terms, type: string, list: true }
 
   # ---------------------------------------------------------------- congresses
   - name: congresses

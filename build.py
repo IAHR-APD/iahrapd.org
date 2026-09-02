@@ -730,9 +730,8 @@ def build_governance(site, committee, meetings, documents):
     body += '    <div class="roster-grid">\n'
     body += "".join(person_card(m) for m in committee["members"])
     body += '    </div>\n'
-    if committee.get("past_terms"):
-        links = " &middot; ".join('<a href="/governance/">%s</a>' % e(t) for t in committee["past_terms"])
-        body += '    <p class="sub" style="margin-top:22px">Past committees: %s</p>\n' % links
+    body += ('    <p class="sub" style="margin-top:22px">Every committee since 2001 is listed on '
+             '<a href="/governance/past-committees/">Past Executive Committees</a>.</p>\n')
     body += '  </div></section>\n\n'
 
     inc = committee.get("incoming")
@@ -774,6 +773,34 @@ def build_governance(site, committee, meetings, documents):
                 "The IAHR-APD Executive Committee for %s and the incoming committee, the Division's "
                 "annual reports to the IAHR Council, and the record of committee meetings."
                 % committee["term"], body)
+
+
+def build_past_committees(site, history):
+    """One table per term, newest first."""
+    body = pagehead("Since 2001", history["title"], history["lede"])
+
+    for i, t in enumerate(history["terms"]):
+        rows = "".join('            <tr><td class="ec-role">%s</td><td class="ec-name">%s</td>'
+                       '<td class="ec-cty">%s</td></tr>\n'
+                       % (e(m["role"]), e(m["name"]), e(m["country"]))
+                       for m in t["members"])
+        chair = next((m["name"] for m in t["members"] if m["role"] == "Chair"), "")
+        body += '  <section class="band%s" id="t%s"><div class="wrap">\n' % (
+            " tint" if i % 2 else "", e(t["term"].replace(" ", "").replace("\u2013", "-")))
+        body += band_head("Executive Committee", t["term"],
+                          "Chaired by %s. %d members." % (chair, len(t["members"]))
+                          if chair else "%d members." % len(t["members"]))
+        body += ('    <div class="tablewrap">\n      <table class="records committee">\n'
+                 '        <thead><tr><th scope="col">Role</th><th scope="col">Name</th>'
+                 '<th scope="col">Country</th></tr></thead>\n'
+                 '        <tbody>\n%s        </tbody>\n      </table>\n    </div>\n'
+                 '  </div></section>\n\n' % rows)
+
+    body += ('  <section class="band"><div class="wrap">\n'
+             '    <p class="sub">%s</p>\n  </div></section>\n' % inline(history["note"]))
+    return page(site, "/governance/past-committees/", "Past Executive Committees",
+                "Every IAHR-APD Executive Committee since 2001, term by term, with the role and "
+                "country of each member.", body)
 
 
 def build_congresses(site, congresses, documents):
@@ -1275,6 +1302,7 @@ def main():
 
     site = load("site.json")
     committee = load("committee.json")
+    history = load("committee-history.json")
     congresses = load("congresses.json")
     meetings = load("ec-meetings.json")
     awards = load("awards.json")
@@ -1291,6 +1319,8 @@ def main():
     write("/", build_home(site, congresses, news, events, documents, journal, awards, hero))
     write("/about/", build_about(site, documents))
     write("/governance/", build_governance(site, committee, meetings, documents))
+    write("/governance/past-committees/",
+          build_past_committees(site, history))
     write("/congresses/", build_congresses(site, congresses, documents))
     write("/awards/", build_awards(site, awards, documents))
     write("/publications/", build_publications(site, journal, congresses))
@@ -1303,7 +1333,7 @@ def main():
     for doc in documents:
         write(doc["url"], build_document(site, doc))
 
-    paths = ["/", "/about/", "/governance/", "/congresses/", "/awards/", "/publications/",
+    paths = ["/", "/about/", "/governance/", "/governance/past-committees/", "/congresses/", "/awards/", "/publications/",
              "/news/", "/gallery/", "/membership/", "/contact/"] +             ["/news/%s/" % n["slug"] for n in news] + [d["url"] for d in documents]
     with open(os.path.join(DIST, "sitemap.xml"), "w", encoding="utf-8") as f:
         f.write(build_sitemap(paths))
