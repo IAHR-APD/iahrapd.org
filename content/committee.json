@@ -151,7 +151,7 @@
       },
       {
         "role": "Member",
-        "name": "Dr Chang Chun Kiat",
+        "name": "Dr. Chang Chun Kiat",
         "affiliation": "Universiti Sains Malaysia",
         "country": "Malaysia"
       },
@@ -163,7 +163,7 @@
       },
       {
         "role": "Member",
-        "name": "Dr Jenn Wei Er",
+        "name": "Dr. Jenn Wei Er",
         "affiliation": "DHI Water & Environment",
         "country": "Singapore"
       },
@@ -175,7 +175,7 @@
       },
       {
         "role": "Member",
-        "name": "Dr Induka Werellagama",
+        "name": "Dr. Induka Werellagama",
         "affiliation": "Wellington Institute of Technology",
         "country": "New Zealand"
       },
@@ -186,14 +186,26 @@
         "country": "Japan"
       },
       {
+        "role": "Member",
+        "name": "Prof. Huu Loc Ho",
+        "affiliation": "Asian Institute of Technology",
+        "country": "Thailand"
+      },
+      {
+        "role": "Member",
+        "name": "Prof. Hao-Che (Howard) Ho",
+        "affiliation": "Zhejiang University",
+        "country": "Taiwan, China"
+      },
+      {
         "role": "YPN Member",
-        "name": "Dr Yu Qian",
+        "name": "Dr. Yu Qian",
         "affiliation": "China Institute of Water Resources and Hydropower Research",
         "country": "China"
       },
       {
         "role": "Secretary General",
-        "name": "Dr Won Kim",
+        "name": "Dr. Won Kim",
         "affiliation": "Korea Institute of Civil Engineering and Building Technology",
         "country": "Republic of Korea"
       }

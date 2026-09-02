@@ -3,39 +3,42 @@
     "congress": "Presented at the 25th Congress · Incheon, Republic of Korea",
     "year": "2026",
     "distinguished": {
-      "name": "Yasuyuki Shimizu",
+      "name": "Prof. Yasuyuki Shimizu",
       "affiliation": "Hokkaido University, Japan",
-      "photo": ""
+      "photo": "",
+      "citation": "Recognised for his contributions to computational river morphodynamics over a career spanning several decades. His work on the numerical modelling of river channel processes — sediment transport, bank erosion, braided-river dynamics and the interaction between vegetation and flow — has shaped the modern practice of river engineering. He was a central figure in the development of the iRIC (International River Interface Cooperative) software platform and its river-simulation solvers, adopted widely by researchers and practitioners internationally as open-source tools for river analysis. Through his teaching, his supervision of researchers now active across the region, and his long service to IAHR and its Asia and Pacific Division, Prof. Shimizu has advanced both the science and the international community of hydro-environment engineering."
     },
     "distinguished_2": {
-      "name": "Adrian Law Wing Keung",
+      "name": "Prof. Adrian Law Wing Keung",
       "affiliation": "National University of Singapore, Singapore",
-      "photo": ""
+      "photo": "/assets/people/adrian.jpg",
+      "citation": "Recognised for his contributions to environmental and coastal hydraulics and for his sustained service to the international water community. He holds Ph.D. and M.Sc. degrees in Civil and Environmental Engineering from the University of California, Berkeley, and a B.Eng. from the University of Hong Kong. After more than seven years of engineering practice in the United States he joined Nanyang Technological University in 1995, and has been Professor at the National University of Singapore since 2024. He chaired the joint IAHR/IWA Committee on Marine Outfall Systems (2014–2016) and represented Singapore at the ASEAN Hydroinformatics Data Centre (2022–2023). As Editor-in-Chief of the Journal of Hydro-environment Research he has been instrumental in strengthening the Division's flagship journal."
     },
     "heritage": {
       "name": "Soyanggang Dam",
-      "affiliation": "Republic of Korea — received on behalf of K-water by Mr Yu In-Seon",
-      "photo": ""
+      "affiliation": "Chuncheon, Republic of Korea — received on behalf of K-water by Mr Yu In-Seon",
+      "photo": "",
+      "citation": ""
     },
     "papers": [
       {
-        "title": "Paper title to be confirmed",
-        "authors": "Bomi Kim",
-        "country": "Kumoh National Institute of Technology, Republic of Korea"
-      },
-      {
-        "title": "Paper title to be confirmed",
-        "authors": "Akihiko Nakayama",
+        "title": "Simulation of shallow and dispersed overland flow in urban catchment by a particle method",
+        "authors": "Akihiko Nakayama and Xin Yan Lye",
         "country": "Universiti Tunku Abdul Rahman, Malaysia"
       },
       {
-        "title": "Paper title to be confirmed",
-        "authors": "Sujin Kim",
+        "title": "Scenario-based simulation of delayed sluice gate operation for CSO control in a restored urban stream: Cheonggyecheon case study",
+        "authors": "Sujin Kim and Won Jeong",
         "country": "The Seoul Institute, Republic of Korea"
       },
       {
-        "title": "Paper title to be confirmed",
-        "authors": "Yushuang Sun",
+        "title": "High-resolution urban flood simulation for large domains enabled by multi-GPU computing",
+        "authors": "Bomi Kim, Hyungon Ryu, Seungsoo Lee, Jun-Hak Lee and Seong Jin Noh",
+        "country": "Kumoh National Institute of Technology, Republic of Korea"
+      },
+      {
+        "title": "Effect of particle shielding on cavitation erosion mitigation in hyper-concentrated sediment flows",
+        "authors": "Yushuang Sun, Kunpeng Su and Dingkang Xia",
         "country": "Yangzhou University, China"
       }
     ]
@@ -49,11 +52,11 @@
         "year": "2026",
         "people": [
           {
-            "name": "Yasuyuki Shimizu",
+            "name": "Prof. Yasuyuki Shimizu",
             "note": "Hokkaido University, Japan"
           },
           {
-            "name": "Adrian Law Wing Keung",
+            "name": "Prof. Adrian Law Wing Keung",
             "note": "National University of Singapore"
           }
         ]
@@ -150,7 +153,7 @@
         "people": [
           {
             "name": "Soyanggang Dam",
-            "note": "Republic of Korea"
+            "note": "Chuncheon, Republic of Korea"
           }
         ]
       },
@@ -209,20 +212,20 @@
         "year": "2026",
         "people": [
           {
-            "name": "Bomi Kim",
-            "note": "Kumoh National Institute of Technology"
+            "name": "Simulation of shallow and dispersed overland flow in urban catchment by a particle method",
+            "note": "Akihiko Nakayama and Xin Yan Lye"
           },
           {
-            "name": "Akihiko Nakayama",
-            "note": "Universiti Tunku Abdul Rahman"
+            "name": "Scenario-based simulation of delayed sluice gate operation for CSO control in a restored urban stream: Cheonggyecheon case study",
+            "note": "Sujin Kim and Won Jeong"
           },
           {
-            "name": "Sujin Kim",
-            "note": "The Seoul Institute"
+            "name": "High-resolution urban flood simulation for large domains enabled by multi-GPU computing",
+            "note": "Bomi Kim, Hyungon Ryu, Seungsoo Lee, Jun-Hak Lee and Seong Jin Noh"
           },
           {
-            "name": "Yushuang Sun",
-            "note": "Yangzhou University"
+            "name": "Effect of particle shielding on cavitation erosion mitigation in hyper-concentrated sediment flows",
+            "note": "Yushuang Sun, Kunpeng Su and Dingkang Xia"
           }
         ]
       },

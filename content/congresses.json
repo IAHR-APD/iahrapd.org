@@ -6,10 +6,10 @@
     "country": "New Zealand",
     "dates": "8 – 11 February 2028",
     "opening": "2028-02-08",
-    "theme": "He Tāonga te Wai – Water is a Treasure",
+    "theme": "Water in Motion: Climate, Science, Engineering and Policy for a Resilient Future",
     "host": "Open Polytechnic of New Zealand and Victoria University of Wellington",
     "abstracts": "Call opens 2027",
-    "description": "The 26th Congress returns the Division to New Zealand, organised jointly by the Open Polytechnic of New Zealand and Victoria University of Wellington. The congress flag was handed over to the New Zealand Local Organising Committee at the closing ceremony of the 25th Congress in Incheon.\n\nThe theme, *He Tāonga te Wai – Water is a Treasure*, takes its name from the Māori understanding of water as something held in trust — a framing the Local Organising Committee has chosen for a programme on water as a shared inheritance across the Asia-Pacific.\n\nThe call for abstracts and the sub-themes will be announced during 2027. Institutions interested in sponsoring or exhibiting should write to the Secretariat.",
+    "description": "The 26th Congress is the first to be held in New Zealand, organised jointly by the Open Polytechnic of New Zealand and Victoria University of Wellington. The congress flag was handed over to the New Zealand Local Organising Committee at the closing ceremony of the 25th Congress in Incheon.\n\nThe theme, *Water in Motion*, spans climate, science, engineering and policy — the four perspectives the Local Organising Committee sees as inseparable in building resilience across the region.\n\nThe call for abstracts and the sub-themes will be announced during 2027. Institutions interested in sponsoring or exhibiting should write to the Secretariat, or see the [congress website](https://iahrapd2028.org/).",
     "facts": [
       {
         "label": "Dates",
@@ -24,10 +24,15 @@
         "value": "Open Polytechnic of New Zealand and Victoria University of Wellington"
       },
       {
+        "label": "Congress website",
+        "value": "iahrapd2028.org"
+      },
+      {
         "label": "Abstracts",
         "value": "Call opens 2027"
       }
-    ]
+    ],
+    "url": "https://iahrapd2028.org/"
   },
   "latest": {
     "number": "25th",
@@ -83,31 +88,35 @@
       "number": "26th",
       "year": "2028",
       "location": "Wellington, New Zealand",
-      "theme": "He Tāonga te Wai – Water is a Treasure",
-      "next": true
+      "theme": "Water in Motion: Climate, Science, Engineering and Policy for a Resilient Future",
+      "next": true,
+      "url": "https://iahrapd2028.org/"
     },
     {
       "number": "25th",
       "year": "2026",
       "location": "Incheon, Republic of Korea",
-      "theme": "Hydro-environments in the Era of Climate Change and AI"
+      "theme": "Hydro-environments in the Era of Climate Change and AI",
+      "url": "https://www.iahr-apd2026.com/"
     },
     {
       "number": "24th",
       "year": "2024",
       "location": "Wuhan, China",
-      "theme": "Water for a Changing Future"
+      "theme": "Water for a Changing Future",
+      "url": "https://iahrapd2024.aconf.cn/"
     },
     {
       "number": "23rd",
       "year": "2022",
       "location": "Chennai, India",
-      "theme": "Water – From Land to Sea – Conservation and Management"
+      "theme": "Water – From Land to Sea – Conservation and Management",
+      "url": "https://doe.iitm.ac.in/iahrapd2022/"
     },
     {
       "number": "22nd",
       "year": "2020",
-      "location": "Sapporo, Japan",
+      "location": "Sapporo, Japan — held online",
       "theme": "Creating resilience to water-related challenges"
     },
     {
@@ -241,44 +250,65 @@
     {
       "number": "25th",
       "year": "2026",
-      "host": "Incheon, Republic of Korea — Springer",
-      "url": ""
+      "host": "Incheon, Republic of Korea",
+      "url": "",
+      "note": "To be published by Springer"
     },
     {
       "number": "24th",
       "year": "2024",
       "host": "Wuhan, China",
-      "url": ""
+      "url": "",
+      "note": ""
     },
     {
       "number": "23rd",
       "year": "2022",
       "host": "Chennai, India",
-      "url": ""
+      "url": "",
+      "note": ""
     },
     {
       "number": "22nd",
       "year": "2020",
-      "host": "Sapporo, Japan",
-      "url": ""
+      "host": "Sapporo, Japan — held online",
+      "url": "https://www.iahr.org/library/regional?pid=294",
+      "note": ""
     },
     {
       "number": "21st",
       "year": "2018",
       "host": "Yogyakarta, Indonesia",
-      "url": ""
+      "url": "",
+      "note": ""
     },
     {
       "number": "20th",
       "year": "2016",
       "host": "Colombo, Sri Lanka",
-      "url": ""
+      "url": "https://www.iahr.org/library/regional?pid=323",
+      "note": ""
     },
     {
       "number": "19th",
       "year": "2014",
       "host": "Hanoi, Viet Nam",
-      "url": ""
+      "url": "https://www.iahr.org/library/regional?pid=325",
+      "note": ""
+    },
+    {
+      "number": "18th",
+      "year": "2012",
+      "host": "Jeju, Republic of Korea",
+      "url": "https://www.iahr.org/library/regional?pid=326",
+      "note": ""
+    },
+    {
+      "number": "17th",
+      "year": "2010",
+      "host": "Auckland, New Zealand",
+      "url": "https://www.iahr.org/library/regional?pid=327",
+      "note": ""
     }
   ]
 }

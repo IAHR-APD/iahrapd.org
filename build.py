@@ -774,9 +774,11 @@ def build_congresses(site, congresses, documents):
             th = '<span class="gap">Theme to be announced</span>'
         else:
             th = '<span class="gap">Year and theme not recorded</span>'
+        num = ('<a href="%s">%s</a>' % (e(c["url"]), e(c["number"]))) if c.get("url") \
+            else e(c["number"])
         rows += ('          <tr%s><td class="no">%s</td><td class="yr">%s</td>'
                  '<td class="place">%s%s</td><td class="theme">%s</td></tr>\n'
-                 % (cls, e(c["number"]), e(c["year"] or "—"), e(c["location"]), tag, th))
+                 % (cls, num, e(c["year"] or "—"), e(c["location"]), tag, th))
     pack = doc_links(documents, "hosting", version=False)
     body += '''    <div class="tablewrap">
       <table class="records">
@@ -836,9 +838,14 @@ def build_awards(site, awards, documents):
         return '<div class="portrait-slot" aria-hidden="true">Photo</div>'
 
     def recipient(entry):
-        return ('          <div class="editor">%s\n'
-                '            <div><strong style="font-size:16px">%s</strong><br>%s</div>\n'
-                '          </div>\n' % (slot(entry), e(entry["name"]), e(entry["affiliation"])))
+        block = ('          <div class="editor">%s\n'
+                 '            <div><strong style="font-size:16px">%s</strong><br>%s</div>\n'
+                 '          </div>\n'
+                 % (slot(entry), e(entry["name"]), e(entry["affiliation"])))
+        if entry.get("citation"):
+            block += ('          <div class="citation">%s</div>\n'
+                      % inline(entry["citation"]))
+        return block
 
     dma = recipient(latest["distinguished"])
     if latest.get("distinguished_2"):
@@ -1133,8 +1140,12 @@ def build_publications(site, journal, congresses):
                       "it is recorded here; earlier volumes are held by the Secretariat.")
     rows = ""
     for pr in congresses["proceedings"]:
-        link = '<a href="%s">Online archive</a>' % e(pr["url"]) if pr.get("url") \
-            else '<span class="gap">Held by the Secretariat</span>'
+        if pr.get("url"):
+            link = '<a href="%s">IAHR library</a>' % e(pr["url"])
+        elif pr.get("note"):
+            link = '<span class="gap">%s</span>' % e(pr["note"])
+        else:
+            link = '<span class="gap">Held by the Secretariat</span>'
         rows += ('          <tr><td class="no">%s</td><td class="yr">%s</td>'
                  '<td class="place">%s</td><td class="theme">%s</td></tr>\n'
                  % (e(pr["number"]), e(pr["year"]), e(pr["host"]), link))
