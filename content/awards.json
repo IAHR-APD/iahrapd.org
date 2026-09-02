@@ -124,8 +124,12 @@
         "year": "2012",
         "people": [
           {
-            "name": "Lianxiang Wang",
+            "name": "Vallam Sundar",
             "note": "India"
+          },
+          {
+            "name": "Lianxiang Wang",
+            "note": "China"
           }
         ]
       },
@@ -133,8 +137,8 @@
         "year": "2010",
         "people": [
           {
-            "name": "Joseph Lee",
-            "note": "China"
+            "name": "Joseph Hun-Wei Lee",
+            "note": "Hong Kong, China"
           },
           {
             "name": "Ashim Das Gupta",
