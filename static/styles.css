@@ -183,6 +183,17 @@ table.records tr.next .no{color:var(--accent)}
 .card .aff{font-size:13px;color:var(--ink-2);margin-top:5px;line-height:1.45}
 .card .cty{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--ink-3);
   margin-top:6px;letter-spacing:.06em;text-transform:uppercase}
+/* A link out of a section, sized to be seen rather than read past. */
+.onward{display:block;margin-top:34px;padding:22px 26px;border:1px solid var(--rule);
+  border-left:4px solid var(--brand);border-radius:14px;background:var(--surface);
+  text-decoration:none;transition:border-color .15s ease,background .15s ease}
+.onward:hover{background:var(--surface-2);border-color:var(--brand)}
+.onward .eyebrow{display:block}
+.onward strong{display:block;font-family:"IBM Plex Serif",serif;font-size:20px;
+  font-weight:600;color:var(--brand);margin-top:7px;letter-spacing:-.01em}
+.onward strong::after{content:" \2192"}
+.onward span:last-child{display:block;font-size:14px;color:var(--ink-2);margin-top:6px;line-height:1.5}
+
 .editor{display:grid;grid-template-columns:66px 1fr;gap:16px;padding:18px 20px;
   border-bottom:1px solid var(--rule);font-size:14px;color:var(--ink-2);line-height:1.5}
 .editor:last-child{border-bottom:0}

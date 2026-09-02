@@ -324,6 +324,7 @@ def footer(site):
       <div><h4>The Division</h4><ul>
         <li><a href="/about/">About IAHR-APD</a></li>
         <li><a href="/governance/">Executive Committee</a></li>
+        <li><a href="/governance/past-committees/">Past Executive Committees</a></li>
         <li><a href="/about/#statutes">By-Laws &amp; regulations</a></li>
         <li><a href="/governance/#reports">Annual reports</a></li>
         <li><a href="/governance/#meetings">EC meeting records</a></li>
@@ -740,12 +741,17 @@ def build_governance(site, committee, meetings, documents):
     body += '  <section class="band" id="members"><div class="wrap">\n'
     body += band_head("Executive Committee · " + committee["term"], "Members",
                       "The Executive Committee is elected for a two-year term and meets at least once a "
-                      "year, normally alongside an IAHR congress.")
+                      "year, normally alongside an IAHR congress.",
+                      more=("/governance/past-committees/", "Every committee since 2001 →"))
     body += '    <div class="roster-grid">\n'
     body += "".join(person_card(m) for m in in_order(committee["members"]))
     body += '    </div>\n'
-    body += ('    <p class="sub" style="margin-top:22px">Every committee since 2001 is listed on '
-             '<a href="/governance/past-committees/">Past Executive Committees</a>.</p>\n')
+    body += ('    <a class="onward" href="/governance/past-committees/">\n'
+             '      <span class="eyebrow">Since 2001</span>\n'
+             '      <strong>Past Executive Committees</strong>\n'
+             '      <span>Fourteen terms, sixty-six members, sixteen countries — '
+             'the Division\'s committee as it was, term by term.</span>\n'
+             '    </a>\n')
     body += '  </div></section>\n\n'
 
     inc = committee.get("incoming")
