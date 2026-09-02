@@ -71,7 +71,7 @@ content:
             list: true
             fields:
               - { name: image, label: Photograph, type: image, options: { media: gallery } }
-              - { name: thumb, label: Small version, type: image, required: false, options: { media: gallery }, description: "Leave empty to use the full photograph." }
+              - { name: thumb, label: Small version, type: image, required: false, options: { media: gallery }, description: "Leave this empty. The site makes its own small version automatically; this is only for overriding the crop." }
               - { name: caption, label: Caption, type: string, required: false }
 
   # ---------------------------------------------------------------- committee

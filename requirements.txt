@@ -1,0 +1,3 @@
+# Only needed to resize uploaded photographs and to read the archive documents.
+# The site still builds without it; images are then served at full size.
+Pillow>=10.0

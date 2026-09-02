@@ -14,6 +14,11 @@ import shutil
 
 from pdfwriter import build_pdf
 
+try:
+    from PIL import Image
+except ImportError:          # the site still builds, just without resizing
+    Image = None
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 CONTENT = os.path.join(HERE, "content")
 STATIC = os.path.join(HERE, "static")
@@ -178,6 +183,44 @@ def write(path, markup):
     with open(full, "w", encoding="utf-8") as f:
         f.write(externalise(rebase(markup)))
     print("  %-24s %6d bytes" % (path, len(markup.encode("utf-8"))))
+
+
+DERIVED = {}
+
+
+def derive(url, width):
+    """A copy of the image no wider than `width`, made once and reused.
+
+    Photographs come off phones and cameras at several megapixels. Rather
+    than ask the Secretariat to resize anything, the build makes the sizes
+    the page actually needs and leaves the original in the repository."""
+    if not url or not url.startswith("/assets/") or Image is None:
+        return url
+    if os.path.splitext(url)[1].lower() not in (".jpg", ".jpeg", ".png"):
+        return url
+    key = (url, width)
+    if key in DERIVED:
+        return DERIVED[key]
+    src = os.path.join(HERE, url.lstrip("/"))
+    if not os.path.exists(src):
+        return url
+    try:
+        im = Image.open(src)
+        if im.width <= width:
+            DERIVED[key] = url
+            return url
+        out_url = "%s-w%d.jpg" % (os.path.splitext(url)[0], width)
+        out = os.path.join(DIST, out_url.lstrip("/"))
+        os.makedirs(os.path.dirname(out), exist_ok=True)
+        im = im.convert("RGB")
+        im = im.resize((width, round(im.height * width / im.width)), Image.LANCZOS)
+        im.save(out, "JPEG", quality=82, optimize=True, progressive=True)
+    except Exception as err:   # a broken upload must not break the build
+        print("  ! could not resize %s: %s" % (url, err))
+        DERIVED[key] = url
+        return url
+    DERIVED[key] = out_url
+    return out_url
 
 
 # ---------------------------------------------------------------- chrome
@@ -431,7 +474,7 @@ def build_home(site, congresses, news, events, documents, journal, awards, hero)
     news_items = ""
     for n in news[:4]:
         img = ('              <img class="thumb" src="%s" alt="" loading="lazy" width="720" height="405">\n'
-               % e(n["image"])) if n.get("image") else ""
+               % e(derive(n["image"], 720))) if n.get("image") else ""
         news_items += ('            <li>%s              <span class="date">%s</span>\n'
                        '              <a class="title" href="/news/%s/">%s</a>\n'
                        '              <span class="meta">%s</span></li>\n'
@@ -856,7 +899,7 @@ def build_awards(site, awards, documents):
             return ""
         return ('          <img class="award-photo" src="%s" alt="%s" '
                 'width="1600" height="900" loading="lazy">\n'
-                % (e(entry["image"]), e(entry["name"])))
+                % (e(derive(entry["image"], 1200)), e(entry["name"])))
 
     dma = recipient(latest["distinguished"])
     if latest.get("distinguished_2"):
@@ -907,7 +950,7 @@ def build_news_index(site, news, events):
     items = ""
     for n in news:
         img = ('            <img class="thumb" src="%s" alt="" loading="lazy" width="720" height="405">\n'
-               % e(n["image"])) if n.get("image") else ""
+               % e(derive(n["image"], 720))) if n.get("image") else ""
         items += ('          <li>%s            <span class="date">%s</span>\n'
                   '            <a class="title" href="/news/%s/">%s</a>\n'
                   '            <span class="meta">%s</span></li>\n'
@@ -947,7 +990,7 @@ def build_news_item(site, item):
     body = pagehead("News · " + pretty_date(item["date"]).replace(" · ", "."),
                     item["title"], item.get("summary", ""))
     img = ('    <img class="newsimg" src="%s" alt="" width="1600" height="900">\n'
-           % e(item["image"])) if item.get("image") else ""
+           % e(derive(item["image"], 1400))) if item.get("image") else ""
     body += '  <section class="band tint"><div class="wrap">\n%s' % img
     body += ('    <div class="prose" style="font-size:16.5px;margin-top:22px">%s</div>\n'
              '    <p class="sub" style="margin-top:32px"><a href="/news/">&larr; All news</a></p>\n'
@@ -970,7 +1013,8 @@ def build_gallery(site, gallery):
                 aria-label="Enlarge photograph from %s">
           <img src="%s" width="640" height="457" loading="lazy" alt="%s">
         </button>
-""" % (e(p["image"]), e(p.get("caption") or alt), e(alt), e(p.get("thumb") or p["image"]),
+""" % (e(derive(p["image"], 1600)), e(p.get("caption") or alt), e(alt),
+       e(derive(p.get("thumb") or p["image"], 720)),
        e(p.get("caption") or alt)) for p in y["photos"])
         body += """  <section class="band%s" id="y%s"><div class="wrap">
     <div class="yearhead"><b>%s</b><h2>%s</h2><span class="where">%s</span></div>

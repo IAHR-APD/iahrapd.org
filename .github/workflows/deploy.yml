@@ -28,6 +28,9 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Install Pillow, for resizing photographs
+        run: pip install -r requirements.txt
+
       - name: Work out where the site will live
         id: pages
         uses: actions/configure-pages@v5
