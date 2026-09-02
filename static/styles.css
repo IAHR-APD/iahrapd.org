@@ -334,7 +334,8 @@ footer.site .addr strong{color:#fff;font-weight:600}
 @media (max-width:1080px){ .roster-grid{grid-template-columns:repeat(4,1fr)} }
 @media (max-width:860px){ .feature-row{grid-template-columns:1fr;gap:34px} .gallery{grid-template-columns:repeat(2,1fr)} }
 @media (max-width:520px){ .feature{grid-template-columns:118px 1fr;gap:18px}
-  .feature .portrait{width:118px;height:148px;border-radius:13px} .gallery{grid-template-columns:1fr} }
+  .feature .portrait,.card .avatar{width:118px;height:148px;border-radius:13px}
+  .gallery{grid-template-columns:1fr} }
 @media (max-width:860px){ .roster-grid{grid-template-columns:repeat(3,1fr)} }
 @media (max-width:560px){ .roster-grid{grid-template-columns:repeat(2,1fr);gap:26px 16px} }
 @media (max-width:960px){
