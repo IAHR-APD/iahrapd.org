@@ -184,7 +184,8 @@ content:
             fields:
               - { name: name, label: Name, type: string }
               - { name: affiliation, label: Place, type: string }
-              - { name: photo, label: Photograph, type: image, required: false, options: { media: uploads } }
+              - { name: image, label: Photograph of the site, type: image, required: false, options: { media: uploads }, description: "Shown wide at the top of the card. A landscape photograph works best." }
+              - { name: citation, label: Citation, type: text, required: false }
           - name: papers
             label: Best Paper Award
             type: object

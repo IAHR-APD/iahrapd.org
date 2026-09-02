@@ -432,3 +432,8 @@ table.records.committee .ec-cty{width:1%;white-space:nowrap;text-align:right;
 /* ============ award citations ============ */
 .citation{padding:0 20px 18px;font-size:14px;line-height:1.65;color:var(--ink-2)}
 .sidecard .editor + .citation{border-top:0;margin-top:-4px}
+
+.award-photo{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;
+  border-bottom:1px solid var(--rule)}
+.citation p{margin-top:12px}
+.citation p:first-child{margin-top:0}

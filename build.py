@@ -844,8 +844,16 @@ def build_awards(site, awards, documents):
                  % (slot(entry), e(entry["name"]), e(entry["affiliation"])))
         if entry.get("citation"):
             block += ('          <div class="citation">%s</div>\n'
-                      % inline(entry["citation"]))
+                      % rich(entry["citation"]))
         return block
+
+    def wide_image(entry):
+        """A site or structure is better shown wide than in a portrait slot."""
+        if not entry.get("image"):
+            return ""
+        return ('          <img class="award-photo" src="%s" alt="%s" '
+                'width="1600" height="900" loading="lazy">\n'
+                % (e(entry["image"]), e(entry["name"])))
 
     dma = recipient(latest["distinguished"])
     if latest.get("distinguished_2"):
@@ -868,13 +876,14 @@ def build_awards(site, awards, documents):
              '%s        </div>\n'
              '        <div class="sidecard" style="margin-top:24px">\n'
              '          <div class="cap">Water Conservancy and Environmental Heritage Award</div>\n'
-             '%s        </div>\n'
+             '%s%s        </div>\n'
              '      </div>\n      <div>\n'
              '        <div class="eyebrow">Best Paper Award</div>\n'
              '        <ul class="papers" style="margin-top:12px;border-top:2px solid var(--ink)">\n'
              '%s        </ul>\n'
              '      </div>\n    </div>\n  </div></section>\n\n'
-             % (dma, recipient(latest["heritage"]), papers))
+             % (dma, wide_image(latest["heritage"]), recipient(latest["heritage"]),
+                papers))
 
     for i, key in enumerate(("distinguished", "heritage", "best_paper")):
         block = awards[key]
