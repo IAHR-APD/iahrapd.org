@@ -130,6 +130,8 @@ content:
         description: "The order here is the order on the page. Keep the Secretary General last."
         fields:
           - { name: role, label: Role, type: select, options: { values: ["EC Member", "YPN Member", "Co-opted Member", "Secretary General"] } }
+          - { name: since, label: On the committee since, type: number, description: "The year they first joined, in any capacity. Sets their place in the list." }
+          - { name: family, label: Family name, type: string, description: "Used to sort members who joined in the same year." }
           - { name: name, label: Name, type: string }
           - { name: affiliation, label: Affiliation, type: string }
           - { name: country, label: Country or economy, type: string }

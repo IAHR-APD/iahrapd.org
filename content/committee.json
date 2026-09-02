@@ -24,91 +24,117 @@
       "name": "Joongcheol Paik",
       "affiliation": "Gangneung-Wonju National University",
       "country": "Republic of Korea",
-      "photo": "/assets/people/paik.jpg"
+      "photo": "/assets/people/paik.jpg",
+      "since": 2025,
+      "family": "Paik"
     },
     {
       "role": "EC Member",
       "name": "Asaad Y. Shamseldin",
       "affiliation": "The University of Auckland",
       "country": "New Zealand",
-      "photo": "/assets/people/shamseldin.jpg"
+      "photo": "/assets/people/shamseldin.jpg",
+      "since": 2023,
+      "family": "Shamseldin"
     },
     {
       "role": "EC Member",
       "name": "Intan Supraba",
       "affiliation": "Universitas Gadjah Mada",
       "country": "Indonesia",
-      "photo": "/assets/people/intan.jpg"
+      "photo": "/assets/people/intan.jpg",
+      "since": 2017,
+      "family": "Supraba"
     },
     {
       "role": "EC Member",
       "name": "Hao-Che (Howard) Ho",
       "affiliation": "Zhejiang University",
       "country": "Taiwan, China",
-      "photo": "/assets/people/haoche.jpg"
+      "photo": "/assets/people/haoche.jpg",
+      "since": 2023,
+      "family": "Ho"
     },
     {
       "role": "EC Member",
       "name": "Mingfu Guan",
       "affiliation": "The University of Hong Kong",
       "country": "Hong Kong, China",
-      "photo": "/assets/people/mingfu.jpg"
+      "photo": "/assets/people/mingfu.jpg",
+      "since": 2023,
+      "family": "Guan"
     },
     {
       "role": "EC Member",
       "name": "Chun Kiat Chang",
       "affiliation": "Universiti Sains Malaysia",
       "country": "Malaysia",
-      "photo": "/assets/people/chunkiat.jpg"
+      "photo": "/assets/people/chunkiat.jpg",
+      "since": 2023,
+      "family": "Chang"
     },
     {
       "role": "EC Member",
       "name": "Huu Loc Ho",
       "affiliation": "Wageningen University",
       "country": "Thailand",
-      "photo": "/assets/people/huuloc.jpg"
+      "photo": "/assets/people/huuloc.jpg",
+      "since": 2023,
+      "family": "Ho"
     },
     {
       "role": "EC Member",
       "name": "Yongfeng Liu",
       "affiliation": "Hohai University",
       "country": "China",
-      "photo": "/assets/people/liu.jpg"
+      "photo": "/assets/people/liu.jpg",
+      "since": 2023,
+      "family": "Liu"
     },
     {
       "role": "EC Member",
       "name": "Er Jenn Wei",
       "affiliation": "DHI Water & Environment (S) Pte. Ltd.",
       "country": "Singapore",
-      "photo": "/assets/people/er.jpg"
+      "photo": "/assets/people/er.jpg",
+      "since": 2023,
+      "family": "Er"
     },
     {
       "role": "YPN Member",
       "name": "Qian Yu",
       "affiliation": "China Institute of Water Resources and Hydropower Research",
       "country": "China",
-      "photo": "/assets/people/qian.jpg"
+      "photo": "/assets/people/qian.jpg",
+      "since": 2023,
+      "family": "Yu"
     },
     {
       "role": "Co-opted Member",
       "name": "Zhu Yonghui",
       "affiliation": "Changjiang River Scientific Research Institute",
       "country": "China",
-      "photo": "/assets/people/zhu.jpg"
+      "photo": "/assets/people/zhu.jpg",
+      "since": 2025,
+      "family": "Zhu"
     },
     {
       "role": "Co-opted Member",
       "name": "Sung-Uk Choi",
       "affiliation": "Yonsei University",
       "country": "Republic of Korea",
-      "photo": "/assets/people/choi.jpg"
+      "photo": "/assets/people/choi.jpg",
+      "since": 2019,
+      "family": "Choi"
     },
     {
       "role": "Secretary General",
       "name": "Won Kim",
       "affiliation": "Korea Institute of Civil Engineering and Building Technology",
       "country": "Republic of Korea",
-      "photo": "/assets/people/wonkim.jpg"
+      "photo": "/assets/people/wonkim.jpg",
+      "since": 2017,
+      "family": "Kim"
     }
   ],
   "incoming": {

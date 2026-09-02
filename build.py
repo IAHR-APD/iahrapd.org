@@ -381,6 +381,20 @@ def band_head(eyebrow, title, sub="", more=None):
 """ % (e(eyebrow), e(title), sub_html, more_html)
 
 
+MEMBER_ORDER = ["EC Member", "YPN Member", "Co-opted Member", "Secretary General"]
+
+
+def in_order(members):
+    """Members by standing, then by how long they have served, then by name.
+
+    Sorting here rather than by hand means whoever adds a member next does not
+    have to work out where in the list they belong.
+    """
+    return sorted(members, key=lambda m: (MEMBER_ORDER.index(m["role"]),
+                                          m.get("since", 9999),
+                                          m.get("family", m["name"]), m["name"]))
+
+
 def person_card(m):
     flag = ' <span class="tag">%s</span>' % e(m["flag"]) if m.get("flag") else ""
     return """        <div class="card">
@@ -728,7 +742,7 @@ def build_governance(site, committee, meetings, documents):
                       "The Executive Committee is elected for a two-year term and meets at least once a "
                       "year, normally alongside an IAHR congress.")
     body += '    <div class="roster-grid">\n'
-    body += "".join(person_card(m) for m in committee["members"])
+    body += "".join(person_card(m) for m in in_order(committee["members"]))
     body += '    </div>\n'
     body += ('    <p class="sub" style="margin-top:22px">Every committee since 2001 is listed on '
              '<a href="/governance/past-committees/">Past Executive Committees</a>.</p>\n')
